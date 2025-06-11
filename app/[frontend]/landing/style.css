@@ -1,16 +1,35 @@
 @import url('https://fonts.googleapis.com/css2?family=Rubik+Gemstones&display=swap');
 @import url('https://fonts.googleapis.com/css2?family=Cherry+Bomb+One&display=swap');
 @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100..900;1,100..900&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Alumni+Sans:ital,wght@0,100..900;1,100..900&display=swap');
 
 .Poppins {
   font-family: "Poppins", sans-serif;
   font-weight: 400;
   font-style: normal;
 }
+
+.Poppins-bold {
+  font-family: "Poppins", sans-serif;
+  font-weight: 600;
+  font-style: normal;
+}
+
+
 .rubik-gemstones-regular {
   font-family: "Rubik Gemstones", system-ui;
   font-weight: 400;
   font-style: normal;
+}
+
+.roboto {
+  font-family: "Roboto", sans-serif;
+  font-optical-sizing: auto;
+  font-weight: 800;
+  font-style: normal;
+  font-variation-settings:
+    "wdth" 100;
 }
 
 
@@ -20,3 +39,11 @@
   font-style: normal;
 }
 
+
+
+.alumni-sans{
+  font-family: "Alumni Sans", sans-serif;
+  font-optical-sizing: auto;
+  font-weight: 400;
+  font-style: normal;
+}
