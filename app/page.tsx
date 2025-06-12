@@ -1,11 +1,10 @@
-import Landing from "./[frontend]/landing/page";
-import Profile from "./[frontend]/profile/page";
+import Landing from "./client/landing/page";
 
 export default function Home() {
   return (
     <div>
       <Landing />
-      <Profile />
+     
     </div>
   );
 }

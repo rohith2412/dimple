@@ -20,6 +20,7 @@ const Landing = () => {
       <div className="pt-10 flex justify-center ">
         <ChatBox />
       </div>
+      
 
       
     </div>

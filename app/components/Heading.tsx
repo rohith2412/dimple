@@ -1,5 +1,5 @@
 import React from "react";
-import '../[frontend]/landing/style.css';
+import '../client/landing/style.css';
 
 const Heading = () => {
   return (

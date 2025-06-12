@@ -5,7 +5,7 @@ const ChatBox = () => {
   return (
     <div
       className=" text-gray-400 text-sm bg-white/5 rounded-lg p-4 w-fit"
-      style={{ backdropFilter: "blur(1px)" }}
+      style={{ backdropFilter: "blur(2px)" }}
     >
       <div>
         <Pic />
