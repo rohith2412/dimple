@@ -3,7 +3,6 @@ import User from "@/models/userModal";
 import NextAuth from "next-auth";
 import GoogleProvider from "next-auth/providers/google";
 
-// Type augmentation directly in this file 👇
 declare module "next-auth" {
   interface Session {
     user: {
@@ -61,7 +60,7 @@ const handler = NextAuth({
 
     async session({ session, token }) {
       if (session.user) {
-        session.user.id = token.id as string; // ✅ No red squiggle now
+        session.user.id = token.id as string; 
       }
       return session;
     },

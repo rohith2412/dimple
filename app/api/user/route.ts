@@ -15,3 +15,14 @@ export async function POST(req: NextRequest) {
         console.log(error)
     }
 }
+
+export async function GET(req: NextRequest) {
+  try {
+    await connectdb();
+    const allUsers = await User.find(); // Get all users
+    return NextResponse.json(allUsers);
+  } catch (error) {
+    console.error("GET error:", error);
+    return NextResponse.json({ error: "Something went wrong" }, { status: 500 });
+  }
+}
