@@ -19,7 +19,7 @@ export async function POST(req: NextRequest) {
 export async function GET(req: NextRequest) {
   try {
     await connectdb();
-    const allUsers = await User.find(); // Get all users
+    const allUsers = await User.find();
     return NextResponse.json(allUsers);
   } catch (error) {
     console.error("GET error:", error);

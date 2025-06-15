@@ -5,7 +5,7 @@ import { useState, useEffect } from "react";
 type User = {
   _id: string;
   name: string;
-  image?: string;
+  image: string;
   email?: string;
 };
 
@@ -47,14 +47,10 @@ export function Alluser() {
       {users.map((item) => (
         <div className="lg:w-70" key={item._id}>
           <div className="">
-            <div className="flex items-center">
-              <img
-                src={item.image || "/mood.svg"}
-                alt="xx"
-                className="w-5 h-5 rounded-full object-cover"
-              />
+            <div className="flex gap-3 items-center">
+              <div><img src={item.image} height={40} width={40} alt="xx" className="rounded-full object-cover"/></div>
               <div className="">
-                <h1 className="">{item.name}</h1>
+                <h1 className="text-sm">{item.name}</h1>
               </div>
             </div>
           </div>
