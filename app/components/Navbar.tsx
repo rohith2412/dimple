@@ -14,10 +14,13 @@ const Navbar = () => {
 
       <div className='flex text-xs text-gray-300 Poppins items-center gap-15'>
         {session?.user ? (
+          
+          <Link href="/client/profile">
           <div className='flex items-center gap-2'>
             <span className='text-white'>Hi, {session.user.name?.split(' ')[0]}</span>
             <img src={session.user.image || '/mood.svg'} alt='avatar' className='w-6 h-6 rounded-full' />
           </div>
+          </Link>
         ) : (
           <Link href='/client/auth'>
             <div className='flex hover:text-gray-500 text-xs underline'>
