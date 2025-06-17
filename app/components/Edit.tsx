@@ -32,7 +32,7 @@ export default function BioForm() {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({
-          user: session?.user?.id,
+          user: session?.user?.email,
           ...form,
           age: Number(form.age),
           phone: Number(form.phone),
@@ -57,7 +57,7 @@ export default function BioForm() {
     }
   };
 
-  if (!session?.user?.id) {
+  if (!session?.user?.email) {
     return <p className="text-white">Please log in to submit your bio.</p>;
   }
 

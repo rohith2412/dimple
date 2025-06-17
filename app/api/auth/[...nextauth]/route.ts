@@ -10,12 +10,11 @@ declare module "next-auth" {
       name?: string | null;
       email?: string | null;
       image?: string | null;
-      id?: string;
+      // remove id here since we use email now
     };
   }
-
   interface User {
-    id: string;
+    email: string;
   }
 }
 
@@ -39,30 +38,28 @@ const authOptions: NextAuthOptions = {
           await User.create({
             name: profile?.name,
             email: profile?.email,
-            image: profile?.picture, 
+            image: profile?.picture,
           });
           console.log("✅ User created in DB");
         }
 
         return true;
       } catch (error) {
-        console.error(" Error in signIn callback:", error);
+        console.error("Error in signIn callback:", error);
         return false;
       }
     },
 
     async jwt({ token, user }) {
-      if (user) {
-        await connectdb(); 
-        const dbUser = await User.findOne({ email: user.email });
-        token.id = dbUser?._id.toString(); 
+      if (user?.email) {
+        token.email = user.email; // save email in token
       }
       return token;
     },
 
     async session({ session, token }) {
-      if (session.user) {
-        session.user.id = token.id as string; 
+      if (session.user && token.email) {
+        session.user.email = token.email as string; // add email to session.user
       }
       return session;
     },

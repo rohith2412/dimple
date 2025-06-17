@@ -1,4 +1,5 @@
-'use client'
+// /app/client/profile/page.tsx
+'use client';
 
 import { useSession } from "next-auth/react";
 import { useEffect, useState } from "react";
@@ -11,19 +12,15 @@ const Bio = () => {
 
   useEffect(() => {
     const fetchBio = async () => {
-      if (!session?.user?.id) {
-        setError("User not authenticated");
+      if (!session?.user?.email) {
+        setError("User not authenticated or missing email");
         setLoading(false);
         return;
       }
 
       try {
-        const res = await fetch(`/api/bio?user=${session.user.id}`);
-        if (!res.ok) {
-          const message = await res.text();
-          throw new Error(message || "Failed to fetch bio");
-        }
-
+        const res = await fetch(`/api/bio?user=${session.user.email}`);
+        if (!res.ok) throw new Error(await res.text());
         const data = await res.json();
         setBio(data);
       } catch (err: any) {
@@ -33,22 +30,19 @@ const Bio = () => {
       }
     };
 
-    if (status === "authenticated") {
-      fetchBio();
-    } else if (status === "unauthenticated") {
+    if (status === "authenticated") fetchBio();
+    else if (status === "unauthenticated") {
       setError("Please log in first.");
       setLoading(false);
     }
   }, [session, status]);
 
   return (
-    <div className=" text-white">
-
+    <div className="text-white">
       {loading && <p>Loading bio...</p>}
       {error && <p className="text-red-500">{error}</p>}
-
       {bio && (
-        <div className="">
+        <div>
           <div>Username: {bio.username}</div>
           <div>Job: {bio.job}</div>
           <div>Location: {bio.location}</div>
@@ -58,7 +52,6 @@ const Bio = () => {
       )}
     </div>
   );
-}
+};
 
-
-export default Bio
+export default Bio;

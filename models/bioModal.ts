@@ -1,16 +1,14 @@
-import { model, models, Schema, Types } from "mongoose";
+import { model, models, Schema } from "mongoose";
 
-const boiSchema = new Schema({
-    user: { type: Types.ObjectId, ref: "User" },
-    job:String,
-    age:Number,
-    location:String,
-    phone:Number,
-    username:String,
-    // dp:
-    bio:String,
-    
-}, { timestamps: true })
+const bioSchema = new Schema({
+  user: { type: String, required: true, unique: true }, 
+  job: String,
+  age: Number,
+  location: String,
+  phone: Number,
+  username: String,
+  bio: String,
+}, { timestamps: true });
 
-const Bio = models.Bio || model("Bio", boiSchema)
+const Bio = models.Bio || model("Bio", bioSchema);
 export default Bio;
