@@ -10,7 +10,6 @@ declare module "next-auth" {
       name?: string | null;
       email?: string | null;
       image?: string | null;
-      // remove id here since we use email now
     };
   }
   interface User {
@@ -52,14 +51,14 @@ const authOptions: NextAuthOptions = {
 
     async jwt({ token, user }) {
       if (user?.email) {
-        token.email = user.email; // save email in token
+        token.email = user.email; 
       }
       return token;
     },
 
     async session({ session, token }) {
       if (session.user && token.email) {
-        session.user.email = token.email as string; // add email to session.user
+        session.user.email = token.email as string; 
       }
       return session;
     },

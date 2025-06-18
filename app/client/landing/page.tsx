@@ -1,27 +1,30 @@
 "use client"
-import React from "react";
-import Navbar from "@/app/components/Navbar";
-import Heading from "@/app/components/Heading";
-import { TopBar } from "@/app/components/TopBar";
-import { Background } from "@/app/components/Background";
-import Button from "@/app/components/Button";
-import ChatBox from "@/app/components/ChatBox";
-
+import React, { useState } from "react";
+import '../landing/style.css';
+import Link from "next/link";
 
 const Landing = () => {
+  const [loading, setLoading] = useState(false);
+
+  const handleClick = () => {
+    setLoading(true);
+  };
+
   return (
-    <div>
-      <Background />
-      <TopBar />
-      <Navbar />
-      <Heading />
-      <div className="flex justify-center pt-10">
-        <Button />
+    
+    <div  className="text-white ">
+      <div className="grid justify-center pt-50">
+        <div className='flex justify-center cherry-bomb-one-regular text-[50px]'>dimple</div>
+        <div className="flex justify-center Poppins ">A community of Malayalis 🌴 </div>
+        <div className="flex justify-center Poppins">across globe</div>
+        <div className="flex justify-center pt-7">
+        <Link href={"client/auth"}>
+        <button onClick={handleClick} disabled={loading} className="flex justify-center Poppins bg-blue-500 pt-2 pb-2 pl-10 pr-10 rounded-xl">
+          {loading ? "loading..." : "Join"}. 
+        </button>
+        </Link>
+        </div>
       </div>
-      <div className="pt-10 flex justify-center ">
-        <ChatBox />
-      </div>
-      
 
       
     </div>

@@ -17,17 +17,17 @@ const Auth = () => {
   }, [status, router]);
 
   return (
-    <div className="flex justify-center pt-50">
+    <div className="flex justify-center pt-70">
       <Background />
       {status === "loading" ? null : !session?.user ? (
         <button
           onClick={() => signIn("google")}
-          className="flex p-2 cursor-pointer items-center gap-2 border bg-white rounded"
+          className="flex p-2 cursor-pointer items-center gap-2 border bg-white rounded-xl"
         >
           <div>
             <Image src="/google.webp" alt="e" width={20} height={20} />
           </div>
-          <div className="text-black Poppins">Continue with Google</div>
+          <div className="text-black text-sm">Continue with Google</div>
         </button>
       ) : null}
     </div>

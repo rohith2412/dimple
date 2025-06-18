@@ -5,8 +5,8 @@ import { NextRequest, NextResponse } from "next/server";
 export async function POST(req: NextRequest) {
     try {
         const {name} = await req.json();
-    await connectdb();
-    const user = new User({
+        await connectdb();
+        const user = new User({
         name
     })
     await user.save()

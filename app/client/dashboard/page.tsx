@@ -1,6 +1,5 @@
 import { Alluser } from '@/app/components/Alluser'
 import Navbar from '@/app/components/Navbar'
-import ProfileUploader from '@/app/components/profilepic'
 import React from 'react'
 
 const Dashboard = () => {
@@ -9,7 +8,6 @@ const Dashboard = () => {
     <div>
         <Navbar />
         <Alluser />
-        <ProfileUploader />
     </div>
   )
 }

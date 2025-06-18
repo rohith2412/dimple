@@ -1,4 +1,4 @@
-// /app/api/bio/route.ts
+
 import connectdb from "@/database/connectdb";
 import Bio from "@/models/bioModal";
 import { NextRequest, NextResponse } from "next/server";
@@ -35,7 +35,7 @@ export async function POST(req: NextRequest) {
     await connectdb();
 
     const bio = await Bio.findOneAndUpdate(
-      { user }, // email
+      { user }, 
       { job, age, location, phone, username },
       { new: true, upsert: true }
     );
