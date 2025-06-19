@@ -10,7 +10,9 @@ const Navbar = () => {
 
   return (
     <div className='flex text-white justify-between p-10'>
+      <Link href={"/client/dashboard"}>
       <div className='flex cherry-bomb-one-regular text-2xl'>dimple</div>
+      </Link>
 
       <div className='flex text-xs text-gray-300 Poppins items-center gap-15'>
         {session?.user ? (

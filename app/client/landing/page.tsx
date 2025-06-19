@@ -1,14 +1,24 @@
 "use client"
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import '../landing/style.css';
 import Link from "next/link";
+import { useRouter } from "next/navigation";
+import { useSession } from "next-auth/react";
 
 const Landing = () => {
+  const { data: session, status } = useSession();
   const [loading, setLoading] = useState(false);
 
   const handleClick = () => {
     setLoading(true);
   };
+  const router = useRouter();
+
+  useEffect(() => {
+    if (status === "authenticated") {
+      router.push("/client/dashboard");
+    }
+  }, [status, router]);
 
   return (
     

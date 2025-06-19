@@ -26,7 +26,7 @@ export async function GET(req: NextRequest) {
 
 export async function POST(req: NextRequest) {
   try {
-    const { user, job, age, location, phone, username } = await req.json();
+    const { user, job, age, location, gender, username, bio } = await req.json();
 
     if (!user) {
       return new NextResponse("User email is required", { status: 400 });
@@ -34,13 +34,13 @@ export async function POST(req: NextRequest) {
 
     await connectdb();
 
-    const bio = await Bio.findOneAndUpdate(
+    const bioForm = await Bio.findOneAndUpdate(
       { user }, 
-      { job, age, location, phone, username },
+      { job, age, location, gender, username, bio },
       { new: true, upsert: true }
     );
 
-    return NextResponse.json(bio);
+    return NextResponse.json(bioForm);
   } catch (error) {
     console.error(error);
     return new NextResponse("Internal Server Error", { status: 500 });
