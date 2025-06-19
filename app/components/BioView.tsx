@@ -73,10 +73,6 @@ const BioView = () => {
           </span>
           </div><hr />
           <div>
-            <span className="pr-12">profile</span>
-            <span>{bio.dp || <span className="text-gray-600">Add photo</span>}</span>
-          </div><hr />
-          <div>
             <span className="pr-10">gender</span>
             <span>{bio.gender || <span className="text-gray-600">Add gender</span>}</span>
           </div><hr />

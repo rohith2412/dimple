@@ -129,6 +129,7 @@ export default function BioForm() {
 
   return (
     <form onSubmit={handleSubmit} className="grid justify-evenly gap-3 text-white pt-10">
+      
       <input name="username" value={form.username} onChange={handleChange} placeholder="Username" required className="w-60 focus:outline-none focus:ring-0 border-0" /><hr />
 
       <input name="job" value={form.job} onChange={handleChange} placeholder="Job" required className="w-60 focus:outline-none focus:ring-0" /><hr />

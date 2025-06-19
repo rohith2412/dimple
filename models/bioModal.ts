@@ -2,7 +2,6 @@ import { model, models, Schema } from "mongoose";
 
 const bioSchema = new Schema({
   user: { type: String, required: true, unique: true }, 
-  dp:String,
   username: String,
   bio: String,
   job: String,

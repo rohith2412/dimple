@@ -1,28 +1,38 @@
-import connectdb from "@/database/connectdb";
+// pages/api/public-profile.ts (or .js)
+
+import type { NextApiRequest, NextApiResponse } from "next";
+
+import ProfilePic from "@/models/profilepicModel";
 import User from "@/models/userModal";
+import Bio from "@/models/bioModal";
 import { NextRequest, NextResponse } from "next/server";
+import connectdb from "@/database/connectdb";
 
-export async function POST(req: NextRequest) {
-    try {
-        const {name} = await req.json();
-        await connectdb();
-        const user = new User({
-        name
-    })
-    await user.save()
-    return NextResponse.json(user)
-    } catch (error) {
-        console.log(error)
-    }
-}
 
-export async function GET(req: NextRequest) {
+export async function GET() {
+  await connectdb();
+
   try {
-    await connectdb();
-    const allUsers = await User.find();
-    return NextResponse.json(allUsers);
+    // Get all users
+    const users = await User.find({}).select("name email image -_id");
+
+    // For each user, fetch bio and profile pics
+    const results = await Promise.all(
+      users.map(async (user) => {
+        const bio = await Bio.findOne({ user: user.email }).select("-_id -__v -createdAt -updatedAt");
+        const profilePics = await ProfilePic.find({ user: user.email }).select("url filename -_id");
+
+        return {
+          user,
+          bio,
+          profilePics,
+        };
+      })
+    );
+
+    return NextResponse.json(results);
   } catch (error) {
-    console.error("GET error:", error);
-    return NextResponse.json({ error: "Something went wrong" }, { status: 500 });
+    console.error(error);
+    return NextResponse.json({ error: "Internal Server Error" }, { status: 500 });
   }
 }

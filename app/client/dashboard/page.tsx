@@ -1,4 +1,6 @@
-import { Alluser } from '@/app/components/Alluser'
+
+
+import Alluser from '@/app/components/Alluser'
 import { Background } from '@/app/components/Background'
 import Navbar from '@/app/components/Navbar'
 import React from 'react'
