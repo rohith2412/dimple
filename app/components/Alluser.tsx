@@ -8,7 +8,6 @@ interface ProfilePic {
 
 interface Bio {
   username?: string;
-  // other bio fields if needed
 }
 
 interface UserData {
@@ -42,12 +41,11 @@ const Alluser: React.FC = () => {
 
   return (
     <div>
-      <h2>All Users</h2>
+      
       <ul>
         {users.map(({ bio, profilePics }, idx) => (
           <li key={idx} style={{ marginBottom: "1rem" }}>
-            <strong>Username:</strong> {bio?.username ?? "No username"} <br />
-            <strong>Images:</strong>
+            <div className="flex justify-center text-white items-center gap-3 Poppins">
             <div style={{ display: "flex", gap: 10, marginTop: 5 }}>
               {profilePics.length > 0 ? (
                 profilePics.map(({ url }, i) => (
@@ -56,8 +54,8 @@ const Alluser: React.FC = () => {
                     src={url}
                     alt={`profile pic ${i + 1}`}
                     style={{
-                      width: 60,
-                      height: 60,
+                      width: 40,
+                      height: 40,
                       objectFit: "cover",
                       borderRadius: "50%",
                     }}
@@ -66,6 +64,10 @@ const Alluser: React.FC = () => {
               ) : (
                 <span>No images</span>
               )}
+            </div>
+            <div>
+              {bio?.username ?? "No username"} <br />
+            </div>
             </div>
           </li>
         ))}

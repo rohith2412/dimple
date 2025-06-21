@@ -1,6 +1,6 @@
 'use client';
 
-import { useSession } from "next-auth/react";
+import { signOut, useSession } from "next-auth/react";
 import Link from "next/link";
 import { useEffect, useState } from "react";
 
@@ -88,6 +88,7 @@ const BioView = () => {
               </button>
             </Link>
           </div>
+          <button onClick={() => signOut()}>Sign Out</button>
         </div>
       )}
     </div>

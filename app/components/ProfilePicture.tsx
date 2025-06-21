@@ -19,7 +19,7 @@ export default function ProfilePicture() {
         const data = await res.json();
         setProfilePicUrl(data.url);
       } catch (err) {
-        setProfilePicUrl(null);
+        setProfilePicUrl(null); // fallback to default
       }
     };
 
@@ -28,7 +28,7 @@ export default function ProfilePicture() {
 
   return (
     <div className="flex justify-center gap-10">
-      <div>
+      <div className="w-20 h-20 rounded-full overflow-hidden relative">
       <Image
         src={profilePicUrl || "/default_img.png"}
         alt="profile"
