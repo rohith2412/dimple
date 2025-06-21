@@ -1,4 +1,5 @@
-"use client"
+"use client";
+import Link from "next/link";
 import React, { useEffect, useState } from "react";
 
 interface ProfilePic {
@@ -8,9 +9,17 @@ interface ProfilePic {
 
 interface Bio {
   username?: string;
+  location?: string;
+}
+
+interface User {
+  name: string;
+  email: string;
+  image?: string;
 }
 
 interface UserData {
+  user: User;
   bio: Bio | null;
   profilePics: ProfilePic[];
 }
@@ -36,39 +45,36 @@ const Alluser: React.FC = () => {
       });
   }, []);
 
-  if (loading) return <div>Loading users...</div>;
-  if (error) return <div>Error: {error}</div>;
+  if (loading) return <div className="text-white">Loading users...</div>;
+  if (error) return <div className="text-red-500">Error: {error}</div>;
 
   return (
     <div>
-      
       <ul>
-        {users.map(({ bio, profilePics }, idx) => (
-          <li key={idx} style={{ marginBottom: "1rem" }}>
-            <div className="flex justify-center text-white items-center gap-3 Poppins">
-            <div style={{ display: "flex", gap: 10, marginTop: 5 }}>
-              {profilePics.length > 0 ? (
-                profilePics.map(({ url }, i) => (
-                  <img
-                    key={i}
-                    src={url}
-                    alt={`profile pic ${i + 1}`}
-                    style={{
-                      width: 40,
-                      height: 40,
-                      objectFit: "cover",
-                      borderRadius: "50%",
-                    }}
-                  />
-                ))
-              ) : (
-                <span>No images</span>
-              )}
-            </div>
-            <div>
-              {bio?.username ?? "No username"} <br />
-            </div>
-            </div>
+        {users.map(({ user, bio, profilePics }, idx) => (
+          <li key={idx} className="mb-4">
+            <Link href={`/client/view/${encodeURIComponent(user.email)}`}>
+              <div className="flex justify-between items-center text-white Poppins px-4">
+                {/* Left: Image + Username */}
+                <div className="flex items-center gap-3 pl-15">
+                  {profilePics.length > 0 ? (
+                    <img
+                      src={profilePics[0].url}
+                      alt="Profile"
+                      className="w-10 h-10 rounded-full object-cover"
+                    />
+                  ) : (
+                    <span className="text-xs text-gray-400">No image</span>
+                  )}
+                  <div className="text-sm">
+                    {bio?.username ?? "No username"}
+                  </div>
+                </div>
+                <div className="text-xs text-gray-500 pr-10 flex items-center gap-1">
+                  {bio?.location?.split(",")[1]?.trim() ?? "No location"}
+                </div>
+              </div>
+            </Link>
           </li>
         ))}
       </ul>
