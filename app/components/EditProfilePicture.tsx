@@ -4,7 +4,7 @@ import { useSession } from 'next-auth/react';
 import { useRouter } from 'next/navigation';
 import { useState } from 'react';
 
-export default function UploadPage() {
+export  function EditProfilePicture() {
   const { data: session } = useSession();
   const router = useRouter();
   const [file, setFile] = useState<File | null>(null);
@@ -30,10 +30,8 @@ export default function UploadPage() {
         method: 'POST',
         body: formData,
       });
-
       if (!res.ok) throw new Error('Upload failed');
 
-      // Redirect after successful upload
       router.push('/client/profile');
     } catch (err) {
       console.error('Upload error:', err);
@@ -43,33 +41,31 @@ export default function UploadPage() {
   };
 
   return (
-    <div className="min-h-screen  text-white p-10">
-      <h1 className="text-xl font-bold mb-4 flex justify-center">Upload Profile Picture</h1>
+    <div className="min-h-screen px-6 py-10 text-white flex flex-col items-center ">
+      <h1 className="text-lg font-semibold mb-6">Upload Profile Picture</h1>
 
-      {!session?.user && <p>Please log in first.</p>}
-
-      {session?.user && (
+      {!session?.user ? (
+        <p className="text-red-400 text-sm">Please log in first.</p>
+      ) : (
         <>
-          <div className="flex justify-center mb-4 pt-15">
-            <label className="cursor-pointer bg-white text-black px-4 py-2 rounded-lg shadow hover:bg-gray-200 transition">
-              Choose File
-              <input type="file" onChange={handleChange} className="hidden" />
-            </label>
-          </div>
+          <label className="cursor-pointer bg-white text-black px-4 py-2 rounded-full shadow hover:bg-gray-200 transition mb-4">
+            Choose File
+            <input type="file" onChange={handleChange} className="hidden" />
+          </label>
 
           {fileName && (
-            <p className="text-center text-sm text-gray-400 mb-4">Selected: {fileName}</p>
+            <p className="text-sm text-gray-400 mb-4 text-center break-all">
+              Selected: {fileName}
+            </p>
           )}
 
-          <div className="flex justify-center">
-            <button
-              onClick={handleUpload}
-              disabled={!file || loading}
-              className="bg-blue-500 text-white px-6 py-2 rounded hover:bg-blue-600 transition"
-            >
-              {loading ? 'Uploading...' : 'Upload'}
-            </button>
-          </div>
+          <button
+            onClick={handleUpload}
+            disabled={!file || loading}
+            className="bg-blue-500 w-full max-w-xs py-2 rounded text-white text-sm hover:bg-blue-600 transition disabled:opacity-50"
+          >
+            {loading ? 'Uploading...' : 'Upload'}
+          </button>
         </>
       )}
     </div>

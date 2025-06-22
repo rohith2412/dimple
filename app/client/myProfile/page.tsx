@@ -1,16 +1,16 @@
 import { Background } from '@/app/components/Background'
 import Gears from '@/app/components/Gear'
+import MainProfileView from '@/app/components/MainProfileView'
 import Navbar from '@/app/components/Navbar'
-import ProfileView from '@/app/components/ProfileView'
 import React from 'react'
 
 const page = () => {
   return (
     <div>
-        <Background />
-        <Navbar />
-        <ProfileView />
-        <Gears />
+      <Background />
+      <Navbar />
+      <MainProfileView />
+      <Gears />
     </div>
   )
 }

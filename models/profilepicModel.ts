@@ -7,4 +7,5 @@ const profilepicSchema = new Schema({
 }, { timestamps: true });
 
 const ProfilePic = models.ProfilePic || model("ProfilePic", profilepicSchema);
+
 export default ProfilePic;

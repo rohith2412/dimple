@@ -61,37 +61,35 @@ export default function BioForm() {
   ]
   };
 
-  const [country, setCountry] = useState("");
-  const [state, setState] = useState("");
+  const [country, setCountry] = useState('');
+  const [state, setState] = useState('');
 
   const [form, setForm] = useState({
-    username: "",
-    job: "",
-    age: "",
-    bio: "",
-    gender: "",
+    username: '',
+    job: '',
+    age: '',
+    bio: '',
+    gender: '',
   });
 
   const [loading, setLoading] = useState(false);
-  const [success, setSuccess] = useState("");
+  const [success, setSuccess] = useState('');
 
-  const handleChange = (
-    e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
-  ) => {
+  const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>) => {
     setForm({ ...form, [e.target.name]: e.target.value });
   };
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     setLoading(true);
-    setSuccess("");
+    setSuccess('');
 
     try {
       const location = `${country}, ${state}`;
 
-      const res = await fetch("/api/bio", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
+      const res = await fetch('/api/bio', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({
           user: session?.user?.email,
           ...form,
@@ -101,51 +99,70 @@ export default function BioForm() {
       });
 
       const data = await res.json();
+      if (!res.ok) throw new Error(data.error || 'Failed to submit');
 
-      if (!res.ok) throw new Error(data.error || "Failed to submit");
-
-      setSuccess("Profile updated successfully!");
-      if (res.ok) {
-        router.push("/client/profile");
-      }
+      setSuccess('Profile updated successfully!');
+      router.push('/client/profile');
 
       setForm({
-        username: "",
-        job: "",
-        age: "",
-        bio: "",
-        gender: ""
+        username: '',
+        job: '',
+        age: '',
+        bio: '',
+        gender: '',
       });
-      setCountry("");
-      setState("");
+      setCountry('');
+      setState('');
+    } catch {
+      setSuccess('Something went wrong. Try again.');
     } finally {
       setLoading(false);
     }
   };
 
   if (!session?.user?.email) {
-    return <p className="text-white">Please log in to submit your bio.</p>;
+    return <p className="text-white text-center mt-10">Please log in to submit your bio.</p>;
   }
 
   return (
-    <form onSubmit={handleSubmit} className="grid justify-evenly gap-3 text-white pt-10">
-      
-      <input name="username" value={form.username} onChange={handleChange} placeholder="Username" required className="w-60 focus:outline-none focus:ring-0 border-0" /><hr />
+    <form
+      onSubmit={handleSubmit}
+      className="flex flex-col items-center  text-white px-6 py-10 min-h-screen w-full max-w-sm mx-auto"
+    >
+      <h2 className="text-lg font-semibold mb-6">Edit Your Profile</h2>
 
-      <input name="job" value={form.job} onChange={handleChange} placeholder="Job" required className="w-60 focus:outline-none focus:ring-0" /><hr />
+      <input
+        name="username"
+        value={form.username}
+        onChange={handleChange}
+        placeholder="Username"
+        required
+        className="w-full px-4 py-2 bg-transparent border-b border-gray-700 mb-4 focus:outline-none"
+      />
+
+      <input
+        name="job"
+        value={form.job}
+        onChange={handleChange}
+        placeholder="Job"
+        required
+        className="w-full px-4 py-2 bg-transparent border-b border-gray-700 mb-4 focus:outline-none"
+      />
 
       <select
         value={country}
         onChange={(e) => {
           setCountry(e.target.value);
-          setState("");
+          setState('');
         }}
         required
-        className="rounded focus:outline-none focus:ring-0 text-white"
+        className="w-full px-4 py-2 bg-transparent border-b border-gray-700 mb-4 focus:outline-none"
       >
-        <option value="">Location</option>
+        <option value="">Select Country</option>
         {Object.keys(countryStateMap).map((c) => (
-          <option key={c} value={c}>{c}</option>
+          <option key={c} value={c} className="bg-black text-white">
+            {c}
+          </option>
         ))}
       </select>
 
@@ -154,27 +171,57 @@ export default function BioForm() {
           value={state}
           onChange={(e) => setState(e.target.value)}
           required
-          className=" rounded focus:outline-none focus:ring-0 text-white"
+          className="w-full px-4 py-2 bg-transparent border-b border-gray-700 mb-4 focus:outline-none"
         >
           <option value="">Select State</option>
           {countryStateMap[country].map((s) => (
-            <option key={s} value={s}>{s}</option>
+            <option key={s} value={s} className="bg-black text-white">
+              {s}
+            </option>
           ))}
         </select>
       )}
-      <hr />
 
-      <input name="age" type="number" value={form.age} onChange={handleChange} placeholder="Age" required className="w-60 focus:outline-none focus:ring-0 border-0" /><hr />
+      <input
+        name="age"
+        type="number"
+        value={form.age}
+        onChange={handleChange}
+        placeholder="Age"
+        required
+        className="w-full px-4 py-2 bg-transparent border-b border-gray-700 mb-4 focus:outline-none"
+      />
 
-      <textarea name="bio" value={form.bio} onChange={handleChange} placeholder="Short bio..." required className="w-60 focus:outline-none focus:ring-0 border-0" /><hr />
+      <select
+        name="gender"
+        required
+        value={form.gender}
+        onChange={handleChange}
+        className="w-full px-4 py-2 bg-transparent border-b border-gray-700 mb-4 focus:outline-none"
+      >
+        <option value="">Select Gender</option>
+        <option value="Male" className="bg-black text-white">Male</option>
+        <option value="Female" className="bg-black text-white">Female</option>
+      </select>
 
-      <div className="flex justify-center">
-        <button type="submit" disabled={loading} className="bg-white text-black rounded p-[6px] text-xs">
-          {loading ? "Submitting..." : "Update profile"}
-        </button>
-      </div>
+      <textarea
+        name="bio"
+        value={form.bio}
+        onChange={handleChange}
+        placeholder="Short bio..."
+        required
+        className="w-full px-4 py-2 bg-transparent border-b border-gray-700 mb-6 resize-none focus:outline-none"
+      />
 
-      {success && <p className="text-green-400 mt-2">{success}</p>}
+      <button
+        type="submit"
+        disabled={loading}
+        className="w-full py-2 bg-white text-black rounded-md hover:bg-gray-200 transition"
+      >
+        {loading ? 'Submitting...' : 'Update Profile'}
+      </button>
+
+      {success && <p className="text-green-400 mt-4 text-sm text-center">{success}</p>}
     </form>
   );
 }

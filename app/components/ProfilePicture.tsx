@@ -18,8 +18,8 @@ export default function ProfilePicture() {
         if (!res.ok) throw new Error('Not found');
         const data = await res.json();
         setProfilePicUrl(data.url);
-      } catch (err) {
-        setProfilePicUrl(null); // fallback to default
+      } catch {
+        setProfilePicUrl(null); 
       }
     };
 
@@ -27,25 +27,22 @@ export default function ProfilePicture() {
   }, [session]);
 
   return (
-    <div className="flex justify-center gap-10">
-      <div className="w-20 h-20 rounded-full overflow-hidden relative">
-      <Image
-        src={profilePicUrl || "/default_img.png"}
-        alt="profile"
-        width={80}
-        height={80}
-        className="rounded-full"
-        unoptimized 
-      />
-
+    <div className="flex flex-col items-center gap-4 ">
+      <div>
+        <Image
+          src={profilePicUrl || "/default_img.png"}
+          alt="Profile photo"
+          width={96}
+          height={96}
+          className="w-24 h-24 rounded-full object-cover border border-white shadow-sm"
+          unoptimized
+        />
       </div>
-      <div className="flex items-center">
-        <Link href="/client/profilePicture">
-          <button className="text-white border rounded px-2 py-1 text-sm">
-            Edit Photo
-          </button>
-        </Link>
-      </div>
+      <Link href="/client/profilePicture">
+        <button className="text-sm text-white border border-white rounded px-4 py-1 transition hover:bg-white hover:text-black">
+          Edit Photo
+        </button>
+      </Link>
     </div>
   );
 }

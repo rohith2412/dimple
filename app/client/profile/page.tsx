@@ -1,20 +1,22 @@
+'use client'
 
-
-import { Background } from '@/app/components/Background'
-import BioView from '@/app/components/BioView'
+import React from 'react'
 import Navbar from '@/app/components/Navbar'
 import ProfilePicture from '@/app/components/ProfilePicture'
-import React from 'react'
+import Gears from '@/app/components/Gear'
+import { Background } from '@/app/components/Background'
+import BioView from '@/app/components/BioView'
 
-const page = () => {
+const Page = () => {
   return (
-    <div>
+    <div className="">
       <Background />
       <Navbar />
       <ProfilePicture />
       <BioView />
+      <Gears />
     </div>
   )
 }
 
-export default page
+export default Page
