@@ -9,7 +9,9 @@ const page = () => {
     <div>
         <Background />
         <Navbar />
+        <div className='pt-10'>
         <EditProfilePicture />
+        </div>
         <Gears />
     </div>
   )

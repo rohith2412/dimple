@@ -60,7 +60,7 @@ export default function MainProfileView() {
   const handleClick = () => setButtonLoading(true);
 
   return (
-    <div className=" scale-80">
+    <div className=" scale-80 ">
       <div className="flex justify-evenly items-center w-[95%] rounded-3xl bg-gray-950/30 backdrop-blur-md backdrop-saturate-150 shadow-lg border border-white/10">
         <div className="">
           <Image

@@ -13,9 +13,11 @@ const Dashboard = () => {
     <div>
         <Background />
         <Navbar />
+        <div className='pt-10'>
         <Alluser />
+        </div>
         <div className=''>
-       <Gears />
+          <Gears />
         </div>
     </div>
   )
