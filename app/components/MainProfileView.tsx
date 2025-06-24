@@ -63,7 +63,7 @@ export default function MainProfileView() {
 
   return (
     <div className=" scale-80 ">
-      <div className="flex justify-evenly items-center w-[95%] rounded-3xl bg-gray-950/30 backdrop-blur-md backdrop-saturate-150 shadow-lg border border-white/10">
+      <div className="flex justify-evenly items-center rounded-3xl bg-gray-950/30 backdrop-blur-md backdrop-saturate-150 shadow-lg border border-white/10">
         <div className="">
           <Image
             src={profilePicUrl || "/default_img.png"}

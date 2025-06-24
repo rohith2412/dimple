@@ -1,59 +1,86 @@
-'use client';
+"use client";
 
-import { useSession } from 'next-auth/react';
-import { useRouter } from 'next/navigation';
-import { useState } from 'react';
+import { useState } from "react";
+import imageCompression from "browser-image-compression";
+import { useSession } from "next-auth/react";
 
-export function Photo() {
+export default function PhotoUploader() {
   const { data: session } = useSession();
-  const router = useRouter();
+  const userEmail = session?.user?.email ?? "";
+
   const [file, setFile] = useState<File | null>(null);
-  const [fileName, setFileName] = useState('');
+  const [fileName, setFileName] = useState("");
   const [loading, setLoading] = useState(false);
-  const [error, setError] = useState('');
+  const [error, setError] = useState("");
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    const selectedFile = e.target.files?.[0] || null;
-    setFile(selectedFile);
-    setFileName(selectedFile ? selectedFile.name : '');
-    setError('');
+    const selectedFile = e.target.files?.[0];
+    if (selectedFile) {
+      setFile(selectedFile);
+      setFileName(selectedFile.name);
+      setError("");
+    }
   };
 
   const handleUpload = async () => {
-    if (!file || !session?.user?.email) return;
-
-    const formData = new FormData();
-    formData.append('file', file);
-    formData.append('user', session.user.email);
+    if (!file) {
+      setError("Please select an image.");
+      return;
+    }
+    if (!userEmail) {
+      setError("User not authenticated.");
+      return;
+    }
 
     setLoading(true);
-    setError('');
+    setError("");
 
     try {
-      const res = await fetch('/api/photo', {
-        method: 'POST',
+      const compressedFile = await imageCompression(file, {
+        maxSizeMB: 9.5,
+        maxWidthOrHeight: 4096,
+        useWebWorker: true,
+      });
+
+      if (compressedFile.size > 10 * 1024 * 1024) {
+        setError("File still too large after compression.");
+        setLoading(false);
+        return;
+      }
+
+      const formData = new FormData();
+      formData.append("file", compressedFile);
+      formData.append("user", userEmail);
+
+      const res = await fetch("/api/photo", {
+        method: "POST",
         body: formData,
       });
 
-      if (!res.ok) throw new Error('Upload failed');
-      router.push('/client/myProfile');
-    } catch (err) {
-      console.error('Upload error:', err);
-      setError('Upload failed. Please try again.');
+      const data = await res.json();
+      if (!res.ok) throw new Error(data.error || "Upload failed");
+
+      setError("");
+      setFile(null);
+      setFileName("");
+      alert("Upload successful!");
+    } catch (err: any) {
+      setError(err.message || "Upload failed");
     } finally {
       setLoading(false);
     }
   };
 
   return (
-    <div className="px-6 py-10 text-white flex flex-col items-center">
+    <div className="px-6 py-10 text-white flex flex-col items-center ">
       {!session?.user ? (
         <p className="text-red-400 text-sm">Please log in first.</p>
       ) : (
-        <>
+        <div className="">
+          <div>
           <label
             htmlFor="file-upload"
-            className="cursor-pointer bg-white text-black px-4 py-2 rounded-full shadow hover:bg-gray-200 transition mb-4 flex items-center gap-2"
+            className="cursor-pointer w-fit bg-white text-black px-4 py-2 rounded-full shadow hover:bg-gray-200 transition mb-4 flex items-center gap-2"
           >
             <svg
               xmlns="http://www.w3.org/2000/svg"
@@ -65,7 +92,6 @@ export function Photo() {
             >
               <path d="M440-120v-320H120v-80h320v-320h80v320h320v80H520v320h-80Z" />
             </svg>
-            
             <input
               id="file-upload"
               type="file"
@@ -73,25 +99,31 @@ export function Photo() {
               onChange={handleChange}
               className="hidden"
             />
+            
           </label>
+          </div>
 
-          {fileName && (
-            <>
+          <div>{fileName && (
+            <div className="">
+              <div>
               <p className="text-sm text-gray-400 mb-4 text-center break-all">
                 Selected: {fileName}
               </p>
+              </div>
+              <div>
               <button
                 onClick={handleUpload}
                 className="bg-blue-500 w-24 py-2 rounded text-white text-sm hover:bg-blue-600 transition"
                 disabled={loading}
               >
-                {loading ? 'Uploading...' : 'Upload'}
+                {loading ? "Uploading..." : "Upload"}
               </button>
-            </>
-          )}
+              </div>
+            </div>
+          )}</div>
 
           {error && <p className="text-red-400 text-sm mt-4">{error}</p>}
-        </>
+        </div>
       )}
     </div>
   );

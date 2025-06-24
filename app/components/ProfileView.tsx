@@ -30,12 +30,23 @@ interface UserData {
 }
 
 export default function ProfileView() {
+  const [isFullScreen, setIsFullScreen] = useState(false);
+
   const params = useParams();
   const email = decodeURIComponent(params.email as string);
 
   const [userData, setUserData] = useState<UserData | null>(null);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
+
+  const handleImageClick = () => {
+    setIsFullScreen(true);
+  };
+
+  const handleClose = () => {
+    setIsFullScreen(false);
+  };
+
 
   useEffect(() => {
     async function fetchUserData() {
@@ -75,7 +86,7 @@ export default function ProfileView() {
   return (
     <div className="">
       <div className="scale-80 ">
-        <div className="flex justify-evenly items-center w-[95%] rounded-3xl bg-gray-950/30 backdrop-blur-md backdrop-saturate-150 shadow-lg border border-white/10">
+        <div className="flex justify-evenly items-center  rounded-3xl bg-gray-950/30 backdrop-blur-md backdrop-saturate-150 shadow-lg border border-white/10">
           <div>
             {userData.profilePics.length > 0 ? (
               <img
@@ -114,19 +125,39 @@ export default function ProfileView() {
         </div>
       </div>
 
+      <>
       <div className="flex flex-col items-center pt-10">
         {userData.photo && userData.photo.length > 0 ? (
           <img
             src={userData.photo[0].url}
             alt="Photo"
-            className="w-70 rounded"
+            onClick={handleImageClick}
+            className="w-70 rounded cursor-pointer transition-transform hover:scale-105"
           />
         ) : (
-          <div className="w-20 h-20 rounded-full bg-gray-700 flex items-center justify-center text-gray-400">
+          <div className="w-20 h-20 flex items-center justify-center text-gray-400">
             No Image
           </div>
         )}
       </div>
+
+      {/* Fullscreen Modal */}
+      {isFullScreen && (
+  <div
+    onClick={handleClose}
+    className="fixed inset-0 z-50 flex items-center justify-center bg-black/70 backdrop-blur-sm"
+  >
+    <img
+      src={userData.photo[0].url}
+      alt="Full Screen"
+      className="max-w-screen max-h-screen object-contain"
+    />
+   
+  </div>
+)}
+
+    </>
+ 
 
 
       {/* <div className="flex flex-col items-center">
