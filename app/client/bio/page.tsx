@@ -8,9 +8,7 @@ const page = () => {
   return (
     <div>
         <Navbar />
-        <div className='pt-10'>
         <Background />
-        </div>
         <BioForm />
         <Gears />
     </div>

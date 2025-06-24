@@ -14,7 +14,7 @@ export async function GET(req: NextRequest) {
     const bio = await Bio.findOne({ user: userEmail });
 
     if (!bio) {
-      return new NextResponse("Bio not found", { status: 404 });
+      return NextResponse.json({ error: "Bio not found" }, { status: 404 });
     }
 
     return NextResponse.json(bio);

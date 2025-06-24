@@ -67,10 +67,10 @@ export default function ProfileView() {
     fetchUserData();
   }, [email]);
 
-  if (loading) return <div className="text-white p-4">Loading profile...</div>;
-  if (error) return <div className="text-white p-4">Error: {error}</div>;
+  if (loading) return <div className="text-white flex justify-center p-30">Loading profile...</div>;
+  if (error) return <div className="text-white flex justify-center p-30">Error: {error}</div>;
   if (!userData)
-    return <div className="text-white p-4">No profile data found.</div>;
+    return <div className="text-white flex justify-center p-30">No profile data found.</div>;
 
   return (
     <div className="">
@@ -90,6 +90,7 @@ export default function ProfileView() {
             )}
             <div className="absolute inset-0 rounded-full border border-cyan-500 blur-sm opacity-30" />
           </div>
+
 
 
           <div className="p-6 grid justify-center ">

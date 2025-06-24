@@ -26,14 +26,14 @@ export default function ViewPhoto() {
   }, [session]);
 
   return (
-    <div className="flex flex-col items-center">
+    <div className="flex flex-col items-center pt-5">
       {profilePicUrl ? (
         <Image
           src={profilePicUrl}
           alt="Profile photo"
-          width={96}
-          height={96}
-          className="w-70"
+          width={70}
+          height={70}
+          className="w-60 rounded"
           unoptimized
         />
       ) : (

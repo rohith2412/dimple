@@ -12,7 +12,7 @@ const Auth = () => {
 
   useEffect(() => {
     if (status === "authenticated") {
-      router.push("/client/dashboard");
+      router.push("/client/newForm");
     }
   }, [status, router]);
 

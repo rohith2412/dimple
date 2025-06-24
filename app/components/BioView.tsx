@@ -1,14 +1,17 @@
-'use client';
+"use client";
 
 import { signOut, useSession } from "next-auth/react";
 import Link from "next/link";
+import { useRouter } from "next/navigation";
 import { useEffect, useState } from "react";
+import EditandLogoutButton from "./Edit&LogoutButton";
 
 const BioView = () => {
   const { data: session, status } = useSession();
   const [bio, setBio] = useState<any>(null);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
+  const router = useRouter();
 
   useEffect(() => {
     const fetchBio = async () => {
@@ -36,12 +39,19 @@ const BioView = () => {
       setLoading(false);
     }
   }, [session, status]);
+  
+
+  useEffect(() => {
+    if (status === "unauthenticated") {
+      router.push("/client/auth");
+    }
+  }, [status, router]);
 
   const [buttonLoading, setButtonLoading] = useState(false);
   const handleClick = () => setButtonLoading(true);
 
   return (
-    <div className="p-6 text-white text-sm pb-30">
+    <div className="p-6 text-white text-sm pb-10 ">
       {loading && <p className="text-center">Loading...</p>}
       {error && <p className="text-center text-red-400">{error}</p>}
       {bio && (
@@ -51,34 +61,34 @@ const BioView = () => {
             { label: "Job", value: bio.job },
             { label: "Location", value: bio.location },
             { label: "Age", value: bio.age },
-            { label: "Bio", value: bio.bio ? `${bio.bio.split(' ').slice(0, 2).join(' ')}...` : null },
+            {
+              label: "Bio",
+              value: bio.bio
+                ? `${bio.bio.split(" ").slice(0, 2).join(" ")}...`
+                : null,
+            },
             { label: "Gender", value: bio.gender },
           ].map(({ label, value }) => (
-            <div key={label} className="flex justify-between border-b border-gray-700 pb-1">
+            <div
+              key={label}
+              className="flex justify-between border-b border-gray-700 pb-1"
+            >
               <span className="text-gray-400">{label}</span>
-              <span>{value || <span className="text-gray-600">Add {label.toLowerCase()}</span>}</span>
+              <span>
+                {value || (
+                  <span className="text-gray-600">
+                    Add {label.toLowerCase()}
+                  </span>
+                )}
+              </span>
             </div>
           ))}
 
-          <div className="pt-6 flex flex-col space-y-2">
-            <Link href="/client/bio">
-              <button
-                onClick={handleClick}
-                disabled={buttonLoading}
-                className="w-full py-2 rounded bg-white text-black transition disabled:opacity-60"
-              >
-                {buttonLoading ? "Loading..." : "Edit Profile"}
-              </button>
-            </Link>
-            <button
-              onClick={() => signOut()}
-              className="w-full py-2 rounded bg-red-500 text-white"
-            >
-              Sign Out
-            </button>
-          </div>
+          
         </div>
+        
       )}
+      <EditandLogoutButton/>
     </div>
   );
 };
