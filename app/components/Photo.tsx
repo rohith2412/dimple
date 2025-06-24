@@ -32,7 +32,7 @@ export function Photo() {
       });
       if (!res.ok) throw new Error('Upload failed');
 
-      router.push('/client/profile');
+      router.push('/client/myProfile');
     } catch (err) {
       console.error('Upload error:', err);
     } finally {
@@ -41,7 +41,7 @@ export function Photo() {
   };
 
   return (
-    <div className="min-h-screen px-6 py-10 text-white flex flex-col items-center">
+    <div className=" px-6 py-10 text-white flex flex-col items-center">
       {!session?.user ? (
         <p className="text-red-400 text-sm">Please log in first.</p>
       ) : (

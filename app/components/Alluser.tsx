@@ -45,8 +45,8 @@ const Alluser: React.FC = () => {
       });
   }, []);
 
-  if (loading) return <div className="text-white">Loading users...</div>;
-  if (error) return <div className="text-red-500">Error: {error}</div>;
+  if (loading) return <div className="text-white flex justify-center p-30">Loading users...</div>;
+  if (error) return <div className="text-red-500 flex justify-center p-30">Error: {error}</div>;
 
   return (
     <div>

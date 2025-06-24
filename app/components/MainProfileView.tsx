@@ -56,6 +56,8 @@ export default function MainProfileView() {
       setLoading(false);
     }
   }, [session, status]);
+  if (loading) return <div className="text-white flex justify-center p-30">Loading users...</div>;
+  if (error) return <div className="text-red-500 flex justify-center p-30">Error: {error}</div>;
 
   const handleClick = () => setButtonLoading(true);
 

@@ -7,6 +7,7 @@ import User from "@/models/userModal";
 import Bio from "@/models/bioModal";
 import { NextRequest, NextResponse } from "next/server";
 import connectdb from "@/database/connectdb";
+import Photo from "@/models/photoModel";
 
 
 export async function GET() {
@@ -21,11 +22,13 @@ export async function GET() {
       users.map(async (user) => {
         const bio = await Bio.findOne({ user: user.email }).select("-_id -__v -createdAt -updatedAt");
         const profilePics = await ProfilePic.find({ user: user.email }).select("url filename -_id");
-
+        const photo = await Photo.find({ user: user.email }).select("url filename -_id");
+ 
         return {
           user,
           bio,
           profilePics,
+          photo
         };
       })
     );

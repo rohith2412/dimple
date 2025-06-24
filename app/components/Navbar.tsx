@@ -16,8 +16,7 @@ const Navbar = () => {
 
       <div className='flex text-xs text-gray-300 Poppins items-center gap-15'>
         {session?.user ? (
-          
-          <Link href="/client/profile">
+          <Link href="/client/myProfile">
           <div className='flex items-center gap-2'>
             <span className='text-white'>Hi, {session.user.name?.split(' ')[0]}</span>
           </div>

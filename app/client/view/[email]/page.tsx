@@ -9,7 +9,7 @@ const page = () => {
     <div>
         <Background />
         <Navbar />
-        <div className='pt-10'>
+        <div className=''>
         <ProfileView />
         </div>
         <Gears />

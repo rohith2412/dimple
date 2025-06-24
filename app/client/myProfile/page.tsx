@@ -15,7 +15,7 @@ const page = () => {
       <MainProfileView />
       </div>
       <ViewPhoto />
-      <div className='flex justify-end'>
+      <div className='flex justify-end pb-20'>
         <Photo />
       </div>
       <Gears />

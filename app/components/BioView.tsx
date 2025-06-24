@@ -41,7 +41,7 @@ const BioView = () => {
   const handleClick = () => setButtonLoading(true);
 
   return (
-    <div className="p-6 text-white text-sm">
+    <div className="p-6 text-white text-sm pb-30">
       {loading && <p className="text-center">Loading...</p>}
       {error && <p className="text-center text-red-400">{error}</p>}
       {bio && (

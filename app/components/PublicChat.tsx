@@ -46,7 +46,7 @@ export default function PublicChat() {
     bottomRef.current?.scrollIntoView({ behavior: "smooth" });
   }, [messages]);
 
-  if (status === "loading") return <div className="flex justify-center text-white pt-20">Loading session...</div>;
+  if (status === "loading") return <div className="flex justify-center text-white pt-20">Loading...</div>;
   if (!session) return <div className="flex justify-center text-white pt-20">Please<Link href={"/client/auth"}> &nbsp; <span className="underline">sign in</span> &nbsp;</Link>to chat.</div>;
 
   const sendMessage = async () => {
@@ -60,6 +60,8 @@ export default function PublicChat() {
     });
 
     setText("");
+
+
   };
 
   return (
