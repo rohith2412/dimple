@@ -41,7 +41,7 @@ export  function EditProfilePicture() {
   };
 
   return (
-    <div className="min-h-screen px-6 py-10 text-white flex flex-col items-center ">
+    <div className="min-h-screen px-6 py-10 text-black flex flex-col items-center ">
       <h1 className="text-lg font-semibold mb-6">Upload Profile Picture</h1>
 
       {!session?.user ? (
@@ -62,7 +62,7 @@ export  function EditProfilePicture() {
           <button
             onClick={handleUpload}
             disabled={!file || loading}
-            className="bg-blue-500 w-full max-w-xs py-2 rounded text-white text-sm hover:bg-blue-600 transition disabled:opacity-50"
+            className="bg-blue-500 w-full max-w-xs py-2 rounded text-black text-sm hover:bg-blue-600 transition disabled:opacity-50"
           >
             {loading ? 'Uploading...' : 'Upload'}
           </button>

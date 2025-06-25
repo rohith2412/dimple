@@ -72,7 +72,7 @@ export default function PhotoUploader() {
   };
 
   return (
-    <div className="px-6 py-10 text-white flex flex-col items-center ">
+    <div className="px-6 py-10 text-black flex flex-col items-center ">
       {!session?.user ? (
         <p className="text-red-400 text-sm">Please log in first.</p>
       ) : (
@@ -113,7 +113,7 @@ export default function PhotoUploader() {
               <div>
               <button
                 onClick={handleUpload}
-                className="bg-blue-500 w-24 py-2 rounded text-white text-sm hover:bg-blue-600 transition"
+                className="bg-blue-500 w-24 py-2 rounded text-black text-sm hover:bg-blue-600 transition"
                 disabled={loading}
               >
                 {loading ? "Uploading..." : "Upload"}

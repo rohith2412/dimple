@@ -121,13 +121,13 @@ export default function BioForm() {
   };
 
   if (!session?.user?.email) {
-    return <p className="text-white text-center mt-10">Please log in to submit your bio.</p>;
+    return <p className="text-black text-center mt-10">Please log in to submit your bio.</p>;
   }
 
   return (
     <form
       onSubmit={handleSubmit}
-      className="flex flex-col items-center  text-white px-6 py-10  w-95  max-w-sm mx-auto"
+      className="flex flex-col items-center  text-black px-6 py-10  w-95  max-w-sm mx-auto"
     >
       <h2 className="Poppins flex justify-center pb-5 ">Edit Your Profile</h2>
 
@@ -218,7 +218,7 @@ export default function BioForm() {
       <button
         type="submit"
         disabled={loading}
-        className="p-2 py-2 bg-white text-black rounded-md hover:bg-gray-200 transition"
+        className="p-2 py-2 bg-black text-black rounded-md hover:bg-gray-200 transition"
       >
         {loading ? 'Submitting...' : 'Update Profile'}
       </button>

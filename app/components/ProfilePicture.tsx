@@ -39,7 +39,7 @@ export default function ProfilePicture() {
         />
       </div>
       <Link href="/client/profilePicture">
-        <button className="text-sm text-white border border-white rounded px-4 py-1 transition hover:bg-white hover:text-black">
+        <button className="text-sm text-black border border-white rounded px-4 py-1 transition hover:bg-white hover:text-black">
           Edit Photo
         </button>
       </Link>

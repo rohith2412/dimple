@@ -79,17 +79,17 @@ export default function ProfileView() {
 
   if (loading)
     return (
-      <div className="text-white flex justify-center p-30">
+      <div className="text-black flex justify-center p-30">
         Loading profile...
       </div>
     );
   if (error)
     return (
-      <div className="text-white flex justify-center p-30">Error: {error}</div>
+      <div className="text-black flex justify-center p-30">Error: {error}</div>
     );
   if (!userData)
     return (
-      <div className="text-white flex justify-center p-30">
+      <div className="text-black flex justify-center p-30">
         No profile data found.
       </div>
     );
@@ -97,7 +97,7 @@ export default function ProfileView() {
   return (
     <div className="">
       <div className="scale-80 ">
-        <div className="flex justify-evenly items-center  rounded-3xl bg-gray-950/30 backdrop-blur-md backdrop-saturate-150 shadow-lg border border-white/10">
+        <div className="flex justify-evenly items-center Poppins  rounded-3xl  backdrop-blur-md backdrop-saturate-150 shadow-lg border border-white/10">
           <div>
             {userData.profilePics.length > 0 ? (
               <img
@@ -106,7 +106,7 @@ export default function ProfileView() {
                 className="w-24 h-24 rounded-full object-cover border border-white shadow-sm"
               />
             ) : (
-              <div className="w-20 h-20 rounded-full bg-gray-700 flex items-center justify-center text-gray-400">
+              <div className="w-20 h-20 rounded-full bg-gray-700 flex items-center justify-center text-black">
                 No Image
               </div>
             )}
@@ -114,7 +114,7 @@ export default function ProfileView() {
           </div>
 
           <div className="p-6 grid justify-center ">
-            <div className="flex justify-center gap-8 w-max text-gray-300 items-center ">
+            <div className="flex justify-center gap-8 w-max text-black items-center ">
               <div>
                 <h1 className="">{userData.bio?.username ?? "No username"}</h1>
               </div>

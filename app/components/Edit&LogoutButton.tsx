@@ -22,7 +22,7 @@ const EditandLogoutButton = () => {
     <div className="pt-0">
       <button
         onClick={() => signOut()}
-        className="w-20 py-2 rounded bg-red-500 text-white"
+        className="w-20 py-2 rounded bg-red-500 text-black"
       >
         Sign Out
       </button>

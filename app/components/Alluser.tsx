@@ -45,7 +45,7 @@ const Alluser: React.FC = () => {
       });
   }, []);
 
-  if (loading) return <div className="text-white flex justify-center p-30">Loading users...</div>;
+  if (loading) return <div className="text-black flex justify-center p-30">Loading users...</div>;
   if (error) return <div className="text-red-500 flex justify-center p-30">Error: {error}</div>;
 
   return (
@@ -54,7 +54,7 @@ const Alluser: React.FC = () => {
         {users.map(({ user, bio, profilePics }, idx) => (
           <li key={idx} className="mb-4">
             <Link href={`/client/view/${encodeURIComponent(user.email)}`}>
-              <div className="flex justify-between items-center text-white Poppins px-4">
+              <div className="flex justify-between items-center text-black Poppins px-4">
                 {/* Left: Image + Username */}
                 <div className="flex items-center gap-3 pl-15">
                   {profilePics.length > 0 ? (

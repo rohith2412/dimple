@@ -2,6 +2,8 @@
 
 import { Background } from "@/app/components/Background";
 import Gears from "@/app/components/Gear";
+import Navbar from "@/app/components/Navbar";
+import Link from "next/link";
 import React, { useEffect, useState } from "react";
 
 interface MatchedUser {
@@ -19,69 +21,145 @@ interface Pair {
   user2: MatchedUser;
 }
 
+const formatLocation = (loc: string) => {
+  const parts = loc.split(",").map((s) => s.trim());
+  return parts.length === 2 ? `${parts[1]}, ${parts[0].toUpperCase()}` : loc;
+};
+
 export default function MatchesPage() {
-    <Background />
   const [pairs, setPairs] = useState<Pair[]>([]);
   const [loading, setLoading] = useState(true);
+  const [userEmail, setUserEmail] = useState<string | null>(null);
 
   useEffect(() => {
-    async function fetchPairs() {
+    async function fetchSessionAndPairs() {
       try {
+        const sessionRes = await fetch("/api/auth/session");
+        const sessionData = await sessionRes.json();
+        const email = sessionData?.user?.email;
+        setUserEmail(email);
+
         const res = await fetch("/api/matchable-profiles");
-        const data = await res.json();
-        console.log("Pairs fetched:", data.length);
-        setPairs(data);
+        const data: Pair[] = await res.json();
+
+        if (email) {
+          const sortedPairs = [
+            ...data.filter(
+              (pair) => pair.user1.email === email || pair.user2.email === email
+            ),
+            ...data.filter(
+              (pair) => pair.user1.email !== email && pair.user2.email !== email
+            ),
+          ];
+          setPairs(sortedPairs);
+        } else {
+          setPairs(data);
+        }
       } catch (err) {
-        console.error("Failed to fetch matched pairs", err);
+        console.error("Error fetching session or matched pairs", err);
       } finally {
         setLoading(false);
       }
     }
 
-    fetchPairs();
+    fetchSessionAndPairs();
   }, []);
 
-  if (loading) return <div className="text-white p-6">Matching users...</div>;
+  if (loading)
+    return (
+      <div className="text-black flex justify-center p-30">Loading...</div>
+    );
 
   if (pairs.length === 0)
     return (
-      <div className="text-gray-400 text-center p-6">
+      <div className="text-black flex justify-center p-30">
         No valid matched pairs found.
       </div>
     );
 
   return (
-    <div className="text-white p-6 max-w-7xl mx-auto grid gap-6">
-      {pairs.map((pair, index) => (
-        <div
-          key={index}
-          className="bg-gray-800 rounded-xl p-6 shadow-lg flex flex-col md:flex-row justify-between gap-6"
-        >
-          <h2 className="text-xl font-bold text-center w-full">
-            Pair #{index + 1}
-          </h2>
+    <>
+      <Background />
+      <Navbar />
+      <div className="flex justify-center items-center pt-10 text-xl">
+        AI generated pairs{" "}
+        ❤️
+      </div>
+      <div className="text-center flex justify-center text-xs text-gray-500">
+        * This cycle will keep on changing every week
+      </div>
 
-          {[pair.user1, pair.user2].map((user, i) => (
+      <div className="text-black Poppins grid justify-center items-center p-6">
+        <div className="w-full max-w-4xl mx-auto space-y-4">
+          {pairs.map((pair, index) => (
             <div
-              key={i}
-              className="flex-1 flex flex-col items-center text-center"
+              key={index}
+              className="flex w-full p-4 rounded-xl shadow-md gap-4"
             >
-              <img
-                src={user.image}
-                alt={user.username}
-                className="w-24 h-24 rounded-full object-cover mb-2 border-2 border-white"
-              />
-              <p className="text-lg font-semibold">{user.username}</p>
-              <p className="text-sm text-gray-300">
-                {user.gender}, Age {user.age}
-              </p>
-              <p className="text-sm text-gray-400">{user.location}</p>
-              <p className="text-xs text-gray-500">{user.email}</p>
+              {/* User 1 */}
+              <Link
+                href={`/client/view/${encodeURIComponent(pair.user1.email)}`}
+                className="flex gap-3 items-center w-1/2"
+              >
+                <img
+                  src={pair.user1.image}
+                  alt={pair.user1.username}
+                  className="w-14 h-14 rounded-full"
+                />
+                <div className="truncate">
+                  <p className="text-sm text-left">{pair.user1.username}</p>
+                  <p className="text-xs text-left text-gray-600 whitespace-nowrap overflow-hidden text-ellipsis">
+                    {formatLocation(pair.user1.location)}
+                  </p>
+                </div>
+              </Link>
+
+              {/* Icon between */}
+              <div className="flex items-center justify-center">
+                <svg
+                  viewBox="0 0 512 512"
+                  width="25"
+                  height="25"
+                  className="animate-pulse drop-shadow-lg"
+                  xmlns="http://www.w3.org/2000/svg"
+                >
+                  <defs>
+                    <radialGradient id="glow" cx="50%" cy="50%" r="50%">
+                      <stop offset="0%" stopColor="#ff6ec4" />
+                      <stop offset="100%" stopColor="#7873f5" stopOpacity="0" />
+                    </radialGradient>
+                  </defs>
+                  <circle cx="256" cy="256" r="130" fill="url(#glow)" />
+                  <path
+                    d="M256 464s-192-112-192-272c0-70.7 57.3-128 128-128 41.2 0 77.8 20.1 100 51.3C314.2 84.1 350.8 64 392 64c70.7 0 128 57.3 128 128 0 160-192 272-192 272s-9.4 6-32 6-32-6-32-6z"
+                    fill="#ff6ec4"
+                  />
+                </svg>
+              </div>
+
+              {/* User 2 */}
+              <Link
+                href={`/client/view/${encodeURIComponent(pair.user2.email)}`}
+                className="flex gap-3 items-center w-1/2 justify-end text-right"
+              >
+                <div className="truncate">
+                  <p className="text-sm text-right">{pair.user2.username}</p>
+                  <p className="text-xs text-right text-gray-600 whitespace-nowrap overflow-hidden text-ellipsis">
+                    {formatLocation(pair.user2.location)}
+                  </p>
+                </div>
+                <img
+                  src={pair.user2.image}
+                  alt={pair.user2.username}
+                  className="w-14 h-14 rounded-full"
+                />
+              </Link>
             </div>
           ))}
         </div>
-      ))}
+      </div>
+
       <Gears />
-    </div>
+    </>
   );
 }

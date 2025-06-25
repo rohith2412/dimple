@@ -4,7 +4,7 @@
 
 :root {
   --background: #F7F6F4;
-  --foreground: #111;
+  --foreground: #F7F6F4;
 }
 
 @theme inline {
@@ -16,8 +16,8 @@
 
 @media (prefers-color-scheme: dark) {
   :root {
-    --background: #000000;
-    --foreground: #000000;
+    --background: #F7F6F4;
+    --foreground: #F7F6F4;
   }
 }
 
@@ -25,7 +25,70 @@ body {
   background: var(--background);
   color: var(--foreground);
   font-family: Arial, Helvetica, sans-serif;
-  color: white;
+  color: black;
+  
 }
 
 
+.redGradient{
+  background: #e4110a;
+  background: linear-gradient(90deg, rgba(228, 17, 10, 1) 0%, rgba(105, 2, 2, 1) 100%);
+}
+
+
+.pinkGradient{
+  background: #B24592;  /* fallback for old browsers */
+  background: -webkit-linear-gradient(to right, #F15F79, #B24592);  /* Chrome 10-25, Safari 5.1-6 */
+  background: linear-gradient(to right, #F15F79, #B24592); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+  
+}
+
+.Gradient{
+  background: linear-gradient(90deg, rgb(18, 32, 20) 0.000%, rgb(0, 0, 0) 50.000%, rgba(0, 39, 18, 1.000) 100.000%)
+}
+
+
+@keyframes floatAlien {
+  0% {
+    transform: translateY(0px) rotate(0deg);
+  }
+  50% {
+    transform: translateY(-10px) rotate(1deg);
+  }
+  100% {
+    transform: translateY(0px) rotate(-1deg);
+  }
+}
+
+.animate-alien {
+  animation: floatAlien 4s ease-in-out infinite;
+}
+
+
+
+
+@keyframes blob {
+  0%, 100% {
+    transform: translate(0px, 0px) scale(1);
+  }
+  33% {
+    transform: translate(30px, -50px) scale(1.1);
+  }
+  66% {
+    transform: translate(-20px, 20px) scale(0.9);
+  }
+}
+
+
+
+.animate-blob {
+  animation: blob 20s ease-in-out infinite;
+}
+
+.animation-delay-2000 {
+  animation-delay: 2s;
+}
+
+.animation-delay-4000 {
+  animation-delay: 4s;
+}
