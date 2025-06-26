@@ -82,8 +82,7 @@ export default function MatchesPage() {
       <Background />
       <Navbar />
       <div className="flex justify-center items-center pt-10 text-xl">
-        AI generated pairs{" "}
-        ❤️
+        AI generated pairs ❤️
       </div>
       <div className="text-center flex justify-center text-xs text-gray-500">
         * This cycle will keep on changing every week
@@ -104,8 +103,9 @@ export default function MatchesPage() {
                 <img
                   src={pair.user1.image}
                   alt={pair.user1.username}
-                  className="w-14 h-14 rounded-full"
+                  className="w-14 h-14 rounded-full object-cover aspect-square"
                 />
+
                 <div className="truncate">
                   <p className="text-sm text-left">{pair.user1.username}</p>
                   <p className="text-xs text-left text-gray-600 whitespace-nowrap overflow-hidden text-ellipsis">
@@ -151,7 +151,7 @@ export default function MatchesPage() {
                 <img
                   src={pair.user2.image}
                   alt={pair.user2.username}
-                  className="w-14 h-14 rounded-full"
+                  className="w-14 h-14 rounded-full object-cover aspect-square"
                 />
               </Link>
             </div>

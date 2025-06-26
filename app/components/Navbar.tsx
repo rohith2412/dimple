@@ -23,7 +23,7 @@ const Navbar = () => {
           </Link>
         ) : (
           <Link href='/client/auth'>
-            <div className='flex hover:text-gray-500 text-xs underline'>
+            <div className='flex text-black hover:text-gray-500 text-xs underline'>
               <button className='cursor-pointer'>join now</button>
               <svg
                 xmlns='http://www.w3.org/2000/svg'
