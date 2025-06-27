@@ -127,9 +127,8 @@ export default function BioForm() {
   return (
     <form
       onSubmit={handleSubmit}
-      className="flex flex-col items-center  text-black px-6 py-10  w-95  max-w-sm mx-auto"
+      className="flex flex-col items-center  text-black px-6   w-95  max-w-sm mx-auto"
     >
-      <h2 className="Poppins flex justify-center pb-5 ">Edit Your Profile</h2>
 
       <input
         name="username"
@@ -137,7 +136,7 @@ export default function BioForm() {
         onChange={handleChange}
         placeholder="Username"
         required
-        className="w-full  px-4 text-gray-400 py-2 bg-transparent   border-gray-700 mb-4 focus:outline-none"
+        className="w-full  px-4 text-black py-2 bg-transparent    mb-4 focus:outline-none"
       />
 
       <input
@@ -146,7 +145,7 @@ export default function BioForm() {
         onChange={handleChange}
         placeholder="Job"
         required
-        className="w-full px-4   text-gray-400  bg-transparent   border-gray-700 mb-4 focus:outline-none"
+        className="w-full px-4   text-black  bg-transparent    mb-4 focus:outline-none"
       />
 
       <select
@@ -156,11 +155,11 @@ export default function BioForm() {
           setState('');
         }}
         required
-        className="w-full px-4 text-gray-400 py-2 bg-transparent   border-gray-700 mb-4 focus:outline-none ml-4" 
+        className="w-full px-4 text-black py-2 bg-transparent    mb-4 focus:outline-none ml-4" 
       >
         <option value="">Select Country</option>
         {Object.keys(countryStateMap).map((c) => (
-          <option key={c} value={c} className="bg-black text-gray-400">
+          <option key={c} value={c} className="bg-black text-black">
             {c}
           </option>
         ))}
@@ -172,11 +171,11 @@ export default function BioForm() {
           value={state}
           onChange={(e) => setState(e.target.value)}
           required
-          className="w-full px-4 py-2 bg-transparent  text-gray-400  border-gray-700 mb-4 focus:outline-none ml-4" 
+          className="w-full px-4 py-2 bg-transparent  text-black   mb-4 focus:outline-none ml-4" 
         >
           <option value="">Select State</option>
           {countryStateMap[country].map((s) => (
-            <option key={s} value={s} className="bg-black text-gray-400">
+            <option key={s} value={s} className="bg-black text-black">
               {s}
             </option>
           ))}
@@ -191,7 +190,7 @@ export default function BioForm() {
         onChange={handleChange}
         placeholder="Age"
         required
-        className="w-full px-4  bg-transparent  text-gray-400  border-gray-700 mb-4 focus:outline-none"
+        className="w-full px-4  bg-transparent  text-black   mb-4 focus:outline-none"
       />
 
       <select
@@ -199,11 +198,11 @@ export default function BioForm() {
         required
         value={form.gender}
         onChange={handleChange}
-        className="w-full px-4 text-gray-400 py-2 bg-transparent   border-gray-700 mb-4 focus:outline-none ml-4"
+        className="w-full px-4 text-black py-2 bg-transparent    mb-4 focus:outline-none ml-4"
       >
         <option value="">Select Gender</option>
-        <option value="Male" className="bg-black text-gray-400">Male</option>
-        <option value="Female" className="bg-black text-gray-400">Female</option>
+        <option value="Male" className="bg-black text-black">Male</option>
+        <option value="Female" className="bg-black text-black">Female</option>
       </select>
 
       <textarea
@@ -212,13 +211,13 @@ export default function BioForm() {
         onChange={handleChange}
         placeholder="Short bio..."
         required
-        className="w-full px-4 py-2 bg-transparent   border-gray-700 mb-6 resize-none focus:outline-none"
+        className="w-full px-4 py-2 bg-transparent    mb-6 resize-none focus:outline-none"
       />
 
       <button
         type="submit"
         disabled={loading}
-        className="p-2 py-2 bg-black text-black rounded-md hover:bg-gray-200 transition"
+        className="p-2 py-2 bg-black text-white text-xs  rounded-md hover:bg-gray-200 transition"
       >
         {loading ? 'Submitting...' : 'Update Profile'}
       </button>

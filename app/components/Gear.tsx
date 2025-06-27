@@ -3,9 +3,9 @@ import React from "react";
 
 const Gears = () => {
   return (
-    <div>
+    <div className="">
     
-      <div className="fixed bg-white bottom-0 left-0 right-0  px-4 py-3 flex w-full items-center z-20 shadow-inner justify-around  ">
+      <div className="fixed bg-white lg:flex lg:justify-center lg:gap-30  bottom-0 left-0 right-0  px-4 py-3 flex w-full items-center z-20 shadow-inner justify-around  ">
         <Link href={"/client/dashboard"}>
             <div className="p-2 rounded-full opacity-60"><svg className="" xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 -960 960 960" width="24px" fill=""><path d="M240-200h120v-240h240v240h120v-360L480-740 240-560v360Zm-80 80v-480l320-240 320 240v480H520v-240h-80v240H160Zm320-350Z"/></svg></div>
         </Link>

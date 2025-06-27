@@ -95,7 +95,7 @@ export default function ProfileView() {
     );
 
   return (
-    <div className="">
+    <div className=" lg:scale-120 lg:pt-10  mx-auto lg:w-fit lg:grid lg:justify-center lg:items-center">
       <div className="scale-80 ">
         <div className="flex justify-evenly items-center Poppins  rounded-3xl  backdrop-blur-md backdrop-saturate-150 shadow-lg border border-white/10">
           <div>
@@ -158,12 +158,12 @@ export default function ProfileView() {
           {isFullScreen && (
             <div
               onClick={handleClose}
-              className="fixed inset-0 z-50 flex items-center justify-center bg-black/70 backdrop-blur-sm"
+              className="fixed inset-0 z-50 flex items-center justify-center  backdrop-blur-sm"
             >
               <img
                 src={userData.photo[0].url}
                 alt="Full Screen"
-                className="max-w-screen max-h-screen object-contain"
+                className="max-w-screen max-h-screen items-center object-contain"
               />
             </div>
           )}

@@ -49,12 +49,12 @@ const Alluser: React.FC = () => {
   if (error) return <div className="text-red-500 flex justify-center p-30">Error: {error}</div>;
 
   return (
-    <div>
+    <div className=" lg:flex lg:justify-center  ">
       <ul>
         {users.map(({ user, bio, profilePics }, idx) => (
           <li key={idx} className="mb-4">
             <Link href={`/client/view/${encodeURIComponent(user.email)}`}>
-              <div className="flex justify-between items-center text-black Poppins px-4">
+              <div className="flex lg:gap-30 justify-between items-center text-black Poppins px-4">
                 {/* Left: Image + Username */}
                 <div className="flex items-center gap-3 pl-15">
                   {profilePics.length > 0 ? (

@@ -72,7 +72,7 @@ export default function PhotoUploader() {
   };
 
   return (
-    <div className="px-6 py-10 text-black flex flex-col items-center ">
+    <div className="px-6 scale-80 lg:scale-90  mx-auto lg:w-fit lg:grid lg:justify-center lg:items-center py-10 text-black flex flex-col items-center ">
       {!session?.user ? (
         <p className="text-red-400 text-sm">Please log in first.</p>
       ) : (

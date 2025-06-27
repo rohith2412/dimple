@@ -8,15 +8,17 @@ import EditandLogoutButton from "./Edit&LogoutButton";
 
 const BioView = () => {
   const { data: session, status } = useSession();
+  const router = useRouter();
+
   const [bio, setBio] = useState<any>(null);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
-  const router = useRouter();
 
+  // Fetch user bio data from backend
   useEffect(() => {
     const fetchBio = async () => {
       if (!session?.user?.email) {
-        setError("User not authenticated or missing email");
+        setError("User not logged in.");
         setLoading(false);
         return;
       }
@@ -27,7 +29,7 @@ const BioView = () => {
         const data = await res.json();
         setBio(data);
       } catch (err: any) {
-        setError(err.message || "Failed to load bio");
+        setError(err.message || "Could not load bio.");
       } finally {
         setLoading(false);
       }
@@ -35,60 +37,69 @@ const BioView = () => {
 
     if (status === "authenticated") fetchBio();
     else if (status === "unauthenticated") {
-      setError("Please log in first.");
+      setError("Please log in.");
       setLoading(false);
     }
   }, [session, status]);
-  
 
+  // Redirect to login if unauthenticated
   useEffect(() => {
     if (status === "unauthenticated") {
       router.push("/client/auth");
     }
   }, [status, router]);
 
-  const [buttonLoading, setButtonLoading] = useState(false);
-  const handleClick = () => setButtonLoading(true);
-
   return (
-    <div className="p-6 text-black text-sm pb-10 ">
+    <div className="p-6 text-black text-sm pb-10">
       {loading && <p className="text-center">Loading...</p>}
-      {error && <p className="text-center text-red-400">{error}</p>}
+      {error && <p className="text-center text-red-500">{error}</p>}
       {bio && (
-        <div className="space-y-4">
-          {[
-            { label: "Username", value: bio.username },
-            { label: "Job", value: bio.job },
-            { label: "Location", value: bio.location },
-            { label: "Age", value: bio.age },
-            {
-              label: "Bio",
-              value: bio.bio
-                ? `${bio.bio.split(" ").slice(0, 2).join(" ")}...`
-                : null,
-            },
-            { label: "Gender", value: bio.gender },
-          ].map(({ label, value }) => (
-            <div
-              key={label}
-              className="flex justify-between border-b border-gray-700 pb-1"
-            >
-              <span className="text-gray-400">{label}</span>
-              <span>
-                {value || (
-                  <span className="text-gray-600">
-                    Add {label.toLowerCase()}
-                  </span>
-                )}
-              </span>
-            </div>
-          ))}
+        <div className="flex justify-center gap-5 items-center">
+          <div className="grid gap-4 ">
+            <span className="font-medium text-gray-700  text-right pr-2">Username</span>
+            <span className="font-medium text-gray-700  text-right pr-2 ">Job</span>
+            <span className="font-medium text-gray-700  text-right pr-2">Location</span>
+            <span className="font-medium text-gray-700  text-right pr-2">Age</span>
+            <span className="font-medium text-gray-700  text-right pr-2">Gender</span>
+            <span className="font-medium text-gray-700  text-right pr-2">Bio</span>
+          </div>
 
-          
+          <div className="grid gap-3 ">
+            <span className="border-b pb-1 border-gray-700 flex text-left ">
+              {bio.username || (
+                <span className="text-gray-500">Add username</span>
+              )}
+            </span>
+            <span className="border-b pb-1 border-gray-700 flex justify-start">
+              {bio.job || <span className="text-gray-500">Add job</span>}
+            </span>
+
+            <span className="border-b pb-1 border-gray-700 flex justify-start">
+              {bio.location || (
+                <span className="text-gray-500">Add location</span>
+              )}
+            </span>
+
+            <span className="border-b pb-1 border-gray-700 flex justify-start">
+              {bio.age || <span className="text-gray-500">Add age</span>}
+            </span>
+
+            <span className="border-b pb-1 border-gray-700 flex justify-start">
+              {bio.gender || <span className="text-gray-500">Add gender</span>}
+            </span>
+
+            <span className="border-b pb-1 border-gray-700 flex justify-start">
+              {bio.bio ? (
+                `${bio.bio.split(" ").slice(0, 2).join(" ")}...`
+              ) : (
+                <span className="text-gray-500">Add bio</span>
+              )}
+            </span>
+          </div>
         </div>
-        
       )}
-      <EditandLogoutButton/>
+
+      <EditandLogoutButton />
     </div>
   );
 };

@@ -9,7 +9,7 @@ const Navbar = () => {
   const { data: session } = useSession();
 
   return (
-    <div className='flex text-black Poppins justify-between p-10 pb-0'>
+    <div className='flex text-black lg:flex lg:justify-evenly Poppins justify-between p-10 pb-0'>
       <Link href={"/client/dashboard"}>
       <div className='flex cherry-bomb-one-regular text-2xl'>dimple</div>
       </Link>

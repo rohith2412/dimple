@@ -92,3 +92,40 @@ body {
 .animation-delay-4000 {
   animation-delay: 4s;
 }
+
+
+
+
+.shiny-text {
+  color: transparent;
+  background: linear-gradient(
+    120deg,
+    black 40%,
+    white 50%,
+    black 60%
+  );
+  background-size: 200% 100%;
+  -webkit-background-clip: text;
+  background-clip: text;
+  display: inline-block;
+  animation: shine 1s linear infinite;
+}
+
+@keyframes shine {
+  0% {
+    background-position: 100%;
+  }
+  100% {
+    background-position: -100%;
+  }
+}
+
+.shiny-text.disabled {
+  animation: none;
+  color: black;
+  background: none;
+  -webkit-background-clip: initial;
+  background-clip: initial;
+}
+
+

@@ -1,22 +1,27 @@
-
 import connectdb from "@/database/connectdb";
 import Bio from "@/models/bioModal";
 import ProfilePic from "@/models/profilepicModel";
 import User from "@/models/userModal";
+import Match from "@/models/matchesModel";
 
 export async function GET() {
   try {
     await connectdb();
 
-    const users = await User.find().lean(); // Get all users
+    // Step 1: Clear outdated matches (for simplicity, just clear all matches)
+    // You can add logic here to selectively clear based on timestamps or profile changes
+    await Match.deleteMany({});
+
+    // Step 2: Fetch all users
+    const users = await User.find().lean();
     const usedEmails = new Set<string>();
     const pairs = [];
 
+    // Step 3: Match users fresh, push to pairs
     for (const user of users) {
       const email = user.email;
       if (usedEmails.has(email)) continue;
 
-      // Get bio and profile pic for user
       const bio = await Bio.findOne({ user: email }).lean();
       const pic = await ProfilePic.findOne({ user: email }).lean();
 
@@ -27,14 +32,11 @@ export async function GET() {
         !bio.age ||
         !bio.location ||
         !pic?.url
-      ) {
-        // Missing required data, skip
+      )
         continue;
-      }
 
       const oppositeGender = bio.gender === "Male" ? "Female" : "Male";
 
-      // Find a match for the user
       const match = await Bio.findOne({
         user: { $ne: email },
         gender: oppositeGender,
@@ -54,7 +56,7 @@ export async function GET() {
         const matchPic = await ProfilePic.findOne({ user: match.user }).lean();
 
         if (matchUser && matchPic?.url) {
-          pairs.push({
+          const newPair = {
             user1: {
               name: user.name,
               email,
@@ -73,23 +75,32 @@ export async function GET() {
               location: match.location,
               image: matchPic.url,
             },
+          };
+
+          pairs.push(newPair);
+
+          // Save the new pair in DB cache
+          await Match.create({
+            user1: newPair.user1,
+            user2: newPair.user2,
           });
 
-          // Mark both as used
           usedEmails.add(email);
           usedEmails.add(match.user);
         }
       }
     }
 
+    // Step 4: Return fresh pairs
     return new Response(JSON.stringify(pairs), {
       status: 200,
       headers: { "Content-Type": "application/json" },
     });
   } catch (err) {
     console.error("Error in matching users:", err);
-    return new Response(JSON.stringify({ error: "Internal Server Error" }), {
-      status: 500,
-    });
+    return new Response(
+      JSON.stringify({ error: "Internal Server Error" }),
+      { status: 500 }
+    );
   }
 }

@@ -65,7 +65,7 @@ export default function PublicChat() {
   };
 
   return (
-    <div className="flex flex-col h-screen  text-black">
+    <div className="flex flex-col h-screen lg:flex lg:justify-center lg:items-center lg:w-full  text-black">
       <header className="fixed top-0 left-0 right-0 z-20 shadow-md px-4 py-3  flex items-center justify-between">
         <Link href={"/client/dashboard"}>
           <div className="flex items-center gap-1">
@@ -129,24 +129,25 @@ export default function PublicChat() {
         <div ref={bottomRef} />
       </main>
 
-      <footer className="fixed bottom-0 left-0 right-0  px-4 py-3 flex gap-3 items-center z-20 shadow-inner">
-        <input
-          type="text"
-          placeholder="Type a message"
-          className="flex-grow rounded-full border   px-4 py-2 text-black focus:outline-none "
-          value={text}
-          onChange={(e) => setText(e.target.value)}
-          onKeyDown={(e) => {
-            if (e.key === "Enter") sendMessage();
-          }}
-        />
-        <button
-          onClick={sendMessage}
-          className="bg-blue-500 px-5 py-2 rounded-full font-semibold  transition"
-        >
-          Send
-        </button>
-      </footer>
+      <footer className="fixed bottom-0 left-1/2 transform -translate-x-1/2 px-4 py-3 flex gap-3 items-center z-20 shadow-inner bg-white w-full max-w-2xl">
+  <input
+    type="text"
+    placeholder="Type a message"
+    className="flex-grow rounded-full border px-4 py-2 text-black focus:outline-none"
+    value={text}
+    onChange={(e) => setText(e.target.value)}
+    onKeyDown={(e) => {
+      if (e.key === "Enter") sendMessage();
+    }}
+  />
+  <button
+    onClick={sendMessage}
+    className="bg-blue-500 px-5 py-2 rounded-full font-semibold transition"
+  >
+    Send
+  </button>
+</footer>
+
     </div>
   );
 }

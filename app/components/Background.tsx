@@ -1,13 +1,8 @@
 export function Background() {
   return (
-    <div>
-      {/* <div className="fixed inset-0 -z-10 w-full h-full bg-black bg-[radial-gradient(#FFFFFF_0.1px,transparent_0.4px)] [background-size:30px_30px]"></div> */}
-      {/* <div className="bg-black"></div> */}
-      <div className="fixed inset-0 -z-10 overflow-hidden">
-        {/* Large colorful blobs */}
-        <div className="absolute lg:size-90 lg:top-[35%] top-[50%] right-[50%] w-[50vw] h-[50vw] bg-green-900 rounded-full mix-blend-multiply filter blur-3xl opacity-80 animate-blob animation-delay-4000"></div>
-      </div>
+    <div className="fixed inset-0 -z-10 overflow-hidden">
+      {/* Static gradient image-like blob */}
+      {/* <div className="absolute top-[30%] right-[50%] w-[60vw] h-[60vw] rounded-full bg-gradient-to-tr from-green-900 via-green-700 to-transparent opacity-60 blur-3xl" /> */}
     </div>
   );
 }
-// bg-orange-500
