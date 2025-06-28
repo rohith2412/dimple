@@ -1,17 +1,19 @@
 import { Background } from '@/app/components/Background'
+import FeedPhotos from '@/app/components/FeedPhotos'
 import Gears from '@/app/components/Gear'
-import MatchesPage from '@/app/components/MatchPage'
 import Navbar from '@/app/components/Navbar'
 import React from 'react'
 
-const page = () => {
+type Props = {}
+
+const page = (props: Props) => {
   return (
     <div>
-      <Navbar/>
+      <Navbar />
       <Background />
-      <MatchesPage />
+      <FeedPhotos />
       <Gears />
-    </div>
+      </div>
   )
 }
 
