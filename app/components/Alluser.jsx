@@ -72,11 +72,11 @@ export default function Alluser() {
                 <div className="flex items-center gap-3 justify-center">
                   {profilePics.length > 0 ? (
                     <Image
-                      src={profilePics[0].url}
-                      alt="Profile"
-                      width={10} // or any fixed width you want
-                      height={10}
-                      className="w-10 h-10 rounded-full object-cover"
+                      src={pair.user1.image || "/default-avatar.png"}
+                      alt={pair.user1.username || "User"}
+                      width={56}
+                      height={56}
+                      className="w-14 h-14 aspect-square rounded-full object-cover"
                     />
                   ) : (
                     <span className="text-xs text-gray-400">No image</span>
