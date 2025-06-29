@@ -1,6 +1,6 @@
 "use client";
 
-import  Background  from "@/app/components/Background";
+import Background from "@/app/components/Background";
 import Gears from "@/app/components/Gear";
 import InfoNotice from "@/app/components/InfoNotice";
 import Navbar from "@/app/components/Navbar";
@@ -18,10 +18,7 @@ const formatLocation = (loc) => {
 // Type guard equivalent - just a runtime check function
 function isMatchedUser(user) {
   if (typeof user !== "object" || user === null) return false;
-  return (
-    typeof user.email === "string" &&
-    typeof user.username === "string"
-  );
+  return typeof user.email === "string" && typeof user.username === "string";
 }
 
 export default function MatchesPage() {
@@ -92,7 +89,9 @@ export default function MatchesPage() {
         <Navbar />
         <div className="text-black flex justify-center items-center min-h-screen">
           <div className="text-center">
-            <div className="text-xl text-red-600 mb-2">Error loading matches</div>
+            <div className="text-xl text-red-600 mb-2">
+              Error loading matches
+            </div>
             <div className="text-sm text-gray-600">{error}</div>
           </div>
         </div>
@@ -103,7 +102,6 @@ export default function MatchesPage() {
   if (!Array.isArray(pairs) || pairs.length === 0) {
     return (
       <>
-        
         <div className="text-black flex justify-center items-center min-h-screen">
           <div className="text-center">
             <div className="text-xl mb-2">No matches found</div>
@@ -118,8 +116,6 @@ export default function MatchesPage() {
 
   return (
     <>
-      
-
       <div className="flex justify-center items-center">
         <div className="flex justify-center items-center pt-10 text-xl">
           AI generated pairs ❤️
@@ -145,12 +141,12 @@ export default function MatchesPage() {
                 className="flex gap-3 items-center w-1/2 hover:opacity-80 transition-opacity"
               >
                 <Image
-  src={pair.user1.image || "/default-avatar.png"}
-  alt={pair.user1.username || "User"}
-  width={56}
-  height={56}
-  className="w-14 h-14 aspect-square rounded-full object-cover"
-/>
+                  src={pair.user1.image || "/default-avatar.png"}
+                  alt={pair.user1.username || "User"}
+                  width={56}
+                  height={56}
+                  className="w-14 h-14 aspect-square rounded-full object-cover"
+                />
 
                 <div className="truncate">
                   <p className="text-sm text-left font-medium">
@@ -209,13 +205,12 @@ export default function MatchesPage() {
                   </p>
                 </div>
                 <Image
-  src={pair.user2.image || "/default-avatar.png"}
-  alt={pair.user2.username || "User"}
-  width={56}
-  height={56}
-  className="w-14 h-14 aspect-square rounded-full object-cover"
-/>
-
+                  src={pair.user2.image || "/default-avatar.png"}
+                  alt={pair.user2.username || "User"}
+                  width={56}
+                  height={56}
+                  className="w-14 h-14 aspect-square rounded-full object-cover"
+                />
               </Link>
             </div>
           ))}

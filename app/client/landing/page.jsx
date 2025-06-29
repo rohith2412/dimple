@@ -41,7 +41,7 @@ const Landing = () => {
           </div>
         </div>
         <div className="grid justify-center items-center">
-        <div className="flex justify-center items-center"><ShinyText text=" A community of Malayalis"  disabled={false} speed={6} className='custom-class' />🌴</div>
+        <div className="flex justify-center items-center"><ShinyText text=" A community of Gen-Z "  disabled={false} speed={6} className='custom-class' /> 🌴</div>
         <div className="flex justify-center items-center"><ShinyText text=" across globe" disabled={false} speed={6} className='custom-class' /></div>
         </div>
 

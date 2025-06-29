@@ -71,16 +71,16 @@ export default function Alluser() {
               <div className="flex lg:gap-40 gap-40 justify-between items-center text-black font-poppins px-4 cursor-pointer hover:bg-gray-100 rounded-md py-2">
                 <div className="flex items-center gap-3 justify-center">
                   {profilePics.length > 0 ? (
-  <Image
-    src={profilePics[0]?.url || "/default-avatar.png"}
-    alt={bio?.username || "User"}
-    width={56}
-    height={56}
-    className="w-14 h-14 aspect-square rounded-full object-cover"
-  />
-) : (
-  <span className="text-xs text-gray-400">No image</span>
-)}
+                    <Image
+                      src={profilePics[0]?.url || "/default-avatar.png"}
+                      alt={bio?.username || "User"}
+                      width={56}
+                      height={56}
+                      className="w-14 h-14 aspect-square rounded-full object-cover"
+                    />
+                  ) : (
+                    <span className="text-xs text-gray-400">No image</span>
+                  )}
 
                   <div className="text-sm">
                     {bio?.username ?? "No username"}
