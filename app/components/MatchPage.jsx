@@ -103,8 +103,7 @@ export default function MatchesPage() {
   if (!Array.isArray(pairs) || pairs.length === 0) {
     return (
       <>
-        <Background />
-        <Navbar />
+        
         <div className="text-black flex justify-center items-center min-h-screen">
           <div className="text-center">
             <div className="text-xl mb-2">No matches found</div>
@@ -119,8 +118,7 @@ export default function MatchesPage() {
 
   return (
     <>
-      <Background />
-      <Navbar />
+      
 
       <div className="flex justify-center items-center">
         <div className="flex justify-center items-center pt-10 text-xl">
