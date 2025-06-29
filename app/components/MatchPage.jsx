@@ -144,13 +144,14 @@ export default function MatchesPage() {
                 href={`/client/view/${encodeURIComponent(pair.user1.email)}`}
                 className="flex gap-3 items-center w-1/2 hover:opacity-80 transition-opacity"
               >
-                <ImageWithFallback
-                  src={pair.user1.image || "/default-avatar.png"}
-                  alt={pair.user1.username || "User"}
-                  width={56}
-                  height={56}
-                  className="rounded-full object-cover"
-                />
+                <Image
+  src={pair.user1.image || "/default-avatar.png"}
+  alt={pair.user1.username || "User"}
+  width={56}
+  height={56}
+  className="w-14 h-14 aspect-square rounded-full object-cover"
+/>
+
                 <div className="truncate">
                   <p className="text-sm text-left font-medium">
                     {pair.user1.username || "Unknown User"}
@@ -207,13 +208,14 @@ export default function MatchesPage() {
                     {formatLocation(pair.user2.location)}
                   </p>
                 </div>
-                <ImageWithFallback
-                  src={pair.user2.image || "/default-avatar.png"}
-                  alt={pair.user2.username || "User"}
-                  width={56}
-                  height={56}
-                  className="rounded-full object-cover"
-                />
+                <Image
+  src={pair.user2.image || "/default-avatar.png"}
+  alt={pair.user2.username || "User"}
+  width={56}
+  height={56}
+  className="w-14 h-14 aspect-square rounded-full object-cover"
+/>
+
               </Link>
             </div>
           ))}
