@@ -12,7 +12,7 @@ const EditandLogoutButton = () => {
         <button
           onClick={() => setLoading(true)}
           disabled={loading}
-          className="py-2 px-4 rounded border text-black transition disabled:opacity-60"
+          className="py-2 px-4 rounded border text-white transition disabled:opacity-60"
         >
           {loading ? "Loading..." : "Edit Profile"}
         </button>

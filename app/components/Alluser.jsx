@@ -2,12 +2,12 @@
 import Image from "next/image";
 import Link from "next/link";
 import React, { useEffect, useState } from "react";
+import LoadingSpinner from "./LoadingSpinner";
 
 export default function Alluser() {
   const [users, setUsers] = useState([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
-
   const [search, setSearch] = useState("");
 
   useEffect(() => {
@@ -17,7 +17,17 @@ export default function Alluser() {
         return res.json();
       })
       .then((data) => {
-        setUsers(data);
+        // Sort by newest first (assuming createdAt is a valid ISO string or timestamp)
+        const sorted = data.sort((a, b) => {
+          const aTime = new Date(
+            a.bio?.createdAt || a.createdAt || 0
+          ).getTime();
+          const bTime = new Date(
+            b.bio?.createdAt || b.createdAt || 0
+          ).getTime();
+          return bTime - aTime;
+        });
+        setUsers(sorted);
         setLoading(false);
       })
       .catch((err) => {
@@ -29,21 +39,22 @@ export default function Alluser() {
   const filteredUsers = users.filter(({ bio }) => {
     const username = bio?.username?.toLowerCase() ?? "";
     const location = bio?.location?.toLowerCase() ?? "";
+    const job = bio?.job?.toLowerCase() ?? "";
     const searchTerm = search.toLowerCase();
     return username.includes(searchTerm) || location.includes(searchTerm);
   });
 
   if (loading)
-    return <div className="text-black flex justify-center p-8">Loading...</div>;
+    return <div className="text-white flex justify-center p-8"><LoadingSpinner /></div>;
   if (error)
     return (
       <div className="text-red-500 flex justify-center p-8">Error: {error}</div>
     );
 
   return (
-    <div className="lg:grid grid lg:justify-center justify-center ">
+    <div className="lg:grid grid lg:justify-center  justify-center ">
       <div className="flex items-center justify-center w-full max-w-md px-4 mb-6">
-        <div className="flex items-center gap-2 w-full max-w-md bg-white border rounded-md shadow-sm px-3 py-2 focus-within:ring-2 focus-within:ring-blue-400">
+        <div className="flex items-center gap-2 w-full max-w-md bg-black border rounded-md shadow-sm px-3 py-2 focus-within:ring-2 focus-within:ring-blue-400">
           <svg
             xmlns="http://www.w3.org/2000/svg"
             height="24"
@@ -59,17 +70,20 @@ export default function Alluser() {
             placeholder="Search by username or location..."
             value={search}
             onChange={(e) => setSearch(e.target.value)}
-            className="flex-1 bg-transparent outline-none text-base placeholder-gray-400"
+            className="flex-1 bg-transparent outline-none text-base text-white placeholder-gray-400"
           />
         </div>
       </div>
 
       <ul>
         {filteredUsers.map(({ user, bio, profilePics }) => (
-          <li key={user.email} className="mb-4">
+          <li
+            key={user.email}
+            className="mb-4 relative rounded-[10px] bg-white/3 border border-white/10 backdrop-blur-[40px] shadow-[0_20px_40px_rgba(0,0,0,0.25)] items-center"
+          >
             <Link href={`/client/view/${encodeURIComponent(user.email)}`}>
-              <div className="flex lg:gap-40 gap-40 justify-between items-center text-black font-poppins px-4 cursor-pointer hover:bg-gray-100 rounded-md py-2">
-                <div className="flex items-center gap-3 justify-center">
+              <div className="flex lg:gap-40 gap-10  items-center text-white font-poppins px-4 cursor-pointer  rounded-md py-2">
+                <div className="flex  items-center gap-3 justify-center">
                   {profilePics.length > 0 ? (
                     <Image
                       src={profilePics[0]?.url || "/default-avatar.png"}
@@ -82,11 +96,14 @@ export default function Alluser() {
                     <span className="text-xs text-gray-400">No image</span>
                   )}
 
-                  <div className="text-sm">
+                  <div className="text-sm ">
                     {bio?.username ?? "No username"}
                   </div>
                 </div>
-                <div className="text-xs text-gray-500 flex items-center gap-1">
+                <div className="text-xs text-gray-400 flex left-0 justify-start">
+                  {bio?.job ?? "-"}
+                </div>
+                <div className="text-gray-500 text-xs ml-auto text-right">
                   {bio?.location?.split(",")[1]?.trim() ?? "No location"}
                 </div>
               </div>
@@ -94,6 +111,7 @@ export default function Alluser() {
           </li>
         ))}
       </ul>
+      
     </div>
   );
 }

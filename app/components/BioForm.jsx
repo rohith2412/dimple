@@ -74,40 +74,40 @@ export default function BioForm() {
   };
 
   if (!session?.user?.email) {
-    return <p className="text-black text-center mt-10">Please log in to submit your bio.</p>;
+    return <p className="text-white text-center mt-10">Please log in to submit your bio.</p>;
   }
 
   return (
-    <form onSubmit={handleSubmit} className="flex flex-col items-center text-black px-6 w-95 max-w-sm mx-auto">
-      <input name="username" value={form.username} onChange={handleChange} placeholder="Username" required className="w-full px-4 text-black py-2 bg-transparent mb-4 focus:outline-none" />
-      <input name="job" value={form.job} onChange={handleChange} placeholder="Job" required className="w-full px-4 text-black bg-transparent mb-4 focus:outline-none" />
+    <form onSubmit={handleSubmit} className="flex flex-col items-center text-white px-6 w-95 max-w-sm mx-auto">
+      <input name="username" value={form.username} onChange={handleChange} placeholder="Username" required className="w-full px-4 text-white py-2 bg-transparent  mb-4 focus:outline-none" />
+      <input name="job" value={form.job} onChange={handleChange} placeholder="Job" required className="w-full px-4 text-white bg-transparent mb-4 focus:outline-none" />
 
-      <select value={country} onChange={(e) => { setCountry(e.target.value); setState(''); }} required className="w-full px-4 text-black py-2 bg-transparent mb-4 focus:outline-none ml-4">
+      <select value={country} onChange={(e) => { setCountry(e.target.value); setState(''); }} required className="w-full px-4 text-white py-2 bg-transparent mb-4 focus:outline-none ml-4">
         <option value="">Select Country</option>
         {Object.keys(countryStateMap).map((c) => (
-          <option key={c} value={c} className="bg-black text-black">{c}</option>
+          <option key={c} value={c} className="bg-black text-white">{c}</option>
         ))}
       </select>
 
       {country && (
-        <select value={state} onChange={(e) => setState(e.target.value)} required className="w-full px-4 py-2 bg-transparent text-black mb-4 focus:outline-none ml-4">
+        <select value={state} onChange={(e) => setState(e.target.value)} required className="w-full px-4 py-2 bg-transparent text-white mb-4 focus:outline-none ml-4">
           <option value="">Select State</option>
           {countryStateMap[country].map((s) => (
-            <option key={s} value={s} className="bg-black text-black">{s}</option>
+            <option key={s} value={s} className="bg-black text-white">{s}</option>
           ))}
         </select>
       )}
 
-      <input name="age" type="number" value={form.age} onChange={handleChange} placeholder="Age" required className="w-full px-4 bg-transparent text-black mb-4 focus:outline-none" />
-      <select name="gender" required value={form.gender} onChange={handleChange} className="w-full px-4 text-black py-2 bg-transparent mb-4 focus:outline-none ml-4">
+      <input name="age" type="number" value={form.age} onChange={handleChange} placeholder="Age" required className="w-full px-4 bg-transparent text-white mb-4 focus:outline-none" />
+      <select name="gender" required value={form.gender} onChange={handleChange} className="w-full px-4 text-white py-2 bg-transparent mb-4 focus:outline-none ml-4">
         <option value="">Select Gender</option>
-        <option value="Male" className="bg-black text-black">Male</option>
-        <option value="Female" className="bg-black text-black">Female</option>
+        <option value="Male" className="bg-black text-white">Male</option>
+        <option value="Female" className="bg-black text-white">Female</option>
       </select>
 
       <textarea name="bio" value={form.bio} onChange={handleChange} placeholder="Short bio..." required className="w-full px-4 py-2 bg-transparent mb-6 resize-none focus:outline-none" />
 
-      <button type="submit" disabled={loading} className="p-2 py-2 bg-black text-white text-xs rounded-md hover:bg-gray-200 transition">
+      <button type="submit" disabled={loading} className="p-2 py-2 bg-white text-black text-xs rounded-md hover:bg-gray-400 transition">
         {loading ? 'Submitting...' : 'Update Profile'}
       </button>
 

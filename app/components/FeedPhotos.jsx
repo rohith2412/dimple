@@ -3,6 +3,7 @@
 import Image from "next/image";
 import Link from "next/link";
 import React, { useEffect, useState } from "react";
+import LoadingSpinner from "./LoadingSpinner";
 
 export default function FeedPhotos() {
   const [photos, setPhotos] = useState([]);
@@ -25,12 +26,12 @@ export default function FeedPhotos() {
     fetchPhotos();
   }, []);
 
-  if (loading) return <p className="text-center mt-10 text-gray-600">Loading...</p>;
-  if (error) return <p className="text-center mt-10 text-red-500">Error: {error}</p>;
+  if (loading) return <div className="text-white flex justify-center p-8"><LoadingSpinner /></div>;
+  if (error) return <div className="text-center mt-10 text-red-500">Error: {error}</div>;
 
   return (
     <div className="max-w-md mx-auto px-4 py-8">
-      <div className="grid grid-cols-1 sm:grid-cols-2 gap-6">
+      <div className="grid  grid-cols-1 sm:grid-cols-2 gap-6">
         {photos.map(({ photo, username }) => (
           <Link
             key={photo._id}

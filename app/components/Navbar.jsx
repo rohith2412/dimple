@@ -9,7 +9,7 @@ export default function Navbar () {
   const { data: session } = useSession();
 
   return (
-    <div className='flex text-black lg:flex lg:justify-evenly Poppins justify-between p-10 pb-0'>
+    <div className='flex text-white lg:flex lg:justify-evenly Poppins justify-between p-10 pb-0'>
       <Link href={"/client/dashboard"}>
       <div className='flex cherry-bomb-one-regular text-2xl'>dimple</div>
       </Link>
@@ -18,12 +18,12 @@ export default function Navbar () {
         {session?.user ? (
           <Link href="/client/myProfile">
           <div className='flex items-center gap-2'>
-            <span className='text-black lowercase '>Hi, {session.user.name?.split(' ')[0]}</span>
+            <span className='text-white lowercase '>Hi, {session.user.name?.split(' ')[0]}</span>
           </div>
           </Link>
         ) : (
           <Link href='/client/auth'>
-            <div className='flex text-black hover:text-gray-500 text-xs underline'>
+            <div className='flex text-white hover:text-gray-500 text-xs underline'>
               <button className='cursor-pointer'>join now</button>
               <svg
                 xmlns='http://www.w3.org/2000/svg'

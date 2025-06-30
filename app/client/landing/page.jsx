@@ -4,14 +4,10 @@ import "../landing/style.css";
 import { useRouter } from "next/navigation";
 import { useSession } from "next-auth/react";
 import ShinyText from "../../components/ShinyText";
-import { LandingBackground } from "../../components/LandingBG";
 import LoginButton from "../../components/LogginButton";
 
 const Landing = () => {
   const { status } = useSession();
-  
-
- 
   const router = useRouter();
 
   useEffect(() => {
@@ -29,8 +25,8 @@ const Landing = () => {
 
   return (
     
-    <div className="text-black flex justify-center items-center ">
-      <LandingBackground />
+    <div className="text-white  flex justify-center items-center ">
+
       <div className="grid justify-center pt-50">
         <div className="flex pl-7">
           <div className="flex  justify-center items-center cherry-bomb-one-regular text-[70px]">
@@ -41,7 +37,7 @@ const Landing = () => {
           </div>
         </div>
         <div className="grid justify-center items-center">
-        <div className="flex justify-center items-center"><ShinyText text=" A community of Gen-Z "  disabled={false} speed={6} className='custom-class' /> 🌴</div>
+        <div className="flex justify-center  items-center"><ShinyText text=" A community of Gen-Z "  disabled={false} speed={6} className='custom-class' /> 🌴</div>
         <div className="flex justify-center items-center"><ShinyText text=" across globe" disabled={false} speed={6} className='custom-class' /></div>
         </div>
 

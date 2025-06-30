@@ -8,6 +8,7 @@ import Link from "next/link";
 import Image from "next/image";
 import React, { useEffect, useState } from "react";
 import { useSession } from "next-auth/react";
+import LoadingSpinner from "./LoadingSpinner";
 
 const formatLocation = (loc) => {
   if (!loc || typeof loc !== "string") return "Unknown Location";
@@ -75,19 +76,14 @@ export default function MatchesPage() {
   }, [session]);
 
   if (loading) {
-    return (
-      <div className="text-black flex justify-center items-center p-30">
-        <div className="text-xl">Loading...</div>
-      </div>
-    );
+    return <div className="text-white flex justify-center p-8"><LoadingSpinner /></div>;
   }
 
   if (error) {
     return (
       <>
-        <Background />
-        <Navbar />
-        <div className="text-black flex justify-center items-center min-h-screen">
+        
+        <div className="text-white flex justify-center items-center min-h-screen">
           <div className="text-center">
             <div className="text-xl text-red-600 mb-2">
               Error loading matches
@@ -102,10 +98,10 @@ export default function MatchesPage() {
   if (!Array.isArray(pairs) || pairs.length === 0) {
     return (
       <>
-        <div className="text-black flex justify-center items-center min-h-screen">
+        <div className="text-white flex justify-center items-center min-h-screen">
           <div className="text-center">
             <div className="text-xl mb-2">No matches found</div>
-            <div className="text-sm text-gray-600">
+            <div className="text-sm text-white">
               Check back later for new AI-generated pairs!
             </div>
           </div>
@@ -117,23 +113,25 @@ export default function MatchesPage() {
   return (
     <>
       <div className="flex justify-center items-center">
-        <div className="flex justify-center items-center pt-10 text-xl">
+        <div className="flex justify-center text-white items-center pt-10 text-xl">
           AI generated pairs ❤️
         </div>
         <div className="flex justify-center pt-10">
           <InfoNotice />
         </div>
       </div>
-      <div className="flex justify-center items-center text-xs pt-5">
+      <div className="flex justify-center text-gray-500 items-center text-xs pt-5">
         {pairs.length} matches
       </div>
 
-      <div className="text-black Poppins grid justify-center items-center p-6">
-        <div className="w-full max-w-4xl mx-auto space-y-4">
+      <div>
+
+      <div className="text-white Poppins grid justify-center items-center p-6">
+        <div className="w-full max-w-4xl mx-auto space-y-4 ">
           {pairs.map((pair, index) => (
             <div
               key={`${pair.user1.email}-${pair.user2.email}-${index}`}
-              className="flex w-full p-4 rounded-xl shadow-md gap-4 bg-white"
+              className="flex w-full mb-4 p-3 relative rounded-[10px] bg-white/3 border border-white/10 backdrop-blur-[40px] shadow-[0_20px_40px_rgba(0,0,0,0.25)] items-center"
             >
               {/* User 1 */}
               <Link
@@ -152,7 +150,7 @@ export default function MatchesPage() {
                   <p className="text-sm text-left font-medium">
                     {pair.user1.username || "Unknown User"}
                   </p>
-                  <p className="text-xs text-left text-gray-600 whitespace-nowrap overflow-hidden text-ellipsis">
+                  <p className="text-xs text-left text-gray-400 whitespace-nowrap overflow-hidden text-ellipsis">
                     {formatLocation(pair.user1.location)}
                   </p>
                 </div>
@@ -200,7 +198,7 @@ export default function MatchesPage() {
                   <p className="text-sm text-right font-medium">
                     {pair.user2.username || "Unknown User"}
                   </p>
-                  <p className="text-xs text-right text-gray-600 whitespace-nowrap overflow-hidden text-ellipsis">
+                  <p className="text-xs text-right text-gray-400 whitespace-nowrap overflow-hidden text-ellipsis">
                     {formatLocation(pair.user2.location)}
                   </p>
                 </div>
@@ -215,6 +213,7 @@ export default function MatchesPage() {
             </div>
           ))}
         </div>
+      </div>
       </div>
 
       <Gears />
@@ -239,3 +238,4 @@ function ImageWithFallback({ src, alt, width, height, className }) {
     />
   );
 }
+``

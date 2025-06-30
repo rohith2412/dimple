@@ -1,14 +1,9 @@
 export function LandingBackground() {
-    return (
-      <div>
-        {/* <div className="fixed inset-0 -z-10 w-full h-full bg-black bg-[radial-gradient(#FFFFFF_0.1px,transparent_0.4px)] [background-size:30px_30px]"></div> */}
-        {/* <div className="bg-black"></div> */}
-        <div className="fixed inset-0 -z-10 overflow-hidden">
-          {/* Large colorful blobs */}
-          <div className="absolute lg:size-90 lg:top-[35%] top-[50%] right-[50%] w-[50vw] h-[50vw] bg-green-900 rounded-full mix-blend-multiply filter blur-3xl opacity-80 animate-blob animation-delay-4000"></div>
-        </div>
+  return (
+    <div>
+      <div className="fixed inset-0 -z-10 overflow-hidden">
+        <div className="absolute lg:size-90 lg:top-[35%] top-[50%] right-[50%] w-[50vw] h-[50vw] bg-green-900 rounded-full mix-blend-multiply filter blur-3xl opacity-80 animate-blob animation-delay-4000"></div>
       </div>
-    );
-  }
-  // bg-orange-500
-  
+    </div>
+  );
+}
