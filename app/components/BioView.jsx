@@ -87,7 +87,9 @@ export default function BioView() {
         </div>
       )}
 
-      <EditandLogoutButton />
+      <div className="pt-5">
+        <EditandLogoutButton />
+      </div>
     </div>
   );
 }
