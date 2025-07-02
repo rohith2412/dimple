@@ -69,7 +69,7 @@ export default function ProfileView() {
     <div className="pt-10 px-4 flex justify-center items-center">
       <div className="w-full max-w-md flex flex-col items-center gap-10">
      
-        <div className="w-full flex justify-evenly items-center Poppins rounded-3xl backdrop-blur-md backdrop-saturate-150 shadow-lg border border-white/10 relative px-4 py-6">
+        <div className="lg:w-100 w-90 flex justify-evenly items-center Poppins rounded-3xl backdrop-blur-md backdrop-saturate-150 shadow-lg border border-white/10 relative px-4 py-6">
           <div className="relative justify-start mr-6">
             {userData.profilePics.length > 0 ? (
               <Image
