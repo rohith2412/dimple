@@ -5,6 +5,7 @@ import Alluser from '@/app/components/Alluser'
 import Background from '@/app/components/Background'
 import Gear from '@/app/components/Gear'
 import Navbar from '@/app/components/Navbar'
+import { Report } from '@/app/components/Report'
 import React from 'react'
 
 
@@ -21,6 +22,7 @@ const Dashboard = () => {
         <div className=''>
           <Gear />
         </div>
+        <Report />
     </div>
   )
 }
