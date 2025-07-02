@@ -136,6 +136,7 @@ export default function ProfileView() {
                 height={180}
                 className="rounded"
                 unoptimized
+                className="w-full"
               />
             </div>
           ) : (
@@ -146,7 +147,7 @@ export default function ProfileView() {
         </div>
 
         {/* Fullscreen Modal */}
-        {isFullScreen && userData.photo?.[0] && (
+        {/* {isFullScreen && userData.photo?.[0] && (
           <div
             onClick={handleClose}
             className="fixed inset-0 z-50 flex items-center justify-center backdrop-blur-sm cursor-zoom-out"
@@ -160,7 +161,7 @@ export default function ProfileView() {
               unoptimized
             />
           </div>
-        )}
+        )} */}
       </div>
     </div>
   );
