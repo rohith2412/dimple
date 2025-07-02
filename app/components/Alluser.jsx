@@ -45,7 +45,7 @@ export default function Alluser() {
   });
 
   if (loading)
-    return <div className="text-white flex justify-center p-8"><LoadingSpinner /></div>;
+    return <div className=""><LoadingSpinner /></div>;
   if (error)
     return (
       <div className="text-red-500 flex justify-center p-8">Error: {error}</div>

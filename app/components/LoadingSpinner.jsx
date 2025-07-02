@@ -1,9 +1,8 @@
 export default function LoadingSpinner() {
   return (
-    <div className="loader pt-30">
-      <li className="ball"></li>
-      <li className="ball"></li>
-      <li className="ball"></li>
+    <div className="p-30 flex justify-center items-center">
+      <div className="loader scale-50">
+    </div>
     </div>
   );
 }

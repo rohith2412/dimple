@@ -3,6 +3,7 @@
 import Image from "next/image";
 import { useParams } from "next/navigation";
 import React, { useEffect, useState } from "react";
+import LoadingSpinner from "./LoadingSpinner";
 
 export default function ProfileView() {
   const [isFullScreen, setIsFullScreen] = useState(false);
@@ -47,7 +48,7 @@ export default function ProfileView() {
 
   if (loading)
     return (
-      <div className="text-black flex justify-center p-30">Loading profile...</div>
+      <div className=""><LoadingSpinner /></div>
     );
 
   if (error)
@@ -63,7 +64,7 @@ export default function ProfileView() {
   return (
     <div className="lg:scale-120 lg:pt-10 mx-auto lg:w-fit lg:grid lg:justify-center lg:items-center">
       <div className="scale-80">
-        <div className="flex justify-evenly items-center Poppins rounded-3xl backdrop-blur-md backdrop-saturate-150 shadow-lg border border-white/10 relative">
+        <div className="flex w-90 justify-evenly items-center Poppins rounded-3xl backdrop-blur-md backdrop-saturate-150 shadow-lg border border-white/10 relative">
           <div className="relative">
             {userData.profilePics.length > 0 ? (
               <Image
@@ -83,7 +84,7 @@ export default function ProfileView() {
           </div>
 
           <div className="p-6 grid justify-center">
-            <div className="flex justify-center gap-8 w-max text-black items-center">
+            <div className="flex justify-center gap-8 w-max text-white items-center">
               <div>
                 <h1>{userData.bio?.username ?? "No username"}</h1>
               </div>
@@ -103,14 +104,14 @@ export default function ProfileView() {
 
             <div>
               <p className="text-gray-400 flex justify-start text-sm text-center mt-1 max-w-xs">
-                - {userData.bio?.bio ?? "No bio info"}
+                " {userData.bio?.bio ?? "No bio info"} "
               </p>
             </div>
           </div>
         </div>
 
         {/* Gallery */}
-        <div className="flex flex-col items-center pt-10">
+        <div className="flex flex-col items-center justify-center pt-10">
           {userData.photo && userData.photo.length > 0 ? (
             <div
               onClick={handleImageClick}

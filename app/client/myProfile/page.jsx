@@ -25,11 +25,11 @@ const Page = () => {
     <div>
       <Background />
       <Navbar />
-      <div className='pt-8'>
+      <div className=''>
       <MainProfileView />
       </div>
       <ViewPhoto />
-      <div className='flex justify-end pb-20'>
+      <div className=''>
         <Photo />
       </div>
       <Gears />

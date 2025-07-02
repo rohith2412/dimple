@@ -55,8 +55,9 @@ export default function MainProfileView() {
 
 
   return (
-    <div className="scale-80 text-white lg:scale-90 mx-auto lg:w-fit lg:grid lg:justify-center lg:items-center">
-      <div className="flex text-black justify-evenly rounded-[10px] bg-white/3 border border-white/10 backdrop-blur-[40px] shadow-[0_20px_40px_rgba(0,0,0,0.25)] items-center">
+    <div className="lg:scale-120 lg:pt-10 mx-auto lg:w-fit lg:grid lg:justify-center lg:items-center">
+      <div className="scale-80">
+        <div className="flex w-90 justify-evenly items-center Poppins rounded-3xl backdrop-blur-md backdrop-saturate-150 shadow-lg border border-white/10 relative">
         <div className="relative">
           <Image
             src={profilePicUrl || "/default_img.png"}
@@ -66,12 +67,12 @@ export default function MainProfileView() {
             className="w-24 h-24 rounded-full object-cover border border-white shadow-sm"
             unoptimized
           />
-          <div className="absolute inset-0 rounded-full border border-cyan-500 blur-sm opacity-30" />
+            <div className="absolute inset-0 rounded-full border border-cyan-500 blur-sm opacity-30" />
         </div>
 
         <div className="p-6 grid justify-center">
-          <div className="flex justify-center gap-8 w-max text-gray-300 items-center">
-            <h1 className="text-white text-xl">
+          <div className="flex justify-center gap-8 w-max text-white items-center">
+            <h1 className="">
               {bio?.username?.split(" ")[0] || <span className="text-gray-400">No name</span>}
             </h1>
             <div className="text-xs text-gray-500 items-center">
@@ -79,15 +80,16 @@ export default function MainProfileView() {
             </div>
           </div>
 
-          <div className="flex w-max justify-center text-gray-300 items-center gap-3 text-md pt-5">
+          <div className="flex w-max justify-center text-gray-400 items-center gap-3 text-sm pt-5 ">
             {bio?.age && <div>{bio.age} yrs,</div>}
             {bio?.job && <div>{bio.job}</div>}
           </div>
 
-          <p className="text-gray-300 flex justify-start text-md text-center mt-1 max-w-xs">
-            "{bio?.bio || "No bio yet."}""
+          <p className="flex w-max justify-center text-gray-400 items-center gap-3 text-sm ">
+            " {bio?.bio || "No bio yet."} "
           </p>
         </div>
+      </div>
       </div>
 
       {error && <p className="text-red-500 text-center mt-4">{error}</p>}

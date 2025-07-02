@@ -26,7 +26,7 @@ export default function FeedPhotos() {
     fetchPhotos();
   }, []);
 
-  if (loading) return <div className="text-white flex justify-center p-8"><LoadingSpinner /></div>;
+  if (loading) return <div className=""><LoadingSpinner /></div>;
   if (error) return <div className="text-center mt-10 text-red-500">Error: {error}</div>;
 
   return (
