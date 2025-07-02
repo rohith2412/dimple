@@ -8,6 +8,7 @@ import  Background from "@/app/components/Background";
 import BioView from "@/app/components/BioView";
 import { useRouter } from "next/navigation";
 import { useSession } from "next-auth/react";
+import { Report } from "@/app/components/Report";
 
 const Page = () => {
   const router = useRouter();
@@ -28,7 +29,7 @@ const Page = () => {
         <ProfilePicture />
       </div>
       <BioView />
-      
+      <Report />
       <Gears />
     </div>
   );
