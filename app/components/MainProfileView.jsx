@@ -65,8 +65,8 @@ export default function MainProfileView() {
     );
 
   return (
-    <div className="lg:scale-120 lg:pt-10 pt-3 grid justify-center items-center lg:grid lg:justify-center lg:items-center">
-      <div className="scale-80">
+    <div className="lg:scale-100 lg:pt-10 pt-3 grid justify-center items-center ">
+     <div className="w-full max-w-md px-4">
         <div className="flex w-90 justify-evenly items-center Poppins rounded-3xl backdrop-blur-md backdrop-saturate-150 shadow-lg border border-white/10 relative">
           <div className="relative">
             <Image

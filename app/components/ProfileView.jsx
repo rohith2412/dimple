@@ -66,9 +66,10 @@ export default function ProfileView() {
     );
 
   return (
-    <div className="lg:scale-120 lg:pt-10 pt-3 grid justify-center items-center lg:w-fit lg:grid lg:justify-center lg:items-center">
-      <div className="scale-80">
-        <div className="flex w-90 justify-evenly items-center Poppins rounded-3xl backdrop-blur-md backdrop-saturate-150 shadow-lg border border-white/10 relative">
+    <div className="lg:scale-100 lg:pt-10 pt-3 grid justify-center items-center ">
+     <div className="w-full max-w-md px-4">
+
+          <div className="flex w-90  justify-evenly items-center Poppins rounded-3xl backdrop-blur-md backdrop-saturate-150 shadow-lg border border-white/10 relative">
           <div className="flex justify-center items-center">
             {userData.profilePics.length > 0 ? (
               <Image
@@ -122,8 +123,9 @@ export default function ProfileView() {
           </div>
         </div>
 
+
         {/* Gallery */}
-        <div className="flex flex-col items-center justify-center pt-10">
+        <div className="flex  flex-col items-center justify-center pt-10">
           {userData.photo && userData.photo.length > 0 ? (
             <div
               onClick={handleImageClick}
@@ -134,9 +136,9 @@ export default function ProfileView() {
                 alt="Photo"
                 width={280}
                 height={180}
-                className="rounded"
+              
                 unoptimized
-                className="w-full"
+                className="w-full rounded "
               />
             </div>
           ) : (
@@ -146,22 +148,7 @@ export default function ProfileView() {
           )}
         </div>
 
-        {/* Fullscreen Modal */}
-        {/* {isFullScreen && userData.photo?.[0] && (
-          <div
-            onClick={handleClose}
-            className="fixed inset-0 z-50 flex items-center justify-center backdrop-blur-sm cursor-zoom-out"
-          >
-            <Image
-              src={userData.photo[0].url}
-              alt="Full Screen"
-              width={800}
-              height={600}
-              className="object-contain max-w-full max-h-full"
-              unoptimized
-            />
-          </div>
-        )} */}
+      
       </div>
     </div>
   );
