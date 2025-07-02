@@ -48,7 +48,9 @@ export default function ProfileView() {
 
   if (loading)
     return (
-      <div className=""><LoadingSpinner /></div>
+      <div className="">
+        <LoadingSpinner />
+      </div>
     );
 
   if (error)
@@ -58,14 +60,16 @@ export default function ProfileView() {
 
   if (!userData)
     return (
-      <div className="text-black flex justify-center p-30">No profile data found.</div>
+      <div className="text-black flex justify-center p-30">
+        No profile data found.
+      </div>
     );
 
   return (
     <div className="lg:scale-120 lg:pt-10 mx-auto lg:w-fit lg:grid lg:justify-center lg:items-center">
       <div className="scale-80">
         <div className="flex w-90 justify-evenly items-center Poppins rounded-3xl backdrop-blur-md backdrop-saturate-150 shadow-lg border border-white/10 relative">
-          <div className="relative">
+          <div className="flex justify-center items-center">
             {userData.profilePics.length > 0 ? (
               <Image
                 src={userData.profilePics[0].url}
@@ -88,9 +92,17 @@ export default function ProfileView() {
               <div>
                 <h1>{userData.bio?.username ?? "No username"}</h1>
               </div>
-              <div className="text-xs text-gray-500 items-center">
+              <div className="text-xs text-gray-500 flex items-center gap-1">
                 <span>📍</span>
-                {userData.bio?.location ?? "No location"}
+                {userData.bio?.location ? (
+                  <div className="grid grid-cols-1">
+                    {userData.bio.location.split(" ").map((word, idx) => (
+                      <div key={idx}>{word}</div>
+                    ))}
+                  </div>
+                ) : (
+                  <div>No location</div>
+                )}
               </div>
             </div>
 

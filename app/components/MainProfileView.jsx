@@ -5,6 +5,7 @@ import Image from "next/image";
 import Link from "next/link";
 import { useSession } from "next-auth/react";
 import LoadingSpinner from "./LoadingSpinner";
+import { Mysettings } from "./Mysettings";
 
 export default function MainProfileView() {
   const { data: session, status } = useSession();
@@ -75,9 +76,19 @@ export default function MainProfileView() {
             <h1 className="">
               {bio?.username?.split(" ")[0] || <span className="text-gray-400">No name</span>}
             </h1>
-            <div className="text-xs text-gray-500 items-center">
-              {bio?.location && <div>📍{bio.location}</div>}
-            </div>
+            <div className="text-xs text-gray-500 flex items-center gap-1">
+  {bio?.location && (
+    <>
+      <span>📍</span>
+      <div className="grid grid-cols-1">
+        {bio.location.split(" ").map((word, idx) => (
+          <div key={idx}>{word}</div>
+        ))}
+      </div>
+    </>
+  )}
+</div>
+
           </div>
 
           <div className="flex w-max justify-center text-gray-400 items-center gap-3 text-sm pt-5 ">
@@ -93,15 +104,6 @@ export default function MainProfileView() {
       </div>
 
       {error && <p className="text-red-500 text-center mt-4">{error}</p>}
-
-      <div className="flex justify-center gap-15 text-gray-400 pt-10">
-        
-        <Link href="/client/profile">
-          <div className="border w-30 text-center p-1 text-sm rounded-md cursor-pointer">
-            My Settings
-          </div>
-        </Link>
-      </div>
     </div>
   );
 }
