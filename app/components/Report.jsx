@@ -3,10 +3,11 @@ import React, { useEffect, useState } from "react";
 import { useSession } from "next-auth/react";
 
 export const Report = () => {
-  const { data: session, status } = useSession();
+  const { data: session } = useSession();
   const [show, setShow] = useState(false);
   const [form, setForm] = useState({ report: "" });
   const [loading, setLoading] = useState(false);
+  const [submitted, setSubmitted] = useState(false);  
   const [feedback, setFeedback] = useState("");
 
   useEffect(() => {
@@ -25,7 +26,6 @@ export const Report = () => {
     e.preventDefault();
     setLoading(true);
     setFeedback("");
-
     if (!session?.user?.email) {
       setFeedback("You must be logged in to submit a report.");
       setLoading(false);
@@ -38,19 +38,24 @@ export const Report = () => {
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({
           user: session.user.email,
-          report: form.report, 
+          report: form.report,
         }),
       });
 
       const data = await res.json();
       if (!res.ok) throw new Error(data.error || "Failed to submit");
 
-      setFeedback(" Report submitted successfully.");
       setForm({ report: "" });
-      setTimeout(() => setShow(false), 1500); 
+      setSubmitted(true);     
+      setLoading(false);
+
+      setTimeout(() => {
+        setShow(false);
+        setSubmitted(false);
+      }, 2000);
+
     } catch (err) {
-      setFeedback(" Something went wrong. Try again.");
-    } finally {
+      setFeedback(err.message || "Something went wrong");
       setLoading(false);
     }
   };
@@ -79,17 +84,7 @@ export const Report = () => {
                 "0 20px 40px rgba(0,0,0,0.25), inset 0 0 40px rgba(0, 0, 0, 0.1)",
             }}
           >
-            <div
-              aria-hidden="true"
-              className="absolute inset-0 rounded-[10px] pointer-events-none"
-              style={{
-                boxShadow:
-                  "0 0 40px 6px rgba(255, 255, 255, 0.25), inset 0 0 20px 4px rgba(255, 255, 255, 0.3)",
-                filter: "blur(60px)",
-              }}
-            />
-
-            <h2 className="relative text-xl Poppins tracking-tighter text-gray-300 mb-6 select-none">
+              <h2 className="relative text-sm Poppins tracking-tighter text-gray-300 mb-6 select-none">
               ⚠️ Report an Issue
             </h2>
 
@@ -101,27 +96,32 @@ export const Report = () => {
                 placeholder="Write your concern here..."
                 required
                 className="w-full px-4 py-2 bg-transparent border border-white/20 text-white rounded resize-none focus:outline-none mb-4"
+                disabled={loading || submitted}
               />
 
               {feedback && (
                 <div
                   className={`text-xs text-center mb-2 ${
-                    feedback.startsWith("✅")
-                      ? "text-green-400"
-                      : "text-red-400"
+                    feedback.startsWith("✅") ? "text-green-400" : "text-red-400"
                   }`}
                 >
                   {feedback}
                 </div>
               )}
 
-              <button
-                type="submit"
-                disabled={loading || !form.report.trim()}
-                className="w-full py-2 bg-white/10 text-white rounded hover:bg-white/20 transition"
-              >
-                {loading ? "Sending..." : "Submit Report"}
-              </button>
+              <div className="flex justify-center items-center">
+                <button
+                  type="submit"
+                  disabled={loading || !form.report.trim() || submitted}
+                  className="p-2 flex justify-center Poppins items-center py-2 bg-white text-black rounded hover:bg-white/20 transition"
+                >
+                  {loading
+                    ? "Sending..."
+                    : submitted
+                    ? "Submitted"
+                    : "Submit Report"}
+                </button>
+              </div>
             </form>
           </div>
         </div>
