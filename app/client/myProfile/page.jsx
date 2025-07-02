@@ -25,7 +25,7 @@ const Page = () => {
       <Background />
       <Navbar />
       <MainProfileView />
-   
+
       <Gears />
     </div>
   );
