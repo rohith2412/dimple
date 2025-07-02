@@ -45,7 +45,7 @@
 //   }, [messages]);
 
 //   if (status === "loading") return <div className="flex justify-center text-black pt-20">Loading...</div>;
-//   if (!session) return <div className="flex justify-center text-black pt-20">Please<Link href={"/client/auth"}> &nbsp; <span className="underline">sign in</span> &nbsp;</Link>to chat.</div>;
+//   if (!session) return <div className="flex justify-center text-black pt-20">Please<Link href={"/"}> &nbsp; <span className="underline">sign in</span> &nbsp;</Link>to chat.</div>;
 
 //   const sendMessage = async () => {
 //     if (!text.trim()) return;

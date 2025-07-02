@@ -48,7 +48,7 @@ export default function ProfileView() {
 
   if (loading)
     return (
-      <div className="min-h-screen flex justify-center items-center">
+      <div className="">
         <LoadingSpinner />
       </div>
     );

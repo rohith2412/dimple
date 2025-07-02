@@ -22,7 +22,7 @@ export default function Navbar () {
           </div>
           </Link>
         ) : (
-          <Link href='/client/auth'>
+          <Link href='/'>
             <div className='flex text-white hover:text-gray-500 text-xs underline'>
               <button className='cursor-pointer'>join now</button>
               <svg

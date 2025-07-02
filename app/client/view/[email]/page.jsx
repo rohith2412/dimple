@@ -13,7 +13,7 @@ const Page = () => {
 
   useEffect(() => {
     if (status === "unauthenticated") {
-      router.push("/client/auth");
+      router.push("/");
     }
   }, [status, router]);
 
