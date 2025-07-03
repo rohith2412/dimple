@@ -10,21 +10,23 @@ export default function FeedPhotos() {
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
 
-  useEffect(() => {
-    async function fetchPhotos() {
-      try {
-        const res = await fetch("/api/feed");
-        if (!res.ok) throw new Error("Failed to fetch photos");
-        const data = await res.json();
-        setPhotos(data);
-      } catch (err) {
-        setError(err.message || "Could not load photos.");
-      } finally {
-        setLoading(false);
-      }
+useEffect(() => {
+  async function fetchPhotos() {
+    try {
+      const res = await fetch("/api/feed");
+      if (!res.ok) throw new Error("Failed to fetch photos");
+      const data = await res.json();
+      setPhotos(data.reverse()); // latest photo appears first
+    } catch (err) {
+      setError(err.message || "Could not load photos.");
+    } finally {
+      setLoading(false);
     }
-    fetchPhotos();
-  }, []);
+  }
+  fetchPhotos();
+}, []);
+
+
 
   if (loading) return <div className=""><LoadingSpinner /></div>;
   if (error) return <div className="text-center mt-10 text-red-500">Error: {error}</div>;

@@ -11,7 +11,7 @@ const Page = () => {
       <Navbar />
       <Background />
       <FeedPhotos />
-       <Report />
+      <Report />
       <Gears />
      
     </div>

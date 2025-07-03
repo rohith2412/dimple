@@ -22,7 +22,7 @@ const Page = () => {
 
 
   return (
-    <div className="Poppins">
+    <div className="Poppins ">
       <Background />
       <Navbar />
       <div className="pt-10">

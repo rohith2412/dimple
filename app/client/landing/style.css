@@ -17,6 +17,26 @@
   font-style: normal;
 }
 
+.bg-auto-responsive {
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-position: center;
+  background-attachment: fixed;
+}
+
+/* Portrait mode (phones) */
+@media screen and (orientation: portrait) {
+  .bg-auto-responsive {
+    background-image: url('/gradii-portrait.png');
+  }
+}
+
+/* Landscape mode (desktops/laptops/tablets) */
+@media screen and (orientation: landscape) {
+  .bg-auto-responsive {
+    background-image: url('/gradii-landscape.png');
+  }
+}
 
 .rubik-gemstones-regular {
   font-family: "Rubik Gemstones", system-ui;

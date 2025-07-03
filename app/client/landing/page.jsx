@@ -5,6 +5,7 @@ import { useRouter } from "next/navigation";
 import { useSession } from "next-auth/react";
 import ShinyText from "../../components/ShinyText";
 import LoginButton from "../../components/LogginButton";
+import Carousel from "../../components/Carousel";
 
 const Landing = () => {
   const { status } = useSession();
@@ -22,31 +23,48 @@ const Landing = () => {
     }
   }, [status, router]);
 
-
   return (
-    
-    <div className="text-white  flex justify-center items-center ">
-
-      <div className="grid justify-center pt-50">
-        <div className="flex pl-7">
-          <div className="flex  justify-center items-center cherry-bomb-one-regular text-[70px]">
-            dimple
-          </div>
-          <div className="pt-2">
-          
-          </div>
+    <div className="bg-auto-responsive text-white grid justify-center items-center min-h-screen w-full">
+      <div classname="flex justify-center ">
+        <div>0</div>
+        <div>0</div>
+      </div>
+      <div className="text-[64px] font-extrabold text-white drop-shadow-[0_0_7px_rgba(255,255,255,0.8)]">
+        Dimple.
+      </div>
+      <div className="grid justify-center items-center">
+        <div className="flex justify-center items-center">
+          <ShinyText
+            text=" A community of Gen-Z "
+            disabled={false}
+            speed={6}
+            className="custom-class"
+          />
+          🌴
         </div>
-        <div className="grid justify-center items-center">
-        <div className="flex justify-center  items-center"><ShinyText text=" A community of Gen-Z "  disabled={false} speed={6} className='custom-class' /> 🌴</div>
-        <div className="flex justify-center items-center"><ShinyText text=" across globe" disabled={false} speed={6} className='custom-class' /></div>
+        <div className="flex justify-center items-center">
+          <ShinyText
+            text=" across globe"
+            disabled={false}
+            speed={6}
+            className="custom-class"
+          />
         </div>
+      </div>
 
-        
-        <div className="flex justify-center">
+      <div style={{ height: "600px", position: "relative" }}>
+        <Carousel
+          baseWidth={300}
+          autoplay={true}
+          autoplayDelay={3000}
+          pauseOnHover={true}
+          loop={true}
+          round={false}
+        />
+      </div>
 
-
+      <div className="flex justify-center">
         <LoginButton />
-        </div>
       </div>
     </div>
   );
