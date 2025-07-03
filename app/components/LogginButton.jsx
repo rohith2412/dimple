@@ -42,11 +42,9 @@ const LoginButton = () => {
       <div className="relative inline-block w-full py-3 modgp ">
         <div className="relative">
           <button
-  type="button"
-  onClick={handleJoinClick}
-
+            type="button"
+            onClick={handleJoinClick}
             className="inline-flex items-center justify-center bg-gray-300 text-sm text-gray-900 font-medium rounded-lg enabled:hover:bg-gray-50 enabled:hover:shadow-md enabled:active:bg-gray-100 enabled:focus:bg-gray-50 focus:outline-none border border-gray-200 w-full py-2.5 relative disabled:opacity-50 transition-all"
-           
           >
             <div className="w-full font-semibold flex items-center justify-center">
               Join for free
@@ -60,7 +58,6 @@ const LoginButton = () => {
           >
             <svg
               style={{ filter: "drop-shadow(rgb(96, 165, 250) 0px 0px 2px)" }}
-
               fill="none"
               viewBox="0 0 68 68"
               height="6"
@@ -79,7 +76,6 @@ const LoginButton = () => {
           >
             <svg
               style={{ filter: "drop-shadow(rgb(96, 165, 250) 0px 0px 2px)" }}
-
               fill="none"
               viewBox="0 0 68 68"
               height="9"
@@ -98,7 +94,6 @@ const LoginButton = () => {
           >
             <svg
               style={{ filter: "drop-shadow(rgb(96, 165, 250) 0px 0px 2px)" }}
-
               fill="none"
               viewBox="0 0 68 68"
               height="7"
@@ -117,7 +112,6 @@ const LoginButton = () => {
           >
             <svg
               style={{ filter: "drop-shadow(rgb(96, 165, 250) 0px 0px 2px)" }}
-
               fill="none"
               viewBox="0 0 68 68"
               height="6"
@@ -136,7 +130,6 @@ const LoginButton = () => {
           >
             <svg
               style={{ filter: "drop-shadow(rgb(96, 165, 250) 0px 0px 2px)" }}
-
               fill="none"
               viewBox="0 0 68 68"
               height="9"
@@ -155,7 +148,6 @@ const LoginButton = () => {
           >
             <svg
               style={{ filter: "drop-shadow(rgb(96, 165, 250) 0px 0px 2px)" }}
-
               fill="none"
               viewBox="0 0 68 68"
               height="5"
@@ -174,7 +166,6 @@ const LoginButton = () => {
           >
             <svg
               style={{ filter: "drop-shadow(rgb(96, 165, 250) 0px 0px 2px)" }}
-
               fill="none"
               viewBox="0 0 68 68"
               height="6"
@@ -193,7 +184,6 @@ const LoginButton = () => {
           >
             <svg
               style={{ filter: "drop-shadow(rgb(96, 165, 250) 0px 0px 2px)" }}
-
               fill="none"
               viewBox="0 0 68 68"
               height="9"
@@ -212,7 +202,6 @@ const LoginButton = () => {
           >
             <svg
               style={{ filter: "drop-shadow(rgb(96, 165, 250) 0px 0px 2px)" }}
-
               fill="none"
               viewBox="0 0 68 68"
               height="5"
@@ -231,7 +220,6 @@ const LoginButton = () => {
           >
             <svg
               style={{ filter: "drop-shadow(rgb(96, 165, 250) 0px 0px 2px)" }}
-
               fill="none"
               viewBox="0 0 68 68"
               height="9"
@@ -246,8 +234,6 @@ const LoginButton = () => {
           </div>
         </div>
       </div>
-
-   
 
       {show && (
         <div
@@ -276,26 +262,29 @@ const LoginButton = () => {
               }}
             />
 
-            <h2 className="relative text-xl Poppins tracking-tighter  text-gray-300 drop-shadow-md  mb-8 select-none">
+            <h2 className="relative  text-xl Poppins tracking-tighter  text-gray-300 drop-shadow-md  mb-8 select-none">
               Sign in to Continue
             </h2>
 
-            <button
-              onClick={() => signIn("google")}
-              className="text-sm relative z-10 w-full max-w-xs flex items-center justify-center gap-4 px-6 py-3 bg-white/85 rounded-3xl shadow-lg hover:scale-105 hover:shadow-2xl transition-transform duration-250  text-gray-900 backdrop-filter backdrop-blur-sm"
-            >
-              <Image
-                src="/google.webp"
-                alt="Google logo"
-                width={24}
-                height={24}
-                className="rounded-full"
-              />
-              Continue with Google
-            </button>
+            <div className="w-45 flex justify-between rounded bg-white">
+              <button onClick={() => signIn("google")} className="flex ">
+                <div className="flex gap-3 justify-between items-center p-2">
+                  <Image
+                  src="/google.webp"
+                  alt="Google logo"
+                  width={15}
+                  height={15}
+                  className=""
+                />
+                <span className="w-max text-sm whitespace-nowrap">
+                  Continue with Google
+                </span>
+                </div>
+              </button>
+            </div>
 
-            <div className="flex justify-center gap-1 text-[14px] items-center text-gray-300 pt-2">
-              <span>made with</span>
+            <div className="flex justify-center gap-1 text-[14px] items-center text-gray-400 pt-2">
+              <span className="">made with</span>
               <svg
                 xmlns="http://www.w3.org/2000/svg"
                 height="16px"

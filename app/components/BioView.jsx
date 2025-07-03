@@ -54,7 +54,7 @@ export default function BioView() {
       {error && <p className="text-center text-red-500">{error}</p>}
 
       {bio && (
-        <div className="flex justify-center gap-5 items-center">
+        <div className="flex pt-7 justify-center gap-5 items-center">
           <div className="grid gap-4">
             <span className="font-medium text-gray-400 text-right pr-2">Username</span>
             <span className="font-medium text-gray-400 text-right pr-2">Job</span>

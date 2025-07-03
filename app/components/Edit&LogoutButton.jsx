@@ -6,7 +6,7 @@ const EditandLogoutButton = () => {
   const [loading, setLoading] = useState(false);
 
   return (
-    <div className="pt-6 grid justify-center ">
+    <div className="pt-6 grid justify-center text-black ">
       {/* Edit Profile Button */}
       <Link href="/client/bio" className="scale-80">
         <button

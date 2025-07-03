@@ -31,9 +31,9 @@ const Landing = () => {
           <div className="text-[25px] Poppins font-extrabold text-white drop-shadow-[0_0_7px_rgba(255,255,255,0.8)]">
             <ShinyText text={"Dimple"} />
           </div>
-          <div className="flex justify-center text-gray-600">
+          <div className="flex justify-center underline text-gray-600">
             <Link href={"/client/auth"}>
-             <ShinyText text={"Join."} />
+             <ShinyText text={"Join."}  />
         
             </Link>
           </div>
