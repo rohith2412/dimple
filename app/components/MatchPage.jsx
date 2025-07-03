@@ -116,7 +116,7 @@ export default function MatchesPage() {
         <div className="flex justify-center text-white items-center pt-10 text-xl">
           AI generated pairs ❤️
         </div>
-        <div className="flex justify-center pt-10">
+        <div className="flex justify-center  pt-10">
           <InfoNotice />
         </div>
       </div>

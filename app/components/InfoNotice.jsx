@@ -6,16 +6,15 @@ export default function InfoNotice()  {
   return (
     <div className="">
 
-      <div className="flex justify-center scale-75">
+      <div className="flex justify-center w-10  scale-75">
         <button
           onClick={() => setShow(true)}
-          className="w-7 h-7 rounded-full bg-gray-200 hover:bg-gray-300 text-gray-500 text-sm font-bold flex items-center justify-center shadow transition"
+          className=" bg-gray-500 rounded-full"
           title="Info"
         >
           ?
         </button>
       </div>
-
 
       {show && (
         <div

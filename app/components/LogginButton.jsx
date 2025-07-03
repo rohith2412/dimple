@@ -4,7 +4,6 @@ import { signIn, useSession } from "next-auth/react";
 import Image from "next/image";
 import React, { useEffect, useState } from "react";
 import { useRouter } from "next/navigation";
-import StarBorder from "./StarBorder";
 
 const LoginButton = () => {
   const { status } = useSession();
@@ -43,8 +42,11 @@ const LoginButton = () => {
       <div className="relative inline-block w-full py-3 modgp ">
         <div className="relative">
           <button
+  type="button"
+  onClick={handleJoinClick}
+
             className="inline-flex items-center justify-center bg-gray-300 text-sm text-gray-900 font-medium rounded-lg enabled:hover:bg-gray-50 enabled:hover:shadow-md enabled:active:bg-gray-100 enabled:focus:bg-gray-50 focus:outline-none border border-gray-200 w-full py-2.5 relative disabled:opacity-50 transition-all"
-            type="button"
+           
           >
             <div className="w-full font-semibold flex items-center justify-center">
               Join for free
