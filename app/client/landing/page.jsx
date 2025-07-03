@@ -4,8 +4,9 @@ import "../landing/style.css";
 import { useRouter } from "next/navigation";
 import { useSession } from "next-auth/react";
 import ShinyText from "../../components/ShinyText";
-import LoginButton from "../../components/LogginButton";
-import Carousel from "../../components/Carousel";
+import Pic from "@/app/components/Pic";
+import Link from "next/link";
+import LoginButton from "@/app/components/LogginButton";
 
 const Landing = () => {
   const { status } = useSession();
@@ -24,35 +25,42 @@ const Landing = () => {
   }, [status, router]);
 
   return (
-    <div className="bg-auto-responsive text-white grid justify-center items-center min-h-screen w-full">
-      <div classname="flex justify-center ">
-        <div>0</div>
-        <div>0</div>
-      </div>
-      <div className="text-[64px] font-extrabold text-white drop-shadow-[0_0_7px_rgba(255,255,255,0.8)]">
-        Dimple.
-      </div>
-      <div className="grid justify-center items-center">
-        <div className="flex justify-center items-center">
-          <ShinyText
-            text=" A community of Gen-Z "
-            disabled={false}
-            speed={6}
-            className="custom-class"
-          />
-          🌴
-        </div>
-        <div className="flex justify-center items-center">
-          <ShinyText
-            text=" across globe"
-            disabled={false}
-            speed={6}
-            className="custom-class"
-          />
+    <div className="bg-auto-responsive text-white grid justify-center items-center  w-full">
+      <div classname="pt-5">
+        <div className="flex justify-between pt-5  items-center">
+          <div className="text-[25px] Poppins font-extrabold text-white drop-shadow-[0_0_7px_rgba(255,255,255,0.8)]">
+            <ShinyText text={"Dimple"} />
+          </div>
+          <div className="flex justify-center text-gray-600">
+            <Link href={"/client/auth"}>
+             <ShinyText text={"Join."} />
+        
+            </Link>
+          </div>
         </div>
       </div>
 
-      <div style={{ height: "600px", position: "relative" }}>
+      <div className="grid w-80 pt-20">
+        <div className="flex justify-center text-5xl text-center bold">
+          <ShinyText
+            text="AI that helps you get paired"
+            disabled={false}
+            speed={6}
+            className=""
+          />
+        </div>
+        <div className="flex justify-end items-center pt-4">
+          <Pic />
+        </div>
+      </div>
+      <div className="flex justify-center items-center pt-10  text-black ">
+        <div className="">
+          <LoginButton />
+        </div>
+      </div>
+      {/* 
+      <div className="top-10">
+        <div className="scale-60 ">
         <Carousel
           baseWidth={300}
           autoplay={true}
@@ -62,10 +70,7 @@ const Landing = () => {
           round={false}
         />
       </div>
-
-      <div className="flex justify-center">
-        <LoginButton />
-      </div>
+      </div> */}
     </div>
   );
 };
