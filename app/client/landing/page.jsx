@@ -27,7 +27,7 @@ const Landing = () => {
   return (
     <div className="bg-auto-responsive text-white grid justify-center items-center  w-full">
       <div classname="pt-5">
-        <div className="flex justify-between pt-5  items-center">
+        <div className="flex justify-between lg:gap-200 pt-5  items-center">
           <div className="text-[25px] Poppins font-extrabold text-white drop-shadow-[0_0_7px_rgba(255,255,255,0.8)]">
             <ShinyText text={"Dimple"} />
           </div>
@@ -40,16 +40,16 @@ const Landing = () => {
         </div>
       </div>
 
-      <div className="grid w-80 pt-20">
-        <div className="flex justify-center text-5xl text-center bold">
+      <div className="grid w-80 lg:w-full justify-center items-center text-center  pt-20">
+        <div className="flex justify-center lg:w-170 text-5xl lg:text-8xl items-center  text-center bold">
           <ShinyText
             text="AI that helps you get paired"
             disabled={false}
             speed={6}
-            className=""
+            className="flex justify-center pb-5"
           />
         </div>
-        <div className="flex justify-end items-center pt-4">
+        <div className="flex justify-end items-center ">
           <Pic />
         </div>
       </div>

@@ -43,11 +43,10 @@ const LoginButton = () => {
       <div className="relative inline-block w-full py-3 modgp ">
         <div className="relative">
           <button
-            onClick={handleJoinClick}
-            className="inline-flex items-center justify-center bg-white text-sm text-gray-900 font-medium rounded-lg enabled:hover:bg-gray-50 enabled:hover:shadow-md enabled:active:bg-gray-100 enabled:focus:bg-gray-50 focus:outline-none border border-gray-200 w-full py-2.5 relative disabled:opacity-50 transition-all"
+            className="inline-flex items-center justify-center bg-gray-300 text-sm text-gray-900 font-medium rounded-lg enabled:hover:bg-gray-50 enabled:hover:shadow-md enabled:active:bg-gray-100 enabled:focus:bg-gray-50 focus:outline-none border border-gray-200 w-full py-2.5 relative disabled:opacity-50 transition-all"
             type="button"
           >
-            <div className="w-full bg- flex items-center justify-center">
+            <div className="w-full font-semibold flex items-center justify-center">
               Join for free
             </div>
           </button>
