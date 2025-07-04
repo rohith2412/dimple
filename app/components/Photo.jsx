@@ -72,25 +72,25 @@ export default function PhotoUploader() {
   };
 
   return (
-    <div className="px-6 w-full scale-80 lg:scale-90 mx-auto lg:w-fit lg:grid lg:justify-center lg:items-center  text-black flex  items-center">
+    <div className="flex justify-center gap-2  items-center">
       {!session?.user ? (
         <p className="text-red-400 text-sm">Please log in first.</p>
       ) : (
-        <div className="Poppins w-40 flex justify-center items-center">
+        <div className="">
           <label
             htmlFor="file-upload"
-            className="cursor-pointer w-38 bg-white text-black px-4 py-2 rounded-md shadow hover:bg-gray-200 transition flex items-center gap-2"
+            className="flex justify-center items-center w-30 gap-2 h-10 bg-white rounded-md"
           >
             <svg
               xmlns="http://www.w3.org/2000/svg"
               height="20px"
               viewBox="0 -960 960 960"
               width="20px"
-              fill="currentColor"
-              className="text-black"
+              fill="#434343"
             >
-              <path d="M440-120v-320H120v-80h320v-320h80v320h320v80H520v320h-80Z" />
-            </svg> Edit photo       
+              <path d="M200-200h57l391-391-57-57-391 391v57Zm-80 80v-170l528-527q12-11 26.5-17t30.5-6q16 0 31 6t26 18l55 56q12 11 17.5 26t5.5 30q0 16-5.5 30.5T817-647L290-120H120Zm640-584-56-56 56 56Zm-141 85-28-29 57 57-29-28Z" />
+            </svg> 
+            <div className="text-sm">Edit Photo</div>    
             <input
               id="file-upload"
               type="file"
