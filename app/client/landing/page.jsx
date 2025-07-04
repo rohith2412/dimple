@@ -7,6 +7,7 @@ import ShinyText from "../../components/ShinyText";
 import Pic from "@/app/components/Pic";
 import Link from "next/link";
 import LoginButton from "@/app/components/LogginButton";
+import { Testimonial } from "@/app/components/Testimonial";
 
 const Landing = () => {
   const { status } = useSession();
@@ -49,15 +50,20 @@ const Landing = () => {
             className="flex justify-center pb-5"
           />
         </div>
-        <div className="flex justify-end items-center ">
-          <Pic />
-        </div>
+          
+
+          <div className="flex justify-end items-center ">
+            <Pic />
+          </div>
       </div>
       <div className="flex justify-center items-center pt-10  text-black ">
         <div className="">
           <LoginButton />
         </div>
       </div>
+      {/* <div className="flex justify-center">
+        <Testimonial />
+      </div> */}
       {/* 
       <div className="top-10">
         <div className="scale-60 ">
