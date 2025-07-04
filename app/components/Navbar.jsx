@@ -12,7 +12,7 @@ export default function Navbar() {
   return (
     <div className="flex text-white lg:flex lg:justify-evenly Poppins justify-between p-10 pb-0">
       <Link href={"/client/dashboard"}>
-        <div className="text-[25px] Poppins font-extrabold text-white drop-shadow-[0_0_7px_rgba(255,255,255,0.8)]">
+        <div className="text-[25px] Poppins font-extrabold text-white">
           <ShinyText text={"Dimple"} />
         </div>
       </Link>
