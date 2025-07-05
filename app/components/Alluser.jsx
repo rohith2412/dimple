@@ -83,7 +83,7 @@ export default function Alluser() {
           >
             <Link href={`/client/view/${encodeURIComponent(user.email)}`}>
               <div className="flex lg:gap-40 gap-10  items-center text-white font-poppins px-4 cursor-pointer  rounded-md py-2">
-                <div className="flex  items-center gap-3 justify-center">
+                <div className="flex   items-center gap-3 justify-center">
                   {profilePics.length > 0 ? (
                     <Image
                       src={profilePics[0]?.url || "/default-avatar.png"}
@@ -96,11 +96,11 @@ export default function Alluser() {
                     <span className="text-xs text-gray-400">No image</span>
                   )}
 
-                  <div className="text-sm ">
+                  <div className="text-sm w-10 ">
                     {bio?.username ?? "No username"}
                   </div>
                 </div>
-                <div className="text-xs text-gray-400 flex left-0 justify-start">
+                <div className="text-xs  text-gray-400 flex left-0 justify-start">
                   {bio?.job ?? "-"}
                 </div>
                 <div className="text-gray-500 text-xs ml-auto text-right">
