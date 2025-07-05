@@ -107,9 +107,11 @@ export default function BioForm() {
 
       <textarea name="bio" value={form.bio} onChange={handleChange} placeholder="Short bio..." required className="w-full px-4 py-2 bg-transparent mb-6 resize-none focus:outline-none" />
 
-      <button type="submit" disabled={loading} className="p-2 py-2 bg-white text-black text-xs rounded-md hover:bg-gray-400 transition">
-        {loading ? 'Submitting...' : 'Update Profile'}
+      <div className="text-black">
+        <button type="submit" disabled={loading} className="p-2 py-2 bg-white text-black text-xs rounded-md hover:bg-gray-400 transition">
+        {loading ? 'Submitting...' : 'Update Profile' }
       </button>
+      </div>
 
       {success && <p className="text-green-400 mt-4 text-sm text-center">{success}</p>}
     </form>

@@ -41,7 +41,7 @@ export function EditProfilePicture() {
   };
 
   return (
-    <div className="w-auto lg:flex lg:justify-center lg:gap-55 mx-auto p-6 flex justify-evenly gap-50 items-center text-gray-900">
+    <div className="w-auto lg:flex lg:justify-center lg:gap-55 mx-auto p-6 flex justify-evenly gap-50 items-center text-gray-300">
       <div>
         <h1 className="text-sm Poppins flex pl-5 justify-start fixed">
           Profile Picture
