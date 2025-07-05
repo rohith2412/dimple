@@ -61,9 +61,9 @@ const Landing = () => {
           <LoginButton />
         </div>
       </div>
-      {/* <div className="flex justify-center">
+      <div className="flex  justify-center">
         <Testimonial />
-      </div> */}
+      </div>
       {/* 
       <div className="top-10">
         <div className="scale-60 ">
