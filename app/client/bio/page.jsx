@@ -1,9 +1,8 @@
-import Background from '@/app/components/Background'
 import BioForm from '@/app/components/BioForm'
 import { EditProfilePicture } from '@/app/components/EditProfilePicture'
 import Gears from '@/app/components/Gear'
-import Navbar from '@/app/components/Navbar'
 import React from 'react'
+import Background from '../../components/Background'
 
 const page = () => {
   return (

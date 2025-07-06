@@ -1,13 +1,13 @@
 "use client"
+import Navbar from "../../components/Navbar";
 
 
 import Alluser from '@/app/components/Alluser'
-import Background from '@/app/components/Background'
 import Gear from '@/app/components/Gear'
-import Navbar from '@/app/components/Navbar'
 import { Report } from '@/app/components/Report'
 import React from 'react'
 import BioCheacker from '@/app/components/BioCheacker'
+import Background from '../../components/Background'
 
 
 const Dashboard = () => {

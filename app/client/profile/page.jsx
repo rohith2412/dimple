@@ -1,7 +1,7 @@
 "use client";
 
 import React, { useEffect } from "react";
-import Navbar from "@/app/components/Navbar";
+import Navbar from "../../components/Navbar";
 import ProfilePicture from "@/app/components/ProfilePicture";
 import Gears from "@/app/components/Gear";
 import  Background from "@/app/components/Background";

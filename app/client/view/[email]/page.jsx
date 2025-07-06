@@ -1,12 +1,12 @@
 "use client";
 import  Background from "@/app/components/Background";
 import Gears from "@/app/components/Gear";
-import Navbar from "@/app/components/Navbar";
 import ProfileView from "@/app/components/ProfileView";
 import { Report } from "@/app/components/Report";
 import { useSession } from "next-auth/react";
 import { useRouter } from "next/navigation";
 import React, { useEffect } from "react";
+import Navbar from "../../components/Navbar";
 
 const Page = () => {
   const router = useRouter();
