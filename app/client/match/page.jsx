@@ -1,7 +1,7 @@
-import  Background from "@/app/components/Background";
-import Gears from '@/app/components/Gear'
-import MatchesPage from '@/app/components/MatchPage'
-import { Report } from "@/app/components/Report";
+import  Background from "../../components/Background";
+import Gears from '../../components/Gear'
+import MatchesPage from '../../components/MatchPage'
+import { Report } from "../../components/Report";
 import React from 'react'
 import Navbar from "../../components/Navbar";
 

@@ -2,11 +2,11 @@
 import Navbar from "../../components/Navbar";
 
 
-import Alluser from '@/app/components/Alluser'
-import Gear from '@/app/components/Gear'
-import { Report } from '@/app/components/Report'
+import Alluser from '../../components/Alluser'
+import Gear from '../../components/Gear'
+import { Report } from '../../components/Report'
 import React from 'react'
-import BioCheacker from '@/app/components/BioCheacker'
+import BioCheacker from '../../components/BioCheacker'
 import Background from '../../components/Background'
 
 

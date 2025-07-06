@@ -1,9 +1,9 @@
 "use client";
 
-import Background from "@/app/components/Background";
-import Gears from "@/app/components/Gear";
-import MainProfileView from "@/app/components/MainProfileView";
-import { Report } from "@/app/components/Report";
+import Background from "../../components/Background";
+import Gears from "../../components/Gear";
+import MainProfileView from "../../components/MainProfileView";
+import { Report } from "../../components/Report";
 import { useSession } from "next-auth/react";
 import { useRouter } from "next/navigation";
 import React, { useEffect } from "react";

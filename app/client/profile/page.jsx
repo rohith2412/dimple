@@ -2,13 +2,13 @@
 
 import React, { useEffect } from "react";
 import Navbar from "../../components/Navbar";
-import ProfilePicture from "@/app/components/ProfilePicture";
-import Gears from "@/app/components/Gear";
-import  Background from "@/app/components/Background";
-import BioView from "@/app/components/BioView";
+import ProfilePicture from "../../components/ProfilePicture";
+import Gears from "../../components/Gear";
+import  Background from "../../components/Background";
+import BioView from "../../components/BioView";
 import { useRouter } from "next/navigation";
 import { useSession } from "next-auth/react";
-import { Report } from "@/app/components/Report";
+import { Report } from "../../components/Report";
 
 const Page = () => {
   const router = useRouter();

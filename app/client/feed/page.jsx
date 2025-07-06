@@ -1,7 +1,7 @@
-import  Background from "@/app/components/Background";
-import FeedPhotos from "@/app/components/FeedPhotos";
-import Gears from "@/app/components/Gear";
-import { Report } from "@/app/components/Report";
+import  Background from "../../components/Background";
+import FeedPhotos from "../../components/FeedPhotos";
+import Gears from "../../components/Gear";
+import { Report } from "../../components/Report";
 import React from "react";
 import Navbar from "../../components/Navbar";
 

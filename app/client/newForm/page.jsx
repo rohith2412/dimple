@@ -3,7 +3,7 @@
 import { useSession } from "next-auth/react";
 import { useRouter } from "next/navigation";
 import { useEffect, useState } from "react";
-import Background from "@/app/components/Background";
+import Background from "../../components/Background";
 
 const Page = () => {
   const { data: session, status } = useSession();

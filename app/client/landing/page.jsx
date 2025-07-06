@@ -4,10 +4,10 @@ import "../landing/style.css";
 import { useRouter } from "next/navigation";
 import { useSession } from "next-auth/react";
 import ShinyText from "../../components/ShinyText";
-import Pic from "@/app/components/Pic";
+import Pic from "../../components/Pic";
 import Link from "next/link";
-import LoginButton from "@/app/components/LogginButton";
-import { Testimonial } from "@/app/components/Testimonial";
+import LoginButton from "../../components/LogginButton";
+import { Testimonial } from "../../components/Testimonial";
 
 const Landing = () => {
   const { status } = useSession();
