@@ -35,10 +35,11 @@ export default function BioChecker() {
 
   return (
     showAddPicPrompt && (
-      <div className="pt-10">
-        <div className=" text-white w-full max-w-md mx-auto bg-gradient-to-r  rounded-lg shadow-lg p-4 sm:p-6">
-          <div className="flex flex-col sm:flex-row items-start sm:items-center gap-3">
-            <div className="flex-shrink-0">
+      <div className="text-white scale-70 pt-10 flex">
+        <div className=" ">
+          <div className="">
+            <div className="flex items-center justify-center gap-1">
+              <div className="flex-shrink-0">
               <svg
                 xmlns="http://www.w3.org/2000/svg"
                 height="24px"
@@ -51,16 +52,17 @@ export default function BioChecker() {
               </svg>
             </div>
 
-            <div className="flex-1 min-w-0">
-              <h3 className=" font-medium text-sm sm:text-base mb-1">
+            <div className="">
+              <h3 className="">
                 Complete your profile to get featured
               </h3>
             </div>
+            </div>
 
-            <div className="w-full sm:w-auto mt-3 bg-white text-black rounded-md sm:mt-0 sm:ml-3">
+            <div className=" pt-3  w-fit  text-black rounded-md ">
               <button
                 onClick={() => router.push("/client/bio")}
-                className="w-full sm:w-auto px-4 py-2 text-black text-sm font-medium rounded-md transition-colors duration-200 focus:outline-none focus:ring-2  focus:ring-offset-2 "
+                className=" px-4 py-2 bg-white text-black text-sm  rounded-md"
               >
                 Update Profile
               </button>
