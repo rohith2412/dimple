@@ -13,9 +13,10 @@ export default function BioChecker() {
       if (!session?.user?.email) return;
 
       try {
-        const res = await fetch(
-          `/api/getProfilePic?user=${session.user.email}`
-        );
+        const url = new URL("/api/getProfilePic", window.location.origin);
+        url.searchParams.set("user", session.user.email);
+
+        const res = await fetch(url.toString());
 
         if (res.status === 404) {
           setShowAddPicPrompt(true);
