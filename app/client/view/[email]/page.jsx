@@ -2,9 +2,12 @@
 
 import Background from "../../../components/Background";
 import Gear from "../../../components/Gear";
-import MainProfileView from "../../../components/MainProfileView";
+import ProfileView from "../../../components/ProfileView";
 import Navbar from "../../../components/Navbar";
 import { Report } from "../../../components/Report";
+import { useRouter } from "next/navigation";
+import { useSession } from "next-auth/react";
+import { useEffect } from "react";
 
 const Page = () => {
   const router = useRouter();
@@ -21,7 +24,7 @@ const Page = () => {
       <Background />
       <Navbar />
       <div className="">
-        <MainProfileView />
+        <ProfileView />
       </div>
       <Report />
       <Gear />

@@ -14,7 +14,7 @@ const Dashboard = () => {
 
 
   return (
-    <div className="grid justify-center items-center">
+    <div className="">
         <Background />
         <Navbar />
         <BioCheacker />
