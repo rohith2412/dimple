@@ -1,6 +1,9 @@
-import connectdb from "@/database/connectdb";
-import Bio from "@/models/bioModal";
 import { NextResponse } from "next/server";
+import connectdb from "../../../database/connectdb";
+
+import Bio from "../../../models/bioModal"
+
+
 
 export async function GET(req) {
   try {
@@ -10,7 +13,7 @@ export async function GET(req) {
     }
 
     await connectdb();
-    const bio = await Bio.findOne({ user: userEmail });
+    const bio = await bio.findOne({ user: userEmail });
 
     if (!bio) {
       return NextResponse.json({ error: "Bio not found" }, { status: 404 });

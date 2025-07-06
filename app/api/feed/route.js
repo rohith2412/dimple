@@ -1,7 +1,10 @@
 import { NextResponse } from "next/server";
-import connectdb from "@/database/connectdb";
-import Photo from "@/models/photoModel";
-import Bio from "@/models/bioModal";
+import connectdb from "../../../database/connectdb";
+
+import Photo from "../../../models/photoModel"
+
+import Bio from "../../../models/bioModal"
+
 
 export async function GET() {
   await connectdb();

@@ -1,8 +1,8 @@
-import connectdb from "@/database/connectdb";
-import Bio from "@/models/bioModal";
-import ProfilePic from "@/models/profilepicModel";
-import User from "@/models/userModal";
-import Match from "@/models/matchesModel";
+import connectdb from "../../../database/connectdb";
+import Bio from "../../../models/bioModal";
+import ProfilePic from "../../../models/profilepicModel";
+import User from "../../../models/userModal";
+import Match from "../../../models/matchesModel";
 
 export async function GET() {
   try {

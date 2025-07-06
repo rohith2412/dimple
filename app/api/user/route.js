@@ -1,11 +1,11 @@
 // pages/api/public-profile.ts
 
 import { NextResponse } from "next/server";
-import connectdb from "@/database/connectdb";
-import User from "@/models/userModal";
-import Bio from "@/models/bioModal";
-import ProfilePic from "@/models/profilepicModel";
-import Photo from "@/models/photoModel";
+import connectdb from "../../../database/connectdb";
+import User from "../../../models/userModal";
+import Bio from "../../../models/bioModal";
+import ProfilePic from "../../../models/profilepicModel";
+import Photo from "../../../models/photoModel";
 
 export async function GET() {
   await connectdb();

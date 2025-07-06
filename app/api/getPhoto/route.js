@@ -1,6 +1,6 @@
 import { NextResponse } from 'next/server';
-import connectdb from '@/database/connectdb';
-import Photo from '@/models/photoModel';
+import connectdb from "../../../database/connectdb";
+import Photo from "../../../models/photoModel";
 
 export async function GET(req) {
   const { searchParams } = new URL(req.url);

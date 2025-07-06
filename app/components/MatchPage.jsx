@@ -1,14 +1,12 @@
 "use client";
 
-import Background from "@/app/components/Background";
-import Gears from "@/app/components/Gear";
-import InfoNotice from "@/app/components/InfoNotice";
-import Navbar from "@/app/components/Navbar";
+import InfoNotice from "./InfoNotice";
 import Link from "next/link";
 import Image from "next/image";
 import React, { useEffect, useState } from "react";
 import { useSession } from "next-auth/react";
 import LoadingSpinner from "./LoadingSpinner";
+import Gear from "./Gear";
 
 const formatLocation = (loc) => {
   if (!loc || typeof loc !== "string") return "Unknown Location";
@@ -216,7 +214,7 @@ export default function MatchesPage() {
       </div>
       </div>
 
-      <Gears />
+      <Gear />
     </>
   );
 }

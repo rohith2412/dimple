@@ -3,8 +3,8 @@ import { v2 as cloudinary } from "cloudinary";
 import fs from "fs";
 import os from "os";
 import path from "path";
-import connectdb from "@/database/connectdb";
-import ProfilePic from "@/models/profilepicModel";
+import connectdb from "../../../database/connectdb";
+import ProfilePic from "../../../models/profilepicModel";
 
 cloudinary.config({
   cloud_name: process.env.CLOUDINARY_CLOUD_NAME,

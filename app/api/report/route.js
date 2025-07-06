@@ -1,7 +1,7 @@
 // app/api/report/route.js or /api/report/route.js
 import { NextResponse } from "next/server";
-import connectdb from "@/database/connectdb";
-import Report from "@/models/reportModel";
+import connectdb from "../../../database/connectdb";
+import Report from "../../../models/reportModel";
 
 export async function POST(req) {
 
