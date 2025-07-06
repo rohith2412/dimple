@@ -13,11 +13,6 @@ const Landing = () => {
   const { status } = useSession();
   const router = useRouter();
 
-  useEffect(() => {
-    if (status === "authenticated") {
-      router.push("/client/dashboard");
-    }
-  }, [status, router]);
 
   useEffect(() => {
     if (status === "authenticated") {

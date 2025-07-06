@@ -7,15 +7,17 @@ import Gear from '@/app/components/Gear'
 import Navbar from '@/app/components/Navbar'
 import { Report } from '@/app/components/Report'
 import React from 'react'
+import BioCheacker from '@/app/components/BioCheacker'
 
 
 const Dashboard = () => {
 
 
   return (
-    <div>
+    <div className="grid justify-center items-center">
         <Background />
         <Navbar />
+        <BioCheacker />
         <div className='pt-10'>
         <Alluser />
         </div>
