@@ -2,7 +2,6 @@
 
 import React, { useEffect, useState } from "react";
 import Image from "next/image";
-import Link from "next/link";
 import { useSession } from "next-auth/react";
 import LoadingSpinner from "./LoadingSpinner";
 import { Mysettings } from "./Mysettings";
