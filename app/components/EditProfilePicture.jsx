@@ -76,7 +76,7 @@ export function EditProfilePicture() {
               )}
             </div>
 
-            <div>
+            <div className="">
               <button
                 onClick={handleUpload}
                 disabled={!file || loading}

@@ -53,7 +53,7 @@ export const Testimonial = () => {
 
             <div className="flex justify-center items-center">
               <div className="grid">
-                <div className="text-sm flex justify-end font-semibold pr-2">
+                <div className="text-sm flex justify-end  pr-2">
                   Helen
                 </div>
                 <div className="text-xs text-gray-700">📍 US, California</div>
@@ -118,7 +118,7 @@ export const Testimonial = () => {
 
             <div className="flex justify-center items-center">
               <div className="grid">
-                <div className="text-sm flex justify-end font-semibold pr-2">
+                <div className="text-sm flex justify-end  pr-2">
                   Helen
                 </div>
                 <div className="text-xs text-gray-700">📍 IN, kerala</div>
@@ -183,7 +183,7 @@ export const Testimonial = () => {
 
             <div className="flex justify-center items-center">
               <div className="grid">
-                <div className="text-sm flex justify-end font-semibold pr-2">
+                <div className="text-sm flex justify-end  pr-2">
                   Tessa
                 </div>
                 <div className="text-xs text-gray-700">📍 CA, Ontario</div>
