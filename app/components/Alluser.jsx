@@ -75,7 +75,7 @@ export default function Alluser() {
         </div>
       </div>
 
-      <ul>
+      <ul className="mb-10">
         {filteredUsers.map(({ user, bio, profilePics }) => (
           <li
             key={user.email}
@@ -111,6 +111,7 @@ export default function Alluser() {
           </li>
         ))}
       </ul>
+
       
     </div>
   );
