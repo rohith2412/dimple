@@ -22,7 +22,7 @@ const Landing = () => {
 
   return (
     <div className="bg-auto-responsive text-white grid justify-center items-center  w-full">
-      <div classname="pt-5">
+      <div className="pt-5">
         <div className="flex justify-between lg:gap-200 pt-5  items-center">
           <div className="text-[25px] Poppins font-extrabold text-white drop-shadow-[0_0_7px_rgba(255,255,255,0.8)]">
             <ShinyText text={"Dimple"} />
