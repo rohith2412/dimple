@@ -4,6 +4,7 @@ import Image from "next/image";
 import { useParams } from "next/navigation";
 import React, { useEffect, useState } from "react";
 import LoadingSpinner from "./LoadingSpinner";
+import Link from "next/link";
 
 export default function ProfileView() {
   const [isFullScreen, setIsFullScreen] = useState(false);
@@ -68,7 +69,6 @@ export default function ProfileView() {
   return (
     <div className="pt-10 px-4 flex justify-center items-center">
       <div className="w-full max-w-md flex flex-col items-center gap-10">
-     
         <div className="lg:w-100 w-90 flex justify-evenly items-center Poppins rounded-3xl backdrop-blur-md backdrop-saturate-150 shadow-lg border border-white/10 relative px-4 py-6">
           <div className="relative justify-start mr-6">
             {userData.profilePics.length > 0 ? (
@@ -94,7 +94,7 @@ export default function ProfileView() {
               <h1 className="text-base font-semibold">
                 {userData.bio?.username ?? "No username"}
               </h1>
-               <div className="text-xs flex justify-end text-gray-500  items-center gap-1">
+              <div className="text-xs flex justify-end text-gray-500  items-center gap-1">
                 <span>📍</span>
                 {userData.bio?.location ? (
                   <div className="grid grid-cols-1">
@@ -106,7 +106,6 @@ export default function ProfileView() {
                   <div>No location</div>
                 )}
               </div>
-        
             </div>
 
             <div className="flex gap-2 text-sm text-gray-400 mb-1">
@@ -117,6 +116,20 @@ export default function ProfileView() {
             <p className="text-sm text-gray-400 max-w-xs">
               " {userData.bio?.bio ?? "No bio info"} "
             </p>
+
+
+            <div className="flex justify-end text-xs">
+              {/* {userData.bio?.connectURL ?? "No bio info"}  */}
+            {userData.bio?.connectURL?.trim() && (
+  <Link href={userData.bio.connectURL} className="text-gray-400 underline">
+    link ~
+  </Link>
+)}
+
+            </div>
+
+
+            
           </div>
         </div>
 
@@ -145,4 +158,4 @@ export default function ProfileView() {
       </div>
     </div>
   );
-} 
+}

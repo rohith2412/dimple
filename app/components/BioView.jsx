@@ -52,6 +52,7 @@ export default function BioView() {
     <div className="p-6 text-white text-sm pb-10">
       {loading &&   <div className="text-white flex justify-center p-8"><LoadingSpinner /></div>}
       {error && <p className="text-center text-red-500">{error}</p>}
+      
 
       {bio && (
         <div className="flex pt-7 justify-center gap-5 items-center">
@@ -62,6 +63,8 @@ export default function BioView() {
             <span className="font-medium text-gray-400 text-right pr-2">Age</span>
             <span className="font-medium text-gray-400 text-right pr-2">Gender</span>
             <span className="font-medium text-gray-400 text-right pr-2">Bio</span>
+            <span className="font-medium text-gray-400 text-right pr-2">Connect links</span>
+
           </div>
 
           <div className="grid gap-3">
@@ -82,6 +85,9 @@ export default function BioView() {
             </span>
             <span className="border-b pb-1 border-gray-700 flex justify-start">
               {bio.bio ? `${bio.bio.split(" ").slice(0, 2).join(" ")}...` : <span className="text-gray-200">Add bio</span>}
+            </span>
+            <span className="border-b pb-1 border-gray-700 flex text-left">
+              {bio.connectURL ? `${bio.connectURL.split(".").slice(0, 2).join(" ")}...` : <span className="text-gray-200">Add links</span>}
             </span>
           </div>
         </div>

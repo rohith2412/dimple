@@ -29,6 +29,7 @@ export default function BioForm() {
     age: '',
     bio: '',
     gender: '',
+    connectURL: '',
   });
 
   const [loading, setLoading] = useState(false);
@@ -63,7 +64,7 @@ export default function BioForm() {
       setSuccess('Profile updated successfully!');
       router.push('/client/profile');
 
-      setForm({ username: '', job: '', age: '', bio: '', gender: '' });
+      setForm({ username: '', job: '', age: '', bio: '', gender: '', connectURL: '' });
       setCountry('');
       setState('');
     } catch {
@@ -104,9 +105,8 @@ export default function BioForm() {
         <option value="Male" className="bg-black text-white">Male</option>
         <option value="Female" className="bg-black text-white">Female</option>
       </select>
-
       <textarea name="bio" value={form.bio} onChange={handleChange} placeholder="Short bio..." required className="w-full px-4 py-2 bg-transparent mb-6 resize-none focus:outline-none" />
-
+      <input name="connectURL" value={form.connectURL} onChange={handleChange} placeholder="Other Links..." required className="w-full px-4 text-white py-2 bg-transparent  mb-4 focus:outline-none" />
       <div className="text-black">
         <button type="submit" disabled={loading} className="p-2 py-2 bg-white text-black text-xs rounded-md hover:bg-gray-400 transition">
         {loading ? 'Submitting...' : 'Update Profile' }

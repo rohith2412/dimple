@@ -1,6 +1,5 @@
 import { NextResponse } from "next/server";
 import connectdb from "../../../database/connectdb";
-
 import Bio from "../../../models/bioModal"
 
 
@@ -27,7 +26,7 @@ export async function GET(req) {
 
 export async function POST(req) {
   try {
-    const { user, job, age, location, gender, username, bio } = await req.json();
+    const { user, job, age, location, gender, username, bio, connectURL } = await req.json();
 
     if (!user) {
       return new NextResponse("User email is required", { status: 400 });
@@ -37,7 +36,7 @@ export async function POST(req) {
 
     const bioForm = await Bio.findOneAndUpdate(
       { user },
-      { job, age, location, gender, username, bio },
+      { job, age, location, gender, username, bio, connectURL },
       { new: true, upsert: true }
     );
 

@@ -9,6 +9,7 @@ const bioSchema = new Schema(
     age: Number,
     gender: String,
     location: String,
+    connectURL: String
   },
   { timestamps: true }
 );

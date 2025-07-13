@@ -7,6 +7,7 @@ import LoadingSpinner from "./LoadingSpinner";
 import { Mysettings } from "./Mysettings";
 import ViewPhoto from "./ViewPhoto";
 import Photo from "./Photo";
+import Link from "next/link";
 
 export default function MainProfileView() {
   const { data: session, status } = useSession();
@@ -122,6 +123,11 @@ export default function MainProfileView() {
             <p className="flex w-max justify-center text-gray-400 items-center gap-3 text-sm">
               " {bio?.bio || "No bio yet."} "
             </p>
+            <div className="flex justify-end text-xs">
+              <Link href={bio.connectURL} className="text-white underline">
+              link ~
+            </Link>
+            </div>
           </div>
         </div>
       </div>
@@ -129,7 +135,6 @@ export default function MainProfileView() {
       {error && <p className="text-red-500 text-center mt-4">{error}</p>}
 
       <ViewPhoto />
-
     </div>
   );
 }
