@@ -150,7 +150,7 @@ export default function ProfileView() {
               />
             </div>
           ) : (
-            <div className="w-20 h-20 flex items-center justify-center text-gray-400">
+            <div className=" h-20 w-full max-w-md flex items-center justify-center text-gray-400">
               No Image
             </div>
           )}

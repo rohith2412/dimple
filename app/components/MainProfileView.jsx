@@ -143,7 +143,7 @@ export default function MainProfileView() {
 
       {error && <p className="text-red-500 text-center mt-4">{error}</p>}
 
-      <ViewPhoto />
+      
     </div>
   );
 }
