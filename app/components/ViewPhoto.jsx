@@ -26,19 +26,23 @@ export default function ViewPhoto() {
   }, [session]);
 
   return (
-    <div className="flex flex-col items-center pt-5">
+    <div className="pt-10 px-4 flex justify-center items-center">
+      <div className="w-full max-w-md flex flex-col items-center gap-10">
+        <div className="w-full h-auto object-cover rounded-t-lg pt-5">
       {profilePicUrl ? (
         <Image
           src={profilePicUrl}
           alt="Profile photo"
           width={70}
           height={70}
-          className="w-60 rounded"
+          className="w-full h-auto object-cover rounded-t-lg"
           unoptimized
         />
       ) : (
         <span className="text-gray-700 text-sm p-20">No photo yet</span>
       )}
+    </div>
+      </div>
     </div>
   );
 }

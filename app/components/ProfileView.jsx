@@ -134,7 +134,7 @@ export default function ProfileView() {
         </div>
 
         {/* Gallery */}
-        <div className="flex w-full pb-15  flex-col items-center justify-center pt-7">
+        <div className="w-full h-auto object-cover rounded-t-lg pt-7">
           {userData.photo && userData.photo.length > 0 ? (
             <div
               onClick={handleImageClick}
@@ -146,7 +146,7 @@ export default function ProfileView() {
                 width={280}
                 height={180}
                 unoptimized
-                className="w-full rounded "
+                className="w-full h-auto object-cover rounded-t-lg "
               />
             </div>
           ) : (
