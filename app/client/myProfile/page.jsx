@@ -8,6 +8,7 @@ import { useSession } from "next-auth/react";
 import { useRouter } from "next/navigation";
 import React, { useEffect } from "react";
 import Navbar from "../../components/Navbar";
+import { Mysettings } from "../../components/Mysettings";
 
 const Page = () => {
   const router = useRouter();
@@ -24,6 +25,8 @@ const Page = () => {
       <Background />
       <Navbar />
       <MainProfileView />
+      <div className="fixed bottom-20 left-1/2 transform -translate-x-1/2 z-50"><Mysettings /></div>
+      
       <Report />
       <Gears />
     </div>

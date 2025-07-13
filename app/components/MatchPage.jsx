@@ -11,7 +11,7 @@ import Gear from "./Gear";
 const formatLocation = (loc) => {
   if (!loc || typeof loc !== "string") return "Unknown Location";
   const parts = loc.split(",").map((s) => s.trim());
-  return parts.length === 2 ? `${parts[1]}, ${parts[0].toUpperCase()}` : loc;
+  return parts.length === 2 ? `${parts[1]}, ${parts[0]}` : loc;
 };
 
 // Type guard equivalent - just a runtime check function
@@ -74,7 +74,7 @@ export default function MatchesPage() {
   }, [session]);
 
   if (loading) {
-    return <div className="text-white flex justify-center p-8"><LoadingSpinner /></div>;
+    return <div className="text-white  flex justify-center p-8"><LoadingSpinner /></div>;
   }
 
   if (error) {
@@ -129,7 +129,7 @@ export default function MatchesPage() {
           {pairs.map((pair, index) => (
             <div
               key={`${pair.user1.email}-${pair.user2.email}-${index}`}
-              className="flex w-full mb-4 p-3 relative rounded-[10px] bg-white/3 border border-white/10 backdrop-blur-[40px] shadow-[0_20px_40px_rgba(0,0,0,0.25)] items-center"
+              className="flex w-full mb-4 p-3 gap-5 relative rounded-[10px] bg-white/3 border border-white/10 backdrop-blur-[40px] shadow-[0_20px_40px_rgba(0,0,0,0.25)] items-center"
             >
               {/* User 1 */}
               <Link
