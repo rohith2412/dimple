@@ -124,9 +124,14 @@ export default function MainProfileView() {
               " {bio?.bio || "No bio yet."} "
             </p>
             <div className="flex justify-end text-xs">
-              <Link href={bio.connectURL} className="text-white underline">
-              link ~
-            </Link>
+              <a
+                href={bio.connectURL}
+                className="text-white underline"
+                target="_blank"
+                rel="noopener noreferrer"
+              >
+                link ~
+              </a>
             </div>
           </div>
         </div>
