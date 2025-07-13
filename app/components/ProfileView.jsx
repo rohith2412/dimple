@@ -116,24 +116,20 @@ export default function ProfileView() {
             <p className="text-sm text-gray-400 max-w-xs">
               " {userData.bio?.bio ?? "No bio info"} "
             </p>
-<div className="flex justify-end text-xs">
-  {userData.bio?.connectURL?.trim() ? (
-    <a
-      href={userData.bio.connectURL}
-      className="text-gray-400 underline"
-      target="_blank"
-      rel="noopener noreferrer"
-    >
-      link ~
-    </a>
-  ) : ( 
-    " "
-  )}
-</div>
-
-
-
-            
+            <div className="flex justify-end text-xs pt-2">
+              {userData.bio?.connectURL?.trim() ? (
+                <a
+                  href={userData.bio.connectURL}
+                  className="text-gray-400 underline"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                >
+                  link ~
+                </a>
+              ) : (
+                " "
+              )}
+            </div>
           </div>
         </div>
 
