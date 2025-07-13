@@ -134,7 +134,7 @@ export default function ProfileView() {
         </div>
 
         {/* Gallery */}
-        <div className="w-full h-auto object-cover rounded-t-lg pt-7">
+        <div className="w-full h-auto object-cover rounded-t-lg pt-7 pb-20">
           {userData.photo && userData.photo.length > 0 ? (
             <div
               onClick={handleImageClick}
