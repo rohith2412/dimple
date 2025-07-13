@@ -4,6 +4,7 @@ import Gears from "../../components/Gear";
 import { Report } from "../../components/Report";
 import React from "react";
 import Navbar from "../../components/Navbar";
+import PhotoUploader from "../../components/Photo";
 
 const Page = () => {
   return (
@@ -11,6 +12,9 @@ const Page = () => {
       <Navbar />
       <Background />
       <FeedPhotos />
+      <div className="fixed bottom-20 left-1/2 transform -translate-x-1/2 z-50">
+        <PhotoUploader />
+      </div>
       <Report />
       <Gears />
      

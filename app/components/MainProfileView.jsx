@@ -131,7 +131,6 @@ export default function MainProfileView() {
       <ViewPhoto />
 
       <div className="grid gap-0 mb-20 items-center justify-center pt-5">
-        <Photo />
         <Mysettings />
       </div>
     </div>
