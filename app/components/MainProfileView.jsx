@@ -120,8 +120,8 @@ export default function MainProfileView() {
               {bio?.job && <div>{bio.job}</div>}
             </div>
 
-            <p className="flex w-max justify-center text-gray-400 items-center gap-3 text-sm">
-              " {bio?.bio || "No bio yet."} "
+            <p className="flex w-max justify-center italic text-gray-400 items-center gap-3 text-sm">
+              {bio?.bio || "No bio yet."} 
             </p>
             <div className="flex justify-end text-xs pt-2">
               {bio.connectURL?.trim() ? (

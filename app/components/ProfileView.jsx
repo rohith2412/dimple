@@ -113,8 +113,8 @@ export default function ProfileView() {
               <span>{userData.bio?.job ?? "No job info"}</span>
             </div>
 
-            <p className="text-sm text-gray-400 max-w-xs">
-              " {userData.bio?.bio ?? "No bio info"} "
+            <p className="text-sm text-gray-400 italic max-w-xs">
+               {userData.bio?.bio ?? "No bio info"} 
             </p>
             <div className="flex justify-end text-xs pt-2">
               {userData.bio?.connectURL?.trim() ? (
