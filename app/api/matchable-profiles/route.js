@@ -5,7 +5,7 @@ import User from "../../../models/userModal";
 import Match from "../../../models/matchesModel";
 import MatchMeta from "../../../models/matchMetaModel";
 
-async function matchNewUser(email) {
+async function matchableprofiles(email) {
   // Find bio of new user
   const bio = await Bio.findOne({ user: email }).lean();
   if (!bio || !bio.username || !bio.gender || !bio.age || !bio.location) return;
@@ -176,4 +176,4 @@ export async function GET() {
   }
 }
 
-export { matchNewUser };
+export { matchableprofiles };

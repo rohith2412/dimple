@@ -36,7 +36,7 @@ export default function MatchesPage() {
         setError(null);
         const currentUserEmail = session?.user?.email;
 
-        const res = await fetch(`/api/matchable-profiles`);
+        const res = await fetch(`/api/matchableprofiles`);
         if (!res.ok) throw new Error(`Pairs fetch failed: ${res.status}`);
 
         const json = await res.json();

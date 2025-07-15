@@ -41,7 +41,7 @@ export async function POST(req) {
     );
 
     // Call incremental matching after bio update
-    await matchNewUser(user);
+    await matchableprofiles(user);
 
     return NextResponse.json(bioForm);
   } catch (error) {
