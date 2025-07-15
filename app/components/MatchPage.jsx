@@ -14,7 +14,6 @@ const formatLocation = (loc) => {
   return parts.length === 2 ? `${parts[1]}, ${parts[0]}` : loc;
 };
 
-// Type guard equivalent - just a runtime check function
 function isMatchedUser(user) {
   if (typeof user !== "object" || user === null) return false;
   return typeof user.email === "string" && typeof user.username === "string";
@@ -26,6 +25,11 @@ export default function MatchesPage() {
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
 
+  // For global match reset timer
+  const [nextReset, setNextReset] = useState(null);
+  const [timeLeft, setTimeLeft] = useState("");
+
+  // Fetch pairs and nextReset time
   useEffect(() => {
     async function fetchPairs() {
       try {
@@ -37,16 +41,26 @@ export default function MatchesPage() {
 
         const json = await res.json();
 
+        console.log("API response JSON:", json);
+
         const pairsData = Array.isArray(json)
           ? json
-          : json.pairs || json.data || [];
+          : json.matches || json.pairs || json.data || [];
+
+        const nextResetTime = json.nextReset || null;
+
+        console.log("Pairs extracted:", pairsData);
+        console.log("Next reset time:", nextResetTime);
 
         // Filter valid pairs
-        const validPairs = pairsData.filter((pair) => {
-          if (typeof pair !== "object" || pair === null) return false;
-          if (!pair.user1 || !pair.user2) return false;
-          return isMatchedUser(pair.user1) && isMatchedUser(pair.user2);
-        });
+        const validPairs = pairsData.filter(
+          (pair) =>
+            pair &&
+            pair.user1 &&
+            pair.user2 &&
+            isMatchedUser(pair.user1) &&
+            isMatchedUser(pair.user2)
+        );
 
         // Sort so pairs with current user come first
         const sortedPairs = [...validPairs].sort((a, b) => {
@@ -60,6 +74,7 @@ export default function MatchesPage() {
         });
 
         setPairs(sortedPairs);
+        setNextReset(nextResetTime);
       } catch (err) {
         setError(err.message || "Unknown error");
         setPairs([]);
@@ -73,59 +88,86 @@ export default function MatchesPage() {
     }
   }, [session]);
 
+  // Countdown timer for next reset
+useEffect(() => {
+  if (!nextReset) return;
+
+  const interval = setInterval(() => {
+    const now = new Date();
+    const resetDate = new Date(nextReset);
+    const diff = resetDate - now;
+
+    if (diff <= 0) {
+      setTimeLeft("Matching is resetting now...");
+      clearInterval(interval);
+      // Optionally trigger a refetch here
+    } else {
+      const days = Math.floor(diff / (1000 * 60 * 60 * 24));
+      const hours = Math.floor(
+        (diff % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60)
+      );
+
+      setTimeLeft(`${days}d ${hours}h`);
+    }
+  }, 1000);
+
+  return () => clearInterval(interval);
+}, [nextReset]);
+
+
   if (loading) {
-    return <div className="text-white  flex justify-center p-8"><LoadingSpinner /></div>;
+    return (
+      <div className="text-white flex justify-center p-8">
+        <LoadingSpinner />
+      </div>
+    );
   }
 
   if (error) {
     return (
-      <>
-        
-        <div className="text-white flex justify-center items-center min-h-screen">
-          <div className="text-center">
-            <div className="text-xl text-red-600 mb-2">
-              Error loading matches
-            </div>
-            <div className="text-sm text-gray-600">{error}</div>
-          </div>
+      <div className="text-white flex justify-center items-center min-h-screen">
+        <div className="text-center">
+          <div className="text-xl text-red-600 mb-2">Error loading matches</div>
+          <div className="text-sm text-gray-600">{error}</div>
         </div>
-      </>
+      </div>
     );
   }
 
   if (!Array.isArray(pairs) || pairs.length === 0) {
     return (
-      <>
-        <div className="text-white flex justify-center items-center min-h-screen">
-          <div className="text-center">
-            <div className="text-xl mb-2">No matches found</div>
-            <div className="text-sm text-white">
-              Check back later for new AI-generated pairs!
-            </div>
+      <div className="text-white flex justify-center items-center min-h-screen">
+        <div className="text-center">
+          <div className="text-xl mb-2">No matches found</div>
+          <div className="text-sm text-white">
+            Check back later for new AI-generated pairs!
           </div>
         </div>
-      </>
+      </div>
     );
   }
 
   return (
     <>
-      <div className="flex justify-center items-center">
-        <div className="flex justify-center text-white items-center pt-10 text-xl">
-          AI generated pairs ❤️
-        </div>
-        <div className="flex justify-center  pt-10">
-          <InfoNotice />
-        </div>
+      <div className="flex  justify-center items-center pt-10">
+        <h1 className="text-white text-xl mb-2">AI generated pairs ❤️</h1>
+        <InfoNotice />
       </div>
-      <div className="flex justify-center text-gray-500 items-center text-xs pt-5">
+
+      <div className="flex justify-center  text-gray-500 items-center text-xs pt-2 pb-6 gap-4">
+        <div className="flex justify-center ">
         {pairs.length} matches
       </div>
-
-      <div>
+      {nextReset && (
+          <div className="text-white text-center ">
+            Next global match reset in:{" "}
+            <span className="font-bold">{timeLeft}</span>
+          </div>
+        )}
+      </div>
 
       <div className="text-white Poppins grid justify-center items-center p-6">
-        <div className="w-full max-w-4xl mx-auto space-y-4 ">
+        <div className="w-full max-w-4xl mx-auto space-y-4">
           {pairs.map((pair, index) => (
             <div
               key={`${pair.user1.email}-${pair.user2.email}-${index}`}
@@ -212,28 +254,8 @@ export default function MatchesPage() {
           ))}
         </div>
       </div>
-      </div>
 
       <Gear />
     </>
   );
 }
-
-// Helper component to handle image fallback with next/image
-function ImageWithFallback({ src, alt, width, height, className }) {
-  const [imgSrc, setImgSrc] = React.useState(src);
-
-  return (
-    <Image
-      src={imgSrc}
-      alt={alt}
-      width={width}
-      height={height}
-      className={className}
-      onError={() => setImgSrc("/default-avatar.png")}
-      unoptimized
-      priority
-    />
-  );
-}
-``

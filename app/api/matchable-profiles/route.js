@@ -3,71 +3,67 @@ import Bio from "../../../models/bioModal";
 import ProfilePic from "../../../models/profilepicModel";
 import User from "../../../models/userModal";
 import Match from "../../../models/matchesModel";
+import MatchMeta from "../../../models/matchMetaModel";
 
 export async function GET() {
   try {
     await connectdb();
 
-    // Clear existing matches
+    // 🕒 Load or create match timer
+    let meta = await MatchMeta.findOne();
+    if (!meta) {
+      meta = await MatchMeta.create({ lastMatchedAt: new Date() });
+    }
+
+    const now = new Date();
+    const nextReset = new Date(meta.lastMatchedAt);
+    nextReset.setDate(nextReset.getDate() + 7);
+
+    // ⏳ If not yet time to rematch, return current matches
+    if (now < nextReset) {
+      const matches = await Match.find().lean();
+      return new Response(JSON.stringify({ matches, nextReset }), {
+        status: 200,
+        headers: { "Content-Type": "application/json" },
+      });
+    }
+
+    // 🔁 Time to re-match — clear all
     await Match.deleteMany({});
 
-    // Fetch all data once
     const users = await User.find().lean();
     const bios = await Bio.find().lean();
     const pics = await ProfilePic.find().lean();
 
-    // Create lookup maps for quick access
     const bioByUser = {};
     const picByUser = {};
     const userByEmail = {};
 
-    bios.forEach((bio) => {
-      bioByUser[bio.user] = bio;
-    });
+    bios.forEach((b) => (bioByUser[b.user] = b));
+    pics.forEach((p) => (picByUser[p.user] = p));
+    users.forEach((u) => (userByEmail[u.email] = u));
 
-    pics.forEach((pic) => {
-      picByUser[pic.user] = pic;
-    });
-
-    users.forEach((user) => {
-      userByEmail[user.email] = user;
-    });
-
-    const usedEmails = new Set();
+    const used = new Set();
     const pairs = [];
 
     for (const user of users) {
       const email = user.email;
-      if (usedEmails.has(email)) continue;
+      if (used.has(email)) continue;
 
       const bio = bioByUser[email];
       const pic = picByUser[email];
 
-      if (
-        !bio ||
-        !bio.username ||
-        !bio.gender ||
-        !bio.age ||
-        !bio.location ||
-        !pic?.url
-      ) {
-        continue;
-      }
+      if (!bio || !bio.username || !bio.gender || !bio.age || !bio.location || !pic?.url) continue;
 
       const oppositeGender = bio.gender === "Male" ? "Female" : "Male";
 
-      // Find a match with opposite gender, same age and location
       const match = bios.find(
         (b) =>
           b.user !== email &&
           b.gender === oppositeGender &&
           b.age === bio.age &&
           b.location === bio.location &&
-          !usedEmails.has(b.user) &&
-          b.username &&
-          b.gender &&
-          b.age &&
-          b.location
+          !used.has(b.user)
       );
 
       if (match) {
@@ -75,7 +71,7 @@ export async function GET() {
         const matchPic = picByUser[match.user];
 
         if (matchUser && matchPic?.url) {
-          const newPair = {
+          const pair = {
             user1: {
               name: user.name,
               email,
@@ -96,27 +92,24 @@ export async function GET() {
             },
           };
 
-          pairs.push(newPair);
-
-          await Match.create({
-            user1: newPair.user1,
-            user2: newPair.user2,
-          });
-
-          usedEmails.add(email);
-          usedEmails.add(match.user);
+          await Match.create(pair);
+          pairs.push(pair);
+          used.add(email);
+          used.add(match.user);
         }
       }
     }
 
-    return new Response(JSON.stringify(pairs), {
+    // 🕒 Update match timestamp
+    meta.lastMatchedAt = new Date();
+    await meta.save();
+
+    return new Response(JSON.stringify({ matches: pairs, nextReset }), {
       status: 200,
       headers: { "Content-Type": "application/json" },
     });
   } catch (err) {
-    console.error("Error in matching users:", err);
-    return new Response(JSON.stringify({ error: "Internal Server Error" }), {
-      status: 500,
-    });
+    console.error("Match Error:", err);
+    return new Response(JSON.stringify({ error: "Internal Server Error" }), { status: 500 });
   }
 }

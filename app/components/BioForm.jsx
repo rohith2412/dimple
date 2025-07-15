@@ -83,21 +83,41 @@ export default function BioForm() {
       <input name="username" value={form.username} onChange={handleChange} placeholder="Username" required className="w-full px-4 text-white py-2 bg-transparent  mb-4 focus:outline-none" />
       <input name="job" value={form.job} onChange={handleChange} placeholder="Job" required className="w-full px-4 text-white bg-transparent mb-4 focus:outline-none" />
 
-      <select value={country} onChange={(e) => { setCountry(e.target.value); setState(''); }} required className="w-full px-4 text-white py-2 bg-transparent mb-4 focus:outline-none ml-4">
-        <option value="">Select Country</option>
-        {Object.keys(countryStateMap).map((c) => (
-          <option key={c} value={c} className="bg-black text-white">{c}</option>
-        ))}
-      </select>
+    {/* STATE DROPDOWN FIRST */}
+{country && (
+  <select
+    value={state}
+    onChange={(e) => setState(e.target.value)}
+    required
+    className="w-full px-4 py-2 bg-transparent text-white mb-4 focus:outline-none ml-4"
+  >
+    <option value="">Select State</option>
+    {countryStateMap[country].map((s) => (
+      <option key={s} value={s} className="bg-black text-white">
+        {s}
+      </option>
+    ))}
+  </select>
+)}
 
-      {country && (
-        <select value={state} onChange={(e) => setState(e.target.value)} required className="w-full px-4 py-2 bg-transparent text-white mb-4 focus:outline-none ml-4">
-          <option value="">Select State</option>
-          {countryStateMap[country].map((s) => (
-            <option key={s} value={s} className="bg-black text-white">{s}</option>
-          ))}
-        </select>
-      )}
+{/* COUNTRY DROPDOWN SECOND */}
+<select
+  value={country}
+  onChange={(e) => {
+    setCountry(e.target.value);
+    setState('');
+  }}
+  required
+  className="w-full px-4 text-white py-2 bg-transparent mb-4 focus:outline-none ml-4"
+>
+  <option value="">Select Country</option>
+  {Object.keys(countryStateMap).map((c) => (
+    <option key={c} value={c} className="bg-black text-white">
+      {c}
+    </option>
+  ))}
+</select>
+
 
       <input name="age" type="number" value={form.age} onChange={handleChange} placeholder="Age" required className="w-full px-4 bg-transparent text-white mb-4 focus:outline-none" />
       <select name="gender" required value={form.gender} onChange={handleChange} className="w-full px-4 text-white py-2 bg-transparent mb-4 focus:outline-none ml-4">
