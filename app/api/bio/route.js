@@ -40,6 +40,9 @@ export async function POST(req) {
       { new: true, upsert: true }
     );
 
+    // Call incremental matching after bio update
+    await matchNewUser(user);
+
     return NextResponse.json(bioForm);
   } catch (error) {
     console.error(error);
