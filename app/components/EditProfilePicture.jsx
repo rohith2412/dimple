@@ -41,9 +41,9 @@ export function EditProfilePicture() {
   };
 
   return (
-    <div className="w-auto lg:flex lg:justify-center lg:gap-55 mx-auto p-6 flex justify-evenly gap-50 items-center text-gray-300">
+    <div className=" ">
       <div>
-        <h1 className="text-sm Poppins flex pl-10 justify-start fixed">
+        <h1 className="text-sm Poppins text-gray-500 flex justify-start fixed">
           Profile Picture
         </h1>
       </div>
@@ -80,7 +80,7 @@ export function EditProfilePicture() {
               <button
                 onClick={handleUpload}
                 disabled={!file || loading}
-                className="bg-blue-600 w-full p-2 rounded-lg text-white font-medium hover:bg-blue-700 transition disabled:opacity-50 disabled:cursor-not-allowed"
+                className="bg-blue-600 w-full p-2  rounded-lg text-white font-medium hover:bg-blue-700 transition disabled:opacity-50 disabled:cursor-not-allowed"
               >
                 {loading ? "Uploading..." : "Upload"}
               </button>

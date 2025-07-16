@@ -1,5 +1,4 @@
 import BioForm from '../../components/BioForm'
-import { EditProfilePicture } from '../../components/EditProfilePicture'
 import Gears from '../../components/Gear'
 import React from 'react'
 import Background from '../../components/Background'
@@ -10,8 +9,8 @@ const page = () => {
     <div>
         <Navbar />
         <Background />
-        <div className='pt-10'>
-        <EditProfilePicture />
+        <div className='pt-20'>
+        
         <BioForm />
         </div>
         <Gears />
