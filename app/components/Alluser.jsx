@@ -96,7 +96,7 @@ export default function Alluser() {
                     <span className="text-xs text-gray-400">No image</span>
                   )}
 
-                  <div className="text-sm ">
+                  <div className="text-sm w-10">
                     {bio?.username ?? "No username"}
                   </div>
                 </div>

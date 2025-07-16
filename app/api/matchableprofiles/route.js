@@ -10,30 +10,46 @@ export async function GET() {
     await connectdb();
 
     const now = new Date();
-const expireTime = 7 * 24 * 60 * 60 * 1000; // 7 days
+    const expireTime = 7 * 24 * 60 * 60 * 1000; // 7 days in milliseconds
     const expireDate = new Date(now.getTime() - expireTime);
 
     // 1. Load old matches to delete them, but archive to history first
     const oldMatches = await Match.find({ createdAt: { $lt: expireDate } });
 
+    console.log(`Found ${oldMatches.length} expired matches to archive`);
+
     for (const match of oldMatches) {
-      await MatchHistory.create({
-        email1: match.user1.email,
-        email2: match.user2.email,
-        createdAt: match.createdAt,
+      // Check if this pair already exists in history to avoid duplicates
+      const existingHistory = await MatchHistory.findOne({
+        $or: [
+          { email1: match.user1.email, email2: match.user2.email },
+          { email1: match.user2.email, email2: match.user1.email }
+        ]
       });
+
+      if (!existingHistory) {
+        await MatchHistory.create({
+          email1: match.user1.email,
+          email2: match.user2.email,
+          createdAt: match.createdAt,
+        });
+      }
+      
       await Match.deleteOne({ _id: match._id });
     }
 
     // 2. Load active matches (not deleted)
     const activeMatches = await Match.find().lean();
+    console.log(`Found ${activeMatches.length} active matches`);
 
     // 3. Build pairing maps
     const activePairsMap = {};
     const historyPairsMap = {};
 
-    // From MatchHistory
+    // From MatchHistory - build bidirectional mapping
     const matchHistory = await MatchHistory.find().lean();
+    console.log(`Found ${matchHistory.length} historical matches`);
+    
     for (const record of matchHistory) {
       const u1 = record.email1;
       const u2 = record.email2;
@@ -43,7 +59,7 @@ const expireTime = 7 * 24 * 60 * 60 * 1000; // 7 days
       historyPairsMap[u2].add(u1);
     }
 
-    // From Active Matches
+    // From Active Matches - build bidirectional mapping
     const currentlyMatchedEmails = new Set();
     for (const match of activeMatches) {
       const u1 = match.user1.email;
@@ -93,41 +109,63 @@ const expireTime = 7 * 24 * 60 * 60 * 1000; // 7 days
     // 5. Try to pair unmatched users
     for (const user of users) {
       const email = user.email;
-      if (currentlyMatchedEmails.has(email)) continue;
+      if (currentlyMatchedEmails.has(email)) {
+        console.log(`User ${email} is already matched, skipping`);
+        continue;
+      }
 
       const bio = bioByEmail[email];
       const pic = picByEmail[email];
-      if (!isValidProfile(bio, pic)) continue;
+      if (!isValidProfile(bio, pic)) {
+        console.log(`User ${email} has invalid profile, skipping`);
+        continue;
+      }
 
       const oppositeGender = bio.gender === "Male" ? "Female" : "Male";
       const historyPartners = historyPairsMap[email] || new Set();
       const activePartners = activePairsMap[email] || new Set();
 
-      // 5a. Try new, never-before matched
-      let partner = bios.find(
+      console.log(`Looking for partner for ${email} (${bio.gender}, age ${bio.age}, location: ${bio.location})`);
+      console.log(`History partners: ${Array.from(historyPartners)}`);
+
+      // Find all potential partners with same criteria
+      const potentialPartners = bios.filter(
         (b) =>
           b.user !== email &&
           !currentlyMatchedEmails.has(b.user) &&
           b.gender === oppositeGender &&
           b.age === bio.age &&
           b.location === bio.location &&
-          isValidProfile(b, picByEmail[b.user]) &&
-          !historyPartners.has(b.user)
+          isValidProfile(b, picByEmail[b.user])
       );
 
-      // 5b. Fallback: allow rematch (not active but in history)
-      if (!partner) {
-        partner = bios.find(
-          (b) =>
-            b.user !== email &&
-            !currentlyMatchedEmails.has(b.user) &&
-            b.gender === oppositeGender &&
-            b.age === bio.age &&
-            b.location === bio.location &&
-            isValidProfile(b, picByEmail[b.user]) &&
-            historyPartners.has(b.user) &&
-            !activePartners.has(b.user)
+      console.log(`Found ${potentialPartners.length} potential partners for ${email}`);
+
+      let partner = null;
+
+      // 5a. PRIORITY: Try partners who have NEVER been matched before
+      const neverMatchedPartners = potentialPartners.filter(
+        (b) => !historyPartners.has(b.user)
+      );
+
+      if (neverMatchedPartners.length > 0) {
+        // Pick the first available never-matched partner
+        partner = neverMatchedPartners[0];
+        console.log(`Found never-matched partner: ${partner.user} for ${email}`);
+      } else {
+        // 5b. FALLBACK: Only if no new partners available, allow rematch
+        // But exclude currently active partners
+        const rematchPartners = potentialPartners.filter(
+          (b) => historyPartners.has(b.user) && !activePartners.has(b.user)
         );
+
+        if (rematchPartners.length > 0) {
+          // Pick the first available rematch partner
+          partner = rematchPartners[0];
+          console.log(`Found rematch partner: ${partner.user} for ${email}`);
+        } else {
+          console.log(`No suitable partner found for ${email}`);
+        }
       }
 
       if (partner) {
@@ -155,6 +193,8 @@ const expireTime = 7 * 24 * 60 * 60 * 1000; // 7 days
             },
           };
 
+          console.log(`Creating match: ${email} <-> ${partner.user}`);
+          
           await Match.create({
             user1: pair.user1,
             user2: pair.user2,
@@ -164,13 +204,19 @@ const expireTime = 7 * 24 * 60 * 60 * 1000; // 7 days
           newPairs.push(pair);
           currentlyMatchedEmails.add(email);
           currentlyMatchedEmails.add(partner.user);
+        } else {
+          console.log(`Missing user data for partner ${partner.user}`);
         }
       }
     }
 
+    console.log(`Created ${newPairs.length} new pairs`);
+
     // 6. Re-fetch updated active matches (including newly created)
     const updatedMatches = await Match.find().lean();
     const responsePairs = updatedMatches.map(({ user1, user2 }) => ({ user1, user2 }));
+
+    console.log(`Returning ${responsePairs.length} total active pairs`);
 
     return new Response(JSON.stringify(responsePairs), {
       status: 200,
