@@ -21,6 +21,21 @@ const Landing = () => {
   }, [status, router]);
 
   return (
+    <>
+    <Head>
+            {/* Google tag (gtag.js) */}
+            <script async src="https://www.googletagmanager.com/gtag/js?id=G-W4Z4F6JYR2"></script>
+            <script
+              dangerouslySetInnerHTML={{
+                __html: `
+                  window.dataLayer = window.dataLayer || [];
+                  function gtag(){dataLayer.push(arguments);}
+                  gtag('js', new Date());
+                  gtag('config', 'G-W4Z4F6JYR2');
+                `,
+              }}
+            />
+          </Head>
     <div className="bg-auto-responsive text-white grid justify-center items-center  w-full">
       <div className="pt-5">
         <div className="flex justify-between lg:gap-200 pt-5  items-center">
@@ -82,6 +97,7 @@ const Landing = () => {
       </div>
       </div> */}
     </div>
+    </>
   );
 };
 
