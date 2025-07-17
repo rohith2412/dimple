@@ -1,23 +1,26 @@
-import  Background from "../../components/Background";
-import Gears from '../../components/Gear'
-import MatchesPage from '../../components/MatchPage'
+import Background from "../../components/Background";
+import Gears from "../../components/Gear";
+import MatchesPage from "../../components/MatchPage";
 import { Report } from "../../components/Report";
-import BioCheacker from '../../components/BioCheacker'
-import React from 'react'
+import BioCheacker from "../../components/BioCheacker";
+import React from "react";
 import Navbar from "../../components/Navbar";
+import { Contact } from "../../components/Contact";
 
 const Page = () => {
   return (
     <div>
-      <Navbar/>
+      <Navbar />
       <Background />
       <BioCheacker />
       <MatchesPage />
-      <Report />
+      <div className="flex justify-between">
+        <Report />
+        <Contact />
+      </div>
       <Gears />
-      
     </div>
-  )
-}
+  );
+};
 
-export default Page
+export default Page;

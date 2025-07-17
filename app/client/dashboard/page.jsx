@@ -6,6 +6,7 @@ import Gear from "../../components/Gear";
 import { Report } from "../../components/Report";
 import BioCheacker from "../../components/BioCheacker";
 import Background from "../../components/Background";
+import { Contact } from "../../components/Contact";
 
 const Dashboard = () => {
   return (
@@ -20,7 +21,10 @@ const Dashboard = () => {
         <div className="">
           <Gear />
         </div>
-        <Report />
+        <div className="flex justify-between">
+          <Report />
+          <Contact />
+        </div>
       </div>
     </>
   );

@@ -10,6 +10,7 @@ import React, { useEffect } from "react";
 import Navbar from "../../components/Navbar";
 import { Mysettings } from "../../components/Mysettings";
 import ViewPhoto from "../../components/ViewPhoto";
+import { Contact } from "../../components/Contact";
 
 const Page = () => {
   const router = useRouter();
@@ -27,10 +28,15 @@ const Page = () => {
       <Navbar />
 
       <MainProfileView />
-       <ViewPhoto />
-      <div className="fixed bottom-20 left-1/2 transform -translate-x-1/2 z-50"><Mysettings /></div>
-      
-      <Report />
+      <ViewPhoto />
+      <div className="fixed bottom-20 left-1/2 transform -translate-x-1/2 z-50">
+        <Mysettings />
+      </div>
+
+      <div className="flex justify-between">
+        <Report />
+        <Contact />
+      </div>
       <Gears />
     </div>
   );

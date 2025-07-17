@@ -5,6 +5,7 @@ import Gear from "../../../components/Gear";
 import ProfileView from "../../../components/ProfileView";
 import Navbar from "../../../components/Navbar";
 import { Report } from "../../../components/Report";
+import { Contact } from "../../../components/Contact";
 import { useRouter } from "next/navigation";
 import { useSession } from "next-auth/react";
 import { useEffect } from "react";
@@ -26,7 +27,10 @@ const Page = () => {
       <div className="">
         <ProfileView />
       </div>
-      <Report />
+      <div className="flex justify-between">
+        <Report />
+        <Contact />
+      </div>
       <Gear />
     </div>
   );

@@ -4,22 +4,22 @@ import React, { useEffect } from "react";
 import Navbar from "../../components/Navbar";
 import ProfilePicture from "../../components/ProfilePicture";
 import Gears from "../../components/Gear";
-import  Background from "../../components/Background";
+import Background from "../../components/Background";
 import BioView from "../../components/BioView";
 import { useRouter } from "next/navigation";
 import { useSession } from "next-auth/react";
 import { Report } from "../../components/Report";
+import { Contact } from "../../components/Contact";
 
 const Page = () => {
   const router = useRouter();
-  const {  status } = useSession();
+  const { status } = useSession();
 
   useEffect(() => {
     if (status === "unauthenticated") {
       router.push("/");
     }
   }, [status, router]);
-
 
   return (
     <div className="Poppins ">
@@ -29,7 +29,10 @@ const Page = () => {
         <ProfilePicture />
       </div>
       <BioView />
-      <Report />
+      <div className="flex justify-between">
+        <Report />
+        <Contact />
+      </div>
       <Gears />
     </div>
   );

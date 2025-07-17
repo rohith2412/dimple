@@ -1,11 +1,10 @@
-// app/api/report/route.js or /api/report/route.js
 import { NextResponse } from "next/server";
 import connectdb from "../../../database/connectdb";
 import Report from "../../../models/reportModel";
 
 export async function POST(req) {
 
-    const { user, report } = await req.json(); // ✅ CORRECT FIELD NAME
+    const { user, report } = await req.json(); 
 
     if (!user || !report) {
       return NextResponse.json(
@@ -16,7 +15,7 @@ export async function POST(req) {
 
     await connectdb();
 
-    const reportDoc = await Report.create({ user, report }); // ✅ USING `message`
+    const reportDoc = await Report.create({ user, report });
 
     return NextResponse.json(reportDoc);
 
