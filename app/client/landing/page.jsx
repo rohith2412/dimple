@@ -9,7 +9,6 @@ import Link from "next/link";
 import LoginButton from "../../components/LogginButton";
 import { Testimonial } from "../../components/Testimonial";
 import Image from "next/image";
-import Head from "next/head";
 
 const Landing = () => {
   const { status } = useSession();
@@ -23,20 +22,7 @@ const Landing = () => {
 
   return (
     <>
-    <Head>
-            {/* Google tag (gtag.js) */}
-            <script async src="https://www.googletagmanager.com/gtag/js?id=G-W4Z4F6JYR2"></script>
-            <script
-              dangerouslySetInnerHTML={{
-                __html: `
-                  window.dataLayer = window.dataLayer || [];
-                  function gtag(){dataLayer.push(arguments);}
-                  gtag('js', new Date());
-                  gtag('config', 'G-W4Z4F6JYR2');
-                `,
-              }}
-            />
-          </Head>
+
     <div className="bg-auto-responsive text-white grid justify-center items-center  w-full">
       <div className="pt-5">
         <div className="flex justify-between lg:gap-200 pt-5  items-center">
@@ -84,19 +70,10 @@ const Landing = () => {
       <div className="flex  justify-center">
         <Testimonial />
       </div>
-      {/* 
-      <div className="top-10">
-        <div className="scale-60 ">
-        <Carousel
-          baseWidth={300}
-          autoplay={true}
-          autoplayDelay={3000}
-          pauseOnHover={true}
-          loop={true}
-          round={false}
-        />
+      <div className="fixed text-xs lg:flex lg:justify-center lg:gap-30  gap-10 bottom-0 left-0 right-0  px-4 py-3 flex w-full items-center z-20 shadow-inner justify-center">
+        <Link href={"/client/privacy-policy"}><div>Privacy Policy</div></Link>
+        <Link href={"/client/terms-and-conditions"}>Terms and Conditions</Link>
       </div>
-      </div> */}
     </div>
     </>
   );
