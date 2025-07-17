@@ -4,6 +4,7 @@ import "../client/landing/style.css";
 import { useSession } from "next-auth/react";
 import Link from "next/link";
 import ShinyText from "./ShinyText";
+import Image from "next/image";
 
 export default function Navbar() {
   const { data: session } = useSession();
@@ -11,9 +12,20 @@ export default function Navbar() {
   return (
     <div className="flex text-white lg:flex lg:justify-evenly Poppins justify-between p-10 pb-0">
       <Link href={"/client/dashboard"}>
-        <div className="text-[25px] Poppins font-extrabold text-white">
-          <ShinyText text={"Dimple"} />
-        </div>
+        <div className="flex gap-2 items-center justify-center">
+            <div>
+              <Image
+                src={"/logo.webp"}
+                alt={"User"}
+                width={30}
+                height={30}
+                className=" aspect-square rounded-full object-cover"
+              />
+            </div>
+            <div className="text-[25px] Poppins font-extrabold text-white drop-shadow-[0_0_7px_rgba(255,255,255,0.8)]">
+              <ShinyText text={"Dimple"} />
+            </div>
+          </div>
       </Link>
 
       <div className="flex text-xs text-gray-300 Poppins items-center gap-15">

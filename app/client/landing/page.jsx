@@ -8,11 +8,11 @@ import Pic from "../../components/Pic";
 import Link from "next/link";
 import LoginButton from "../../components/LogginButton";
 import { Testimonial } from "../../components/Testimonial";
+import Image from "next/image";
 
 const Landing = () => {
   const { status } = useSession();
   const router = useRouter();
-
 
   useEffect(() => {
     if (status === "authenticated") {
@@ -24,13 +24,23 @@ const Landing = () => {
     <div className="bg-auto-responsive text-white grid justify-center items-center  w-full">
       <div className="pt-5">
         <div className="flex justify-between lg:gap-200 pt-5  items-center">
-          <div className="text-[25px] Poppins font-extrabold text-white drop-shadow-[0_0_7px_rgba(255,255,255,0.8)]">
-            <ShinyText text={"Dimple"} />
+          <div className="flex gap-2 items-center justify-center">
+            <div>
+              <Image
+                src={"/logo.webp"}
+                alt={"User"}
+                width={30}
+                height={30}
+                className=" aspect-square rounded-full object-cover"
+              />
+            </div>
+            <div className="text-[25px] Poppins font-extrabold text-white drop-shadow-[0_0_7px_rgba(255,255,255,0.8)]">
+              <ShinyText text={"Dimple"} />
+            </div>
           </div>
           <div className="flex justify-center underline text-gray-600">
             <Link href={"/client/auth"}>
-             <ShinyText text={"Join."}  />
-        
+              <ShinyText text={"Join."} />
             </Link>
           </div>
         </div>
@@ -45,11 +55,10 @@ const Landing = () => {
             className="flex justify-center pb-5"
           />
         </div>
-          
 
-          <div className="flex justify-end items-center ">
-            <Pic />
-          </div>
+        <div className="flex justify-end items-center ">
+          <Pic />
+        </div>
       </div>
       <div className="flex justify-center items-center pt-10  text-black ">
         <div className="">
