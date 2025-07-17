@@ -9,6 +9,7 @@ import Link from "next/link";
 import LoginButton from "../../components/LogginButton";
 import { Testimonial } from "../../components/Testimonial";
 import Image from "next/image";
+import Head from "next/head";
 
 const Landing = () => {
   const { status } = useSession();
