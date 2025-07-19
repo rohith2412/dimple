@@ -36,7 +36,7 @@ const Landing = () => {
                   className=" aspect-square rounded-full object-cover"
                 />
               </div>
-              <div className="text-[25px] Poppins font-extrabold text-white drop-shadow-[0_0_7px_rgba(255,255,255,0.8)]">
+              <div className="text-[25px] 7777 Poppins font-extrabold text-white drop-shadow-[0_0_7px_rgba(255,255,255,0.8)]">
                 <ShinyText text={"Dimple"} />
               </div>
             </div>
