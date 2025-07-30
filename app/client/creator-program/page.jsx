@@ -6,6 +6,7 @@ import { useRouter } from "next/navigation";
 import { useSession } from "next-auth/react";
 import LoginButton from "../../components/LogginButton";
 import Link from "next/link";
+import { Contact } from "../../components/Contact";
 
 const Page = () => {
   const router = useRouter();
@@ -20,7 +21,7 @@ const Page = () => {
   return (
     <div>
       <Navbar />
-      <div className="flex justify-center items-center pt-40 pb-10">
+      <div className="flex justify-center items-center pt-15 pb-10">
         <div className="text-white grid justify-start gap-5 max-w-2xl px-4">
           <h1 className="text-3xl text-center justify-center items-center flex font-semibold">
             Get paid 💸 to create!
@@ -53,6 +54,10 @@ const Page = () => {
           <p>
             Every video over 1m + views gets you paid 10,000 rupees.
             <br />
+            share the URL of the video to our{" "}
+            <Link href={"https://www.instagram.com/dimple_io"}>
+              <span className="text-blue-500 underline">Instagram</span>
+            </Link>
             <br />
             Must follow step 2 to qualify. Payment method options: Payal, venmo,
             or Zelle. Paid every end of the month.
@@ -67,7 +72,9 @@ const Page = () => {
           </p>
           <div className="p-2  justify-center items-center flex   ">
             <Link href={"/"}>
-              <div className=" text-black bg-white p-2 font-semibold rounded">Get Started</div>
+              <div className=" text-black bg-white p-2 font-semibold rounded">
+                Get Started
+              </div>
             </Link>
           </div>
         </div>
