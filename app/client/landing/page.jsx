@@ -71,14 +71,14 @@ const Landing = () => {
           <Testimonial />
         </div>
         
-        <div className="fixed text-xs lg:flex lg:justify-center lg:gap-30  gap-10 bottom-0 left-0 right-0  px-4 py-3 flex w-full items-center z-20 shadow-inner justify-center">
+        {/* <div className="fixed text-xs lg:flex lg:justify-center lg:gap-30  gap-10 bottom-0 left-0 right-0  px-4 py-3 flex w-full items-center z-20 shadow-inner justify-center">
           <Link href={"/client/privacy-policy"}>
             <div>Privacy Policy</div>
           </Link>
           <Link href={"/client/terms-and-conditions"}>
             Terms and Conditions
           </Link>
-        </div>
+        </div> */}
       </div>
     </>
   );
